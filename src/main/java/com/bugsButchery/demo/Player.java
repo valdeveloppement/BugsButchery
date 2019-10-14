@@ -8,7 +8,7 @@ public class Player {
 	private String playerName;
 	private String playerAntsBreed;
 	private ArrayList<Territory> playerTerritoryList; 
-	private ArrayList<Territory> playerTerritoryFamilyList;
+	private ArrayList<Family> playerTerritoryFamilyList;
 	private int playerAvailableAnts;
 	
 	public Player() {
@@ -39,10 +39,10 @@ public class Player {
 	public void setPlayerTerritoryList(ArrayList<Territory> playerTerritoryList) {
 		this.playerTerritoryList = playerTerritoryList;
 	}
-	public ArrayList<Territory> getPlayerTerritoryFamilyList() {
+	public ArrayList<Family> getPlayerTerritoryFamilyList() {
 		return playerTerritoryFamilyList;
 	}
-	public void setPlayerTerritoryFamilyList(ArrayList<Territory> playerTerritoryFamilyList) {
+	public void setPlayerTerritoryFamilyList(ArrayList<Family> playerTerritoryFamilyList) {
 		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
 	}
 	public int getPlayerAvailableAnts() {
