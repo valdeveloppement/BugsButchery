@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
-	 TerritoryRepository territoryRep;
-	 FamilyRepository myFamily;
-	 PlayerRepository playerRep;
+	 TerritoryRepository myTerritoryRepository;
+	 FamilyRepository myFamilyRepository;
+	 PlayerRepository myPlayerRepository;
 	
 	
 		protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
-		protected ArrayList<Player> playersAlive = (ArrayList<Player>) playerRep.findAll();
+		protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
 		protected Player playerTurn = playersAlive.get(0);
 		protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 		protected int pathExist;
@@ -30,7 +30,7 @@ public class BugsButcheryService {
 	 */
 	public boolean checkAllTerritoryPicked() {
 		List<Territory> allTerritory = new ArrayList<Territory>();
-		allTerritory = territoryRep.findAll();
+		allTerritory = myTerritoryRepository.findAll();
 		for (Territory entry : allTerritory) {
 			if (entry.getTerritoryOwner() == null) {
 				return false;
@@ -51,7 +51,7 @@ public class BugsButcheryService {
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		 for (Territory t : player.getPlayerTerritoryList()) {
-		ArrayList<Territory> allTerritoryInAFamily = myFamily.findAllByTerritoryFamily(t.getTerritoryFamily());
+		ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 		if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
 			player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
 			 }
@@ -228,10 +228,12 @@ public class BugsButcheryService {
 	
 	
 	
-	//Move 
+	// MOVE
+	
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
 		// VALEURS INITIALES
+		potentialsTerritories.clear();
 		potentialsTerritories.addAll(player.getPlayerTerritoryList());
 		 potentialsTerritories.addAll(unownedTerritories);
 		//	crossedTerritories = new ArrayList<Territory>();          
@@ -304,6 +306,16 @@ public class BugsButcheryService {
 
 
 	}
+	
+	
+	//Change player
+	
+	public void changePlayer() {
+		
+		
+	}
+	
+	
 	
 	
 	
