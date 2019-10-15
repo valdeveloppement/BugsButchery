@@ -12,8 +12,14 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
-	TerritoryRepository territoryRep;
-	FamilyRepository myFamily;
+	static TerritoryRepository territoryRep;
+	static FamilyRepository myFamily;
+	static PlayerRepository playerRep;
+	
+	
+		static ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
+		static ArrayList<Player> playersAlive = (ArrayList<Player>) playerRep.findAll();
+		static Player playerTurn = playersAlive.get(0);
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -31,7 +37,8 @@ public class BugsButcheryService {
 	}
 	
 	//New Round
-	
+
+
 	/** 
 	 * Check if a player owns an entire family
 	 * @param player

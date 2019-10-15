@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class tempMoveAvailable {
 
+	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 
-	protected ArrayList<Territory> potentialsTerritories;
 	protected int pathExist;
 
 	//protected ArrayList<Territory> crossedTerritories;
@@ -16,15 +16,20 @@ public class tempMoveAvailable {
 
 
 
-
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
 		// VALEURS INITIALES
-		potentialsTerritories = player.getPlayerTerritoryList();
+		potentialsTerritories.addAll(player.getPlayerTerritoryList());
+		 potentialsTerritories.addAll(BugsButcheryService.unownedTerritories);
 		//	crossedTerritories = new ArrayList<Territory>();          
 		pathExist=0;
 		boolean thereIsAPath=false;
-
+		
+		if(!potentialsTerritories.contains(territoryArrival)){
+			return false;
+		}
+		
+		
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
