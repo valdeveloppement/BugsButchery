@@ -16,8 +16,9 @@ public class Player {
 	public Player() {
 		super();
 	}
-	
+
 	//---- get & set ----//
+
 	public int getPlayerId() {
 		return playerId;
 	}
