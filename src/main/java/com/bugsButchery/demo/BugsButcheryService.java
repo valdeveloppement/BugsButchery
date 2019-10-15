@@ -12,17 +12,17 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
-	 TerritoryRepository myTerritoryRepository;
-	 FamilyRepository myFamilyRepository;
-	 PlayerRepository myPlayerRepository;
-	
-	
-		protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
-		protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
-		protected Player playerTurn = playersAlive.get(0);
-		protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
-		protected int pathExist;
-		
+	TerritoryRepository myTerritoryRepository;
+	FamilyRepository myFamilyRepository;
+	PlayerRepository myPlayerRepository;
+
+
+	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
+	protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
+	protected Player playerTurn = playersAlive.get(0);
+	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
+	protected int pathExist;
+
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -38,7 +38,7 @@ public class BugsButcheryService {
 		}
 		return true;
 	}
-	
+
 	//New Round
 
 
@@ -50,13 +50,13 @@ public class BugsButcheryService {
 	 * NON TESTE
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
-		 for (Territory t : player.getPlayerTerritoryList()) {
-		ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
-		if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
-			player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
-			 }
-		 }
-		 
+		for (Territory t : player.getPlayerTerritoryList()) {
+			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
+			if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
+				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+			}
+		}
+
 	}
 
 
@@ -76,13 +76,13 @@ public class BugsButcheryService {
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
 	}
-	
+
 	//Phase 2 attack /optional
-		/**
-		 * check country pawn number if pawn < 1 can't attack.
-		 * @param id
-		 * @return
-		 */
+	/**
+	 * check country pawn number if pawn < 1 can't attack.
+	 * @param id
+	 * @return
+	 */
 	public boolean antNumber(Territory territory) {
 		if (territory.getTerritoryAntsNb() > 1) {
 			return true;
@@ -91,7 +91,7 @@ public class BugsButcheryService {
 			return false;
 		}
 	}
-		
+
 	/**
 	 * check if the player have at least 1 pawn left on the country
 	 * @param country
@@ -106,7 +106,7 @@ public class BugsButcheryService {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * check if country as path to target country
 	 * @param idCurrent
@@ -114,7 +114,7 @@ public class BugsButcheryService {
 	 * @return
 	 */
 	public boolean pathExist(Territory attacker, Territory target) {
-		
+
 		if (attacker.getTerritoryFrontiers().contains(target)) {
 			return true;
 		}
@@ -122,7 +122,7 @@ public class BugsButcheryService {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Regroup all 3 checks (antNumber, oneAntBehind and pathExist)
 	 * @param attacker
@@ -138,7 +138,7 @@ public class BugsButcheryService {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Check if player has conquiered the territory
 	 * @param country
@@ -153,7 +153,7 @@ public class BugsButcheryService {
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Moving through the all fight
 	 * @param current
@@ -208,43 +208,43 @@ public class BugsButcheryService {
 			//cant attack at least on check failed
 		}
 	}
-	
+
 	/**
 	 * Moving ants after a conquest between the two territories
 	 * @param attacker
 	 * @param target
 	 * @param pawnNbr
 	 */
-//	public void moveAfterConquest(Territory attacker, Territory target, int antNbr) {
-//		(attacker.getTerritoryAntsNb() - antNbr);
-//		(target.getTerritoryAntsNb() + antNbr);
-//		//NOT FINISH 
-//	}
-	
-	
-	
-	
-	
-	
-	
-	
+	//	public void moveAfterConquest(Territory attacker, Territory target, int antNbr) {
+	//		(attacker.getTerritoryAntsNb() - antNbr);
+	//		(target.getTerritoryAntsNb() + antNbr);
+	//		//NOT FINISH 
+	//	}
+
+
+
+
+
+
+
+
 	// MOVE
-	
+
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
 		// VALEURS INITIALES
 		potentialsTerritories.clear();
 		potentialsTerritories.addAll(player.getPlayerTerritoryList());
-		 potentialsTerritories.addAll(unownedTerritories);
+		potentialsTerritories.addAll(unownedTerritories);
 		//	crossedTerritories = new ArrayList<Territory>();          
 		pathExist=0;
 		boolean thereIsAPath=false;
-		
+
 		if(!potentialsTerritories.contains(territoryArrival)){
 			return false;
 		}
-		
-		
+
+
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
@@ -252,7 +252,7 @@ public class BugsButcheryService {
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
-		
+
 
 		return thereIsAPath;
 
@@ -266,7 +266,7 @@ public class BugsButcheryService {
 
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
-		
+
 		potentialsTerritories.remove(territory1);
 		if(potentialsTerritories.size()==0) {
 			return false;
@@ -298,25 +298,38 @@ public class BugsButcheryService {
 			}
 
 		}
-		
-		
+
+
 		return false;
 
 
 
 
 	}
-	
-	
+
+
 	//Change player
-	
+
 	public void changePlayer() {
-		
-		
+		int roundSize= playersAlive.size();
+		int roundPosition= playersAlive.indexOf(playerTurn);
+		if(roundSize!=roundPosition+1) {
+			playerTurn = playersAlive.get(roundPosition+1);
+		}
+		else {
+			playerTurn = playersAlive.get(0);
+
+		}
+
 	}
 	
 	
-	
-	
-	
+	public void addPlayer(Player thisPlayer) {
+		playersAlive.add(thisPlayer);
+		
+	}
+
+
+
+
 }
