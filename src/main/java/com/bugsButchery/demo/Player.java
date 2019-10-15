@@ -37,24 +37,19 @@ public class Player {
 		this.playerAntsBreed = playerAntsBreed;
 	}
 	public ArrayList<Territory> getPlayerTerritoryList() {
-		return playerTerritoryList;
-	}
-	public void setPlayerTerritoryList(ArrayList<Territory> playerTerritoryList) {
-		this.playerTerritoryList = playerTerritoryList;
-	}
-	public ArrayList<Family> getPlayerTerritoryFamilyList() {
-		return playerTerritoryFamilyList;
-	}
-	public void setPlayerTerritoryFamilyList(ArrayList<Family> playerTerritoryFamilyList) {
-		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
-	}
-	public int getPlayerAvailableAnts() {
-		return playerAvailableAnts;
+		return playerTerritoryList; 
 	}
 	public void setPlayerAvailableAnts(int playerAvailableAnts) {
 		this.playerAvailableAnts = playerAvailableAnts;
 	}
-	
+	public ArrayList<Family> getPlayerTerritoryFamilyList() {
+		return playerTerritoryFamilyList;
+	}
+
+	public void setPlayerTerritoryFamilyList(ArrayList<Family> playerTerritoryFamilyList) {
+		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
+	}
+		
 	/**
 	 * roll a Dice
 	 * @return
@@ -101,5 +96,6 @@ public class Player {
 		return playerTerritoryList;
 		//retourn la liste des territoires qui on changé dans la methode
 	}
-	
+
+
 }

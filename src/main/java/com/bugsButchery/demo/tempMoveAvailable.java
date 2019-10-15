@@ -50,30 +50,30 @@ public class tempMoveAvailable {
 		potentialsTerritories.remove(territory1);
 		if(potentialsTerritories.size()==0) {
 			return false;
-		}
+		}//if 0 territory except territory1 (||& territories already crossed) = false
 
-		ArrayList<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers();
-		TerritoryFrontiersMine.retainAll(potentialsTerritories);	
+		ArrayList<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
+		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
 
 		if(TerritoryFrontiersMine.size()==0) {
 			return false;
-		}
+		} // si pas de territoires frontaliers = false
 
 
-		else {
+		else { 
 
-			for (Territory thisTerritory : TerritoryFrontiersMine) {
+			for (Territory thisTerritory : TerritoryFrontiersMine) { // pour les territoires frontaliers
 
 				if (thisTerritory.equals(territory2)) {
 					pathExist=1;
-				}
+				} //quand la boucle tombe sur le territoire de destination,  = path exist
 
 				else {
 					//				crossedTerritories.add(thisTerritory);
 					//				potentialsTerritories.removeAll(crossedTerritories);
-					potentialsTerritories.remove(thisTerritory);
-					moveOneStep(thisTerritory, territory2);
+					potentialsTerritories.remove(thisTerritory); //supprime de la liste des territoires à traiter
+					moveOneStep(thisTerritory, territory2); // continue à chercher le territoire de à partir de la nouvelle position 'thisterritoy'
 				}
 			}
 

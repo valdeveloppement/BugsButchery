@@ -13,7 +13,7 @@ public class BugsButcheryService {
 
 	@Autowired
 	TerritoryRepository territoryRep;
-	
+	FamilyRepository myFamily;
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -37,31 +37,34 @@ public class BugsButcheryService {
 	 * @param player
 	 * @return void
 	 * @author Eloise
-	 * 
+	 * NON TESTE
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		 for (Territory t : player.getPlayerTerritoryList()) {
-		if(player.getPlayerTerritoryList().contains(t.getTerritoryFamily().findAllByTerritoryFamily(t.getTerritoryFamily()))){
+		ArrayList<Territory> allTerritoryInAFamily = myFamily.findAllByTerritoryFamily(t.getTerritoryFamily());
+		if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
 			player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
 			 }
 		 }
 		 
 	}
-	
+
+
 	/**
 	 * Calculate the Refill for a new round
 	 * @param player
 	 * @return int Refill
 	 * @author Eloise
+	 * NON TESTE
 	 */
-	public int refillAvailableAnts(Player player) {
+	public void refillAvailableAnts(Player player) {
 		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
 		int refillByFamily = 0;
 		for (Family f : player.getPlayerTerritoryFamilyList()) {
 			refillByFamily =+ f.getFamilyValue();
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
-		return refillAvailableAnts;
+		player.setPlayerAvailableAnts(refillAvailableAnts);
 	}
 	
 	//Phase 2 attack /optional
