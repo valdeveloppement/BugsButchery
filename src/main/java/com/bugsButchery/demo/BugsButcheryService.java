@@ -13,6 +13,7 @@ public class BugsButcheryService {
 
 	@Autowired
 	TerritoryRepository territoryRep;
+
 	FamilyRepository familyRep;
 	PlayerRepository playerRep;
 	
@@ -34,6 +35,43 @@ public class BugsButcheryService {
 			}
 		}
 		return true;
+	}
+	
+	//New Round
+	
+	/** 
+	 * Check if a player owns an entire family
+	 * @param player
+	 * @return void
+	 * @author Eloise
+	 * NON TESTE
+	 */
+	public void upDatePlayerTerritoryFamilyList(Player player) {
+		 for (Territory t : player.getPlayerTerritoryList()) {
+		ArrayList<Territory> allTerritoryInAFamily = myFamily.findAllByTerritoryFamily(t.getTerritoryFamily());
+		if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
+			player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+			 }
+		 }
+		 
+	}
+
+
+	/**
+	 * Calculate the Refill for a new round
+	 * @param player
+	 * @return int Refill
+	 * @author Eloise
+	 * NON TESTE
+	 */
+	public void refillAvailableAnts(Player player) {
+		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		int refillByFamily = 0;
+		for (Family f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ f.getFamilyValue();
+		}
+		int refillAvailableAnts = refillByTerritory + refillByFamily;
+		player.setPlayerAvailableAnts(refillAvailableAnts);
 	}
 	
 	//Phase 2 attack /optional

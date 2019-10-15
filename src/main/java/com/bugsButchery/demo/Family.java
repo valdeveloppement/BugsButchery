@@ -6,6 +6,8 @@ public class Family {
 	private String familyName;
 	private int familyValue;
 	
+	
+	
 	public Family() {
 		super();
 	}
@@ -28,6 +30,5 @@ public class Family {
 	public void setFamilyValue(int familyValue) {
 		this.familyValue = familyValue;
 	}
-	
-	
+
 }
