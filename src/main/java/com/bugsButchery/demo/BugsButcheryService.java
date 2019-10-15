@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
-<<<<<<< HEAD
+
 	TerritoryRepository myTerritoryRepository;
 	FamilyRepository myFamilyRepository;
 	PlayerRepository myPlayerRepository;
@@ -23,19 +23,7 @@ public class BugsButcheryService {
 	protected Player playerTurn = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
-=======
-	 TerritoryRepository myTerritoryRepository;
-	 FamilyRepository myFamilyRepository;
-	 PlayerRepository myPlayerRepository;
-	
-	
-		protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
-		protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
-		protected Player playerTurn = playersAlive.get(0);
-		protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
-		protected int pathExist;
-		
->>>>>>> a72723c7677d83b889184448a8f265b6cd48b4aa
+
 
 	//New Game
 	/**
@@ -220,21 +208,19 @@ public class BugsButcheryService {
 			//cant attack at least on check failed
 		}
 	}
-<<<<<<< HEAD
 
-=======
 	
 	public void killAntHill(Player player, Territory territory) {
 		if(territory.isAnthill()) {
 			for (Territory entry :player.getPlayerTerritoryList()) {
-				playerAlive.remove(player);
+				playersAlive.remove(player);
 				entry.setTerritoryOwner(null);
-				unownedTerritory.add(entry);
+				unownedTerritories.add(entry);
 			}
 		}
 	}
 	
->>>>>>> a72723c7677d83b889184448a8f265b6cd48b4aa
+
 	/**
 	 * Moving ants after a conquest between the two territories
 	 * @param attacker
