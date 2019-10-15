@@ -12,15 +12,18 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
-	TerritoryRepository territoryRep;
+	 TerritoryRepository myTerritoryRepository;
+	 FamilyRepository myFamilyRepository;
+	 PlayerRepository myPlayerRepository;
+	
+	
+		protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
+		protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
+		protected Player playerTurn = playersAlive.get(0);
+		protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
+		protected int pathExist;
+		
 
-	FamilyRepository familyRep;
-	PlayerRepository playerRep;
-	
-	
-	ArrayList<Territory> unownedTerritory = new ArrayList<Territory>();
-	ArrayList<Player> playerAlive = (ArrayList<Player>) playerRep.findAll();
-	Player playerTurn = playerAlive.get(0);
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -28,7 +31,7 @@ public class BugsButcheryService {
 	 */
 	public boolean checkAllTerritoryPicked() {
 		List<Territory> allTerritory = new ArrayList<Territory>();
-		allTerritory = territoryRep.findAll();
+		allTerritory = myTerritoryRepository.findAll();
 		for (Territory entry : allTerritory) {
 			if (entry.getTerritoryOwner() == null) {
 				return false;
@@ -38,7 +41,8 @@ public class BugsButcheryService {
 	}
 	
 	//New Round
-	
+
+
 	/** 
 	 * Check if a player owns an entire family
 	 * @param player
@@ -48,7 +52,7 @@ public class BugsButcheryService {
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		 for (Territory t : player.getPlayerTerritoryList()) {
-		ArrayList<Territory> allTerritoryInAFamily = myFamily.findAllByTerritoryFamily(t.getTerritoryFamily());
+		ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 		if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
 			player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
 			 }
@@ -225,4 +229,103 @@ public class BugsButcheryService {
 //		(target.getTerritoryAntsNb() + antNbr);
 //		//NOT FINISH 
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// MOVE
+	
+	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
+
+		// VALEURS INITIALES
+		potentialsTerritories.clear();
+		potentialsTerritories.addAll(player.getPlayerTerritoryList());
+		 potentialsTerritories.addAll(unownedTerritories);
+		//	crossedTerritories = new ArrayList<Territory>();          
+		pathExist=0;
+		boolean thereIsAPath=false;
+		
+		if(!potentialsTerritories.contains(territoryArrival)){
+			return false;
+		}
+		
+		
+		moveOneStep(territoryStart, territoryArrival);
+
+		if (pathExist==1) {
+			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
+			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
+			thereIsAPath=true;
+		}
+		
+
+		return thereIsAPath;
+
+
+
+	}
+
+
+
+
+
+
+	public boolean moveOneStep(Territory territory1, Territory territory2) {
+		
+		potentialsTerritories.remove(territory1);
+		if(potentialsTerritories.size()==0) {
+			return false;
+		}//if 0 territory except territory1 (||& territories already crossed) = false
+
+		ArrayList<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
+		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
+
+
+		if(TerritoryFrontiersMine.size()==0) {
+			return false;
+		} // si pas de territoires frontaliers = false
+
+
+		else { 
+
+			for (Territory thisTerritory : TerritoryFrontiersMine) { // pour les territoires frontaliers
+
+				if (thisTerritory.equals(territory2)) {
+					pathExist=1;
+				} //quand la boucle tombe sur le territoire de destination,  = path exist
+
+				else {
+					//				crossedTerritories.add(thisTerritory);
+					//				potentialsTerritories.removeAll(crossedTerritories);
+					potentialsTerritories.remove(thisTerritory); //supprime de la liste des territoires à traiter
+					moveOneStep(thisTerritory, territory2); // continue à chercher le territoire de à partir de la nouvelle position 'thisterritoy'
+				}
+			}
+
+		}
+		
+		
+		return false;
+
+
+
+
+	}
+	
+	
+	//Change player
+	
+	public void changePlayer() {
+		
+		
+	}
+	
+	
+	
+	
+	
 }
