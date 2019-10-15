@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
+<<<<<<< HEAD
 	TerritoryRepository myTerritoryRepository;
 	FamilyRepository myFamilyRepository;
 	PlayerRepository myPlayerRepository;
@@ -22,6 +23,19 @@ public class BugsButcheryService {
 	protected Player playerTurn = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
+=======
+	 TerritoryRepository myTerritoryRepository;
+	 FamilyRepository myFamilyRepository;
+	 PlayerRepository myPlayerRepository;
+	
+	
+		protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
+		protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
+		protected Player playerTurn = playersAlive.get(0);
+		protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
+		protected int pathExist;
+		
+>>>>>>> a72723c7677d83b889184448a8f265b6cd48b4aa
 
 	//New Game
 	/**
@@ -130,7 +144,7 @@ public class BugsButcheryService {
 	 * @param nbrDiceAttack
 	 * @return
 	 */
-	public boolean canAttack(Territory attacker, Territory target, int nbrDiceAttack) {
+	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
 		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
 			return true;
 		}
@@ -164,7 +178,7 @@ public class BugsButcheryService {
 	 * @param nbrDiceDefender
 	 */
 	public void diceFight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender){
-		if(canAttack(attacker, target, nbrDiceAttack)) {
+		if(requestAttack(attacker, target, nbrDiceAttack)) {
 			ArrayList<Integer> resultCurrent = new ArrayList<Integer>();
 			ArrayList<Integer> resultTarget = new ArrayList<Integer>();
 			for (int i = 0; i < nbrDiceAttack; i++) {
@@ -198,17 +212,29 @@ public class BugsButcheryService {
 				//System.out.println("current -2");
 			}
 			if(checkConquest(target)) {
-				//winner > moveAfterConquest
-			}
-			else {
-				//keepAttacking?
+				//move()
+				killAntHill(defender, target);
 			}
 		}
 		else {
 			//cant attack at least on check failed
 		}
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public void killAntHill(Player player, Territory territory) {
+		if(territory.isAnthill()) {
+			for (Territory entry :player.getPlayerTerritoryList()) {
+				playerAlive.remove(player);
+				entry.setTerritoryOwner(null);
+				unownedTerritory.add(entry);
+			}
+		}
+	}
+	
+>>>>>>> a72723c7677d83b889184448a8f265b6cd48b4aa
 	/**
 	 * Moving ants after a conquest between the two territories
 	 * @param attacker
