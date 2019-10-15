@@ -13,7 +13,14 @@ public class BugsButcheryService {
 
 	@Autowired
 	TerritoryRepository territoryRep;
-	FamilyRepository myFamily;
+
+	FamilyRepository familyRep;
+	PlayerRepository playerRep;
+	
+	
+	ArrayList<Territory> unownedTerritory = new ArrayList<Territory>();
+	ArrayList<Player> playerAlive = (ArrayList<Player>) playerRep.findAll();
+	Player playerTurn = playerAlive.get(0);
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -120,7 +127,7 @@ public class BugsButcheryService {
 	 * @param nbrDiceAttack
 	 * @return
 	 */
-	public boolean canAttack(Territory attacker, Territory target, int nbrDiceAttack) {
+	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
 		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
 			return true;
 		}
@@ -154,7 +161,7 @@ public class BugsButcheryService {
 	 * @param nbrDiceDefender
 	 */
 	public void diceFight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender){
-		if(canAttack(attacker, target, nbrDiceAttack)) {
+		if(requestAttack(attacker, target, nbrDiceAttack)) {
 			ArrayList<Integer> resultCurrent = new ArrayList<Integer>();
 			ArrayList<Integer> resultTarget = new ArrayList<Integer>();
 			for (int i = 0; i < nbrDiceAttack; i++) {
@@ -188,14 +195,22 @@ public class BugsButcheryService {
 				//System.out.println("current -2");
 			}
 			if(checkConquest(target)) {
-				//winner > moveAfterConquest
-			}
-			else {
-				//keepAttacking?
+				//move()
+				killAntHill(defender, target);
 			}
 		}
 		else {
 			//cant attack at least on check failed
+		}
+	}
+	
+	public void killAntHill(Player player, Territory territory) {
+		if(territory.isAnthill()) {
+			for (Territory entry :player.getPlayerTerritoryList()) {
+				playerAlive.remove(player);
+				entry.setTerritoryOwner(null);
+				unownedTerritory.add(entry);
+			}
 		}
 	}
 	
