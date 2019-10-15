@@ -30,6 +30,40 @@ public class BugsButcheryService {
 		return true;
 	}
 	
+	//New Round
+	
+	/** 
+	 * Check if a player owns an entire family
+	 * @param player
+	 * @return void
+	 * @author Eloise
+	 * 
+	 */
+	public void upDatePlayerTerritoryFamilyList(Player player) {
+		 for (Territory t : player.getPlayerTerritoryList()) {
+		if(player.getPlayerTerritoryList().contains(t.getTerritoryFamily().findAllByTerritoryFamily(t.getTerritoryFamily()))){
+			player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+			 }
+		 }
+		 
+	}
+	
+	/**
+	 * Calculate the Refill for a new round
+	 * @param player
+	 * @return int Refill
+	 * @author Eloise
+	 */
+	public int refillAvailableAnts(Player player) {
+		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		int refillByFamily = 0;
+		for (Family f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ f.getFamilyValue();
+		}
+		int refillAvailableAnts = refillByTerritory + refillByFamily;
+		return refillAvailableAnts;
+	}
+	
 	//Phase 2 attack /optional
 		/**
 		 * check country pawn number if pawn < 1 can't attack.

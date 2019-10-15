@@ -28,6 +28,9 @@ public class Family {
 	public void setFamilyValue(int familyValue) {
 		this.familyValue = familyValue;
 	}
-	
+	public Territory findAllByTerritoryFamily(Family territoryFamily) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

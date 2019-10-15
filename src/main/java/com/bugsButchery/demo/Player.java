@@ -63,10 +63,6 @@ public class Player {
 		return (int)Math.ceil(Math.random()*6);
 	}
 	
-//	public int refillAvailableAnts(Player player) {
-//		
-//	}
-	
 	
 	/**
 	 * placer le nombre de fourmis que l'on veut sur un territoire possédé
