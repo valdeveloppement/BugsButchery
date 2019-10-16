@@ -140,6 +140,21 @@ public class BugsButcheryService {
 			return false;
 		}
 	}
+	
+	/** check if the defender has enough pawns to fightBack
+	 * @param territory
+	 * @param nbrDiceDefense
+	 * @return 
+	 */
+	public boolean requestDefense(Territory defender, int nbrDiceDefense) {
+		if (defender.getTerritoryAntsNb() >= nbrDiceDefense && nbrDiceDefense <= 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 
 	/**
 	 * Check if player has conquiered the territory
