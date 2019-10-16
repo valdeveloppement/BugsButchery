@@ -1,7 +1,14 @@
 package com.bugsButchery.demo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Family {
 
+	@Id
+	@GeneratedValue
 	private int familyId;
 	private String familyName;
 	private int familyValue;
