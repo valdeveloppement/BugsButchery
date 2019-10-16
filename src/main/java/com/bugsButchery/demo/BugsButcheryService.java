@@ -54,7 +54,7 @@ public class BugsButcheryService {
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		for (Territory t : player.getPlayerTerritoryList()) {
 			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
-			if(player.getPlayerTerritoryList().contains(allTerritoryInAFamily)){
+			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
 			}
 		}
