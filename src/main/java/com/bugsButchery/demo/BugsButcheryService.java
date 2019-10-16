@@ -357,6 +357,52 @@ public class BugsButcheryService {
 	}
 
 
+	/**
+	 * placer le nombre de fourmis que l'on veut sur un territoire possédé
+	 * @param player
+	 * @param territory
+	 * @param ants
+	 * @return
+	 */
+	public ArrayList<Territory> placeAnts(Player player, Territory territory, int ants) {
+		
+		if (player.getPlayerTerritoryList().contains(territory)) {
+		//si le player possède le territoire (nommé ici territory) qu'on fait passer dans la méthode	
+			territory.setTerritoryAntsNb(territory.getTerritoryAntsNb() + ants);
+			//le territoire possédé ...
+			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - ants);
+		}
+		return player.getPlayerTerritoryList();
+		//retourn la liste des territoires qui on changé dans la methode
+	}
 
+	/**
+	 * placer tour a tour une fourmi pour définir a qui sont les territoires
+	 * @param player
+	 * @param territory
+	 * @return
+	 */
+	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
+		
+		if (territory.getTerritoryOwner() == null) {
+		//si le territoire séléctionner est égal a vide
+			player.getPlayerTerritoryList().add(territory);
+			//ajoute territoire a la liste de territoire du player
+			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
+			//enlever une fourmi au compte total de fourmi du player
+		}
+		return player.getPlayerTerritoryList();
+		//retourn la liste des territoires qui on changé dans la methode
+	}
+	
+	/**
+	 * @param player
+	 * @param territory
+	 */
+	public void addAntsHill(Player player, Territory territory) {
+		if (player.getPlayerTerritoryList().contains(territory)) {
+			territory.isAnthill();
+		}
+	}
 
 }
