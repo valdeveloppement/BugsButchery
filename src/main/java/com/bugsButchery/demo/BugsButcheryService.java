@@ -15,12 +15,11 @@ public class BugsButcheryService {
 
 	TerritoryRepository myTerritoryRepository;
 	FamilyRepository myFamilyRepository;
-	PlayerRepository myPlayerRepository;
 
 
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
-	protected ArrayList<Player> playersAlive = (ArrayList<Player>) myPlayerRepository.findAll();
-	protected Player playerTurn = playersAlive.get(0);
+	protected ArrayList<Player> playersAlive = new ArrayList<Player>();
+	protected Player playerTurn; // = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
 
@@ -51,32 +50,32 @@ public class BugsButcheryService {
 	 * @author Eloise
 	 * NON TESTE
 	 */
-	public void upDatePlayerTerritoryFamilyList(Player player) {
-		for (Territory t : player.getPlayerTerritoryList()) {
-			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
-			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
-				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
-			}
-		}
-	}
-
-
-	/**
-	 * Calculate the Refill for a new round
-	 * @param player
-	 * @return int Refill
-	 * @author Eloise
-	 * NON TESTE
-	 */
-	public void refillAvailableAnts(Player player) {
-		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
-		int refillByFamily = 0;
-		for (Family f : player.getPlayerTerritoryFamilyList()) {
-			refillByFamily =+ f.getFamilyValue();
-		}
-		int refillAvailableAnts = refillByTerritory + refillByFamily;
-		player.setPlayerAvailableAnts(refillAvailableAnts);
-	}
+//	public void upDatePlayerTerritoryFamilyList(Player player) {
+//		for (Territory t : player.getPlayerTerritoryList()) {
+//			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
+//			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
+//				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+//			}
+//		}
+//	}
+//
+//
+//	/**
+//	 * Calculate the Refill for a new round
+//	 * @param player
+//	 * @return int Refill
+//	 * @author Eloise
+//	 * NON TESTE
+//	 */
+//	public void refillAvailableAnts(Player player) {
+//		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+//		int refillByFamily = 0;
+//		for (Family f : player.getPlayerTerritoryFamilyList()) {
+//			refillByFamily =+ f.getFamilyValue();
+//		}
+//		int refillAvailableAnts = refillByTerritory + refillByFamily;
+//		player.setPlayerAvailableAnts(refillAvailableAnts);
+//	}
 
 	//Phase 2 attack /optional
 	/**
@@ -248,13 +247,7 @@ public class BugsButcheryService {
 	//	}
 
 
-
-
-
-
-
-
-	// MOVE
+	//---- MOVE ----//
 
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
@@ -270,7 +263,7 @@ public class BugsButcheryService {
 			return false;
 		}
 
-
+		
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
@@ -278,17 +271,8 @@ public class BugsButcheryService {
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
-
-
 		return thereIsAPath;
-
-
-
 	}
-
-
-
-
 
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
@@ -324,17 +308,11 @@ public class BugsButcheryService {
 			}
 
 		}
-
-
 		return false;
-
-
-
-
 	}
 
 
-	//Change player
+	//---- Change player ----//
 
 	public void changePlayer() {
 		int roundSize= playersAlive.size();
@@ -344,9 +322,7 @@ public class BugsButcheryService {
 		}
 		else {
 			playerTurn = playersAlive.get(0);
-
 		}
-
 	}
 	
 	

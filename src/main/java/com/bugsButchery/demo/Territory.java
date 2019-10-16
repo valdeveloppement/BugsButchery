@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 public class Territory {
@@ -24,13 +27,14 @@ public class Territory {
 //			  name = "frontier", 
 //			  joinColumns = @JoinColumn(name = "frontier_id"),
 //			  inverseJoinColumns = @JoinColumn(name = "territory_id"))
-//			
+	@Transient		
 	private ArrayList<Territory> territoryFrontiers;
-	private Player territoryOwner;
 	private boolean isAnthill;
-	
+	@ManyToOne
 	private Family territoryFamily;
-	private int territoryAntsNb;
+	private int territoryAntsNb;	
+	@Transient
+	private Player territoryOwner;
 	
 	public Territory() {
 		super();
