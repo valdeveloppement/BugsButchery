@@ -248,13 +248,7 @@ public class BugsButcheryService {
 	//	}
 
 
-
-
-
-
-
-
-	// MOVE
+	//---- MOVE ----//
 
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
@@ -270,7 +264,7 @@ public class BugsButcheryService {
 			return false;
 		}
 
-
+		
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
@@ -278,17 +272,8 @@ public class BugsButcheryService {
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
-
-
 		return thereIsAPath;
-
-
-
 	}
-
-
-
-
 
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
@@ -324,17 +309,11 @@ public class BugsButcheryService {
 			}
 
 		}
-
-
 		return false;
-
-
-
-
 	}
 
 
-	//Change player
+	//---- Change player ----//
 
 	public void changePlayer() {
 		int roundSize= playersAlive.size();
@@ -344,9 +323,7 @@ public class BugsButcheryService {
 		}
 		else {
 			playerTurn = playersAlive.get(0);
-
 		}
-
 	}
 	
 	
