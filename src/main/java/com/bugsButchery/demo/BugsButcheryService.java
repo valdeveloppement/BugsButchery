@@ -58,7 +58,6 @@ public class BugsButcheryService {
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
 			}
 		}
-
 	}
 
 

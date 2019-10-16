@@ -6,15 +6,6 @@ INSERT INTO family (family_name, family_value) VALUES ('legume', 3);
 INSERT INTO family (family_name, family_value) VALUES ('viande', 2);
 
 
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('maurane', 'violet', 30);
-
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('eloise', 'rouge', 30);
-
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('sylvain', 'vert', 30);
-
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('valentin', 'noir', 30);
-
-
 INSERT INTO territory (territory_name, territory_value, territory_family) VALUES ('kiwi', 2, 1);
 
 INSERT INTO territory (territory_name, territory_value, territory_family) VALUES ('abricot', 3, 1);
