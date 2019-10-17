@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class BugsButcheryService {
 
 	@Autowired
-
 	TerritoryRepository myTerritoryRepository;
 	FamilyRepository myFamilyRepository;
 
@@ -22,7 +22,24 @@ public class BugsButcheryService {
 	protected Player playerTurn; // = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
+	
+	//---- get & set ----//
+	
+	public Player getPlayerTurn() {
+		return playerTurn;
+	}
 
+	public void setPlayerTurn(Player playerTurn) {
+		this.playerTurn = playerTurn;
+	}
+	
+	public ArrayList<Player> getPlayersAlive() {
+		return playersAlive;
+	}
+
+	public void setPlayersAlive(ArrayList<Player> playersAlive) {
+		this.playersAlive = playersAlive;
+	}
 
 	//New Game
 	/**
@@ -68,15 +85,19 @@ public class BugsButcheryService {
 //	 * @author Eloise
 //	 * NON TESTE
 //	 */
-//	public void refillAvailableAnts(Player player) {
-//		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
-//		int refillByFamily = 0;
-//		for (Family f : player.getPlayerTerritoryFamilyList()) {
-//			refillByFamily =+ f.getFamilyValue();
-//		}
-//		int refillAvailableAnts = refillByTerritory + refillByFamily;
-//		player.setPlayerAvailableAnts(refillAvailableAnts);
-//	}
+	public void refillAvailableAnts(Player player) {
+		upDatePlayerTerritoryFamilyList(player);
+		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		int refillByFamily = 0;
+		for (Family f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ f.getFamilyValue();
+		}
+		int refillAvailableAnts = refillByTerritory + refillByFamily;
+		player.setPlayerAvailableAnts(refillAvailableAnts);
+		
+	
+		
+	}
 
 	//Phase 2 attack /optional
 	/**
@@ -201,7 +222,6 @@ public class BugsButcheryService {
 				else {
 					//System.out.println("attacker -1");
 					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-					
 				}
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
@@ -390,4 +410,5 @@ public class BugsButcheryService {
 		}
 	}
 
+	
 }
