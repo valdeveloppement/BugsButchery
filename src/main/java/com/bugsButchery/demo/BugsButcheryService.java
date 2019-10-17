@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class BugsButcheryService {
 
 	@Autowired
-
 	TerritoryRepository myTerritoryRepository;
 	
 	@Autowired
@@ -43,6 +42,25 @@ public class BugsButcheryService {
 	protected Player playerTurn; // = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
+	
+	//---- get & set ----//
+	
+	public Player getPlayerTurn() {
+		return playerTurn;
+	}
+
+	public void setPlayerTurn(Player playerTurn) {
+		this.playerTurn = playerTurn;
+	}
+	
+	public ArrayList<Player> getPlayersAlive() {
+		return playersAlive;
+	}
+
+
+	public void setPlayersAlive(ArrayList<Player> playersAlive) {
+		this.playersAlive = playersAlive;
+	}
 
 	public List<Territory> findAll() {
 		return myTerritoryRepository.findAll();
@@ -91,6 +109,9 @@ public class BugsButcheryService {
 //	 * @author Eloise
 //	 */
 	public void refillAvailableAnts(Player player) {
+
+		upDatePlayerTerritoryFamilyList(player);
+
 		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
 		int refillByFamily = 0;
 		for (Family f : player.getPlayerTerritoryFamilyList()) {
@@ -98,6 +119,11 @@ public class BugsButcheryService {
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
+
+		
+	
+		
+
 	}
 
 	//Phase 2 attack /optional
@@ -201,58 +227,57 @@ public class BugsButcheryService {
 	 * @param target
 	 * @param nbrDiceDefender
 	 */
-//	public void diceFight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender){
-//		if(requestAttack(attacker, target, nbrDiceAttack)) {
-//			ArrayList<Integer> resultCurrent = new ArrayList<Integer>();
-//			ArrayList<Integer> resultTarget = new ArrayList<Integer>();
-//			for (int i = 0; i < nbrDiceAttack; i++) {
-//				resultCurrent.add(current.rollDice());
-//			}
-//			for (int i = 0; i < nbrDiceDefender; i++) {
-//				resultTarget.add(defender.rollDice());
-//			}
-//
-//			Collections.sort(resultCurrent, Collections.reverseOrder());
-//			Collections.sort(resultTarget, Collections.reverseOrder());
-//
-//			if (resultCurrent.size() < 2 || resultTarget.size() < 2) {
-//				if (resultCurrent.get(0) > resultTarget.get(0)) {
-//					//System.out.println("target -1");
-//					target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-//				}
-//				else {
-//					//System.out.println("attacker -1");
-//					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-//					
-//				}
-//			}
-//			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
-//				//System.out.println("target -2");
-//				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-2);
-//			}
-//			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) <= resultTarget.get(1)) {
-//				//System.out.println("attacker -1 target -1");
-//				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-//				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-//			}
-//			else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
-//				//System.out.println("attacker -1 target -1");
-//				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-//				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-//			}
-//			else {
-//				//System.out.println("attacker -2");
-//				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-2);
-//			}
-//			if(checkConquest(target)) {
-//				//move()
-//				killAntHill(defender, target);
-//			}
-//		}
-//		else {
-//			//cant attack at least on check failed
-//		}
-//	}
+	public void diceFight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender){
+		if(requestAttack(attacker, target, nbrDiceAttack)) {
+			ArrayList<Integer> resultCurrent = new ArrayList<Integer>();
+			ArrayList<Integer> resultTarget = new ArrayList<Integer>();
+			for (int i = 0; i < nbrDiceAttack; i++) {
+				resultCurrent.add(current.rollDice());
+			}
+			for (int i = 0; i < nbrDiceDefender; i++) {
+				resultTarget.add(defender.rollDice());
+			}
+
+			Collections.sort(resultCurrent, Collections.reverseOrder());
+			Collections.sort(resultTarget, Collections.reverseOrder());
+
+			if (resultCurrent.size() < 2 || resultTarget.size() < 2) {
+				if (resultCurrent.get(0) > resultTarget.get(0)) {
+					//System.out.println("target -1");
+					target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
+				}
+				else {
+					//System.out.println("attacker -1");
+					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				}
+			}
+			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
+				//System.out.println("target -2");
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-2);
+			}
+			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) <= resultTarget.get(1)) {
+				//System.out.println("attacker -1 target -1");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
+			}
+			else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
+				//System.out.println("attacker -1 target -1");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
+			}
+			else {
+				//System.out.println("attacker -2");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-2);
+			}
+			if(checkConquest(target)) {
+				//move()
+				killAntHill(defender, target);
+			}
+		}
+		else {
+			//cant attack at least on check failed
+		}
+	}
 
 	
 	public void killAntHill(Player player, Territory territory) {
@@ -412,4 +437,5 @@ public class BugsButcheryService {
 		}
 	}
 
+	
 }
