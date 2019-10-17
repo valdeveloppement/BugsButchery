@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class BugsButcheryService {
 
@@ -15,6 +16,23 @@ public class BugsButcheryService {
 
 	TerritoryRepository myTerritoryRepository;
 	FamilyRepository myFamilyRepository;
+	
+		
+	public TerritoryRepository getMyTerritoryRepository() {
+		return myTerritoryRepository;
+	}
+
+	public void setMyTerritoryRepository(TerritoryRepository myTerritoryRepository) {
+		this.myTerritoryRepository = myTerritoryRepository;
+	}
+
+	public FamilyRepository getMyFamilyRepository() {
+		return myFamilyRepository;
+	}
+
+	public void setMyFamilyRepository(FamilyRepository myFamilyRepository) {
+		this.myFamilyRepository = myFamilyRepository;
+	}
 
 
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
@@ -23,7 +41,10 @@ public class BugsButcheryService {
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
 
-
+	public List<Territory> findAll() {
+		return myTerritoryRepository.findAll();
+	}
+	
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -68,15 +89,15 @@ public class BugsButcheryService {
 //	 * @author Eloise
 //	 * NON TESTE
 //	 */
-//	public void refillAvailableAnts(Player player) {
-//		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
-//		int refillByFamily = 0;
-//		for (Family f : player.getPlayerTerritoryFamilyList()) {
-//			refillByFamily =+ f.getFamilyValue();
-//		}
-//		int refillAvailableAnts = refillByTerritory + refillByFamily;
-//		player.setPlayerAvailableAnts(refillAvailableAnts);
-//	}
+	public void refillAvailableAnts(Player player) {
+		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		int refillByFamily = 0;
+		for (Family f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ f.getFamilyValue();
+		}
+		int refillAvailableAnts = refillByTerritory + refillByFamily;
+		player.setPlayerAvailableAnts(refillAvailableAnts);
+	}
 
 	//Phase 2 attack /optional
 	/**

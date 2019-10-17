@@ -35,7 +35,7 @@ public class Territory {
 	private List<Territory> territoryFrontiers;
  
 	private boolean isAnthill;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Family territoryFamily;
 	private int territoryAntsNb;	
 	@Transient
