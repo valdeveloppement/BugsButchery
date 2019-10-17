@@ -17,16 +17,25 @@ public class Player {
 		super();
 	}
 	
+
 	public Player(int playerId,String playerName, String playerAntsBreed, int playerAvailableAnts) {
+
+
 		super();
 		this.playerId = playerId;
 		this.playerName = playerName;
 		this.playerAntsBreed = playerAntsBreed;
+
+
+		this.playerTerritoryList = playerTerritoryList;
+		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
 		this.playerAvailableAnts = playerAvailableAnts;
-		
 	}
 
+
 	//---- get & set ----//
+
+	
 
 	public int getPlayerId() {
 		return playerId;

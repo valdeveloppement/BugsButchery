@@ -26,15 +26,22 @@ public class Territory {
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
+
 	@ManyToMany(cascade = CascadeType.ALL)
-//	@JoinTable(
-//			  name = "frontier", 
-//			  joinColumns = @JoinColumn(name = "frontier_id"),
-//			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
+	@JoinTable(
+			  name = "frontier", 
+			  joinColumns = @JoinColumn(name = "frontier_id"),
+			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
 	private List<Territory> territoryFrontiers;
+	@Transient
 	private boolean isAnthill;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinTable(
+			  name = "territory", 
+			  joinColumns = @JoinColumn(name = "family_territory"),
+			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
 	private Family territoryFamily;
+	@Transient
 	private int territoryAntsNb;	
 	@Transient
 	private Player territoryOwner;

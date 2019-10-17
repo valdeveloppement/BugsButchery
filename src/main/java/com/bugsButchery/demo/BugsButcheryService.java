@@ -14,8 +14,28 @@ public class BugsButcheryService {
 
 	@Autowired
 	TerritoryRepository myTerritoryRepository;
+	
+	@Autowired
 	FamilyRepository myFamilyRepository;
+	
 
+	
+
+	public TerritoryRepository getMyTerritoryRepository() {
+		return myTerritoryRepository;
+	}
+
+	public void setMyTerritoryRepository(TerritoryRepository myTerritoryRepository) {
+		this.myTerritoryRepository = myTerritoryRepository;
+	}
+
+	public FamilyRepository getMyFamilyRepository() {
+		return myFamilyRepository;
+	}
+
+	public void setMyFamilyRepository(FamilyRepository myFamilyRepository) {
+		this.myFamilyRepository = myFamilyRepository;
+	}
 
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
 	protected ArrayList<Player> playersAlive = new ArrayList<Player>();
@@ -37,10 +57,15 @@ public class BugsButcheryService {
 		return playersAlive;
 	}
 
+
 	public void setPlayersAlive(ArrayList<Player> playersAlive) {
 		this.playersAlive = playersAlive;
 	}
 
+	public List<Territory> findAll() {
+		return myTerritoryRepository.findAll();
+	}
+	
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -57,7 +82,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round
+	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
 
 
 	/** 
@@ -65,7 +90,6 @@ public class BugsButcheryService {
 	 * @param player
 	 * @return void
 	 * @author Eloise
-	 * NON TESTE
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		for (Territory t : player.getPlayerTerritoryList()) {
@@ -83,10 +107,11 @@ public class BugsButcheryService {
 //	 * @param player
 //	 * @return int Refill
 //	 * @author Eloise
-//	 * NON TESTE
 //	 */
 	public void refillAvailableAnts(Player player) {
+
 		upDatePlayerTerritoryFamilyList(player);
+
 		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
 		int refillByFamily = 0;
 		for (Family f : player.getPlayerTerritoryFamilyList()) {
@@ -94,9 +119,11 @@ public class BugsButcheryService {
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
+
 		
 	
 		
+
 	}
 
 	//Phase 2 attack /optional
@@ -135,15 +162,15 @@ public class BugsButcheryService {
 	 * @param idTarget
 	 * @return
 	 */
-	public boolean pathExist(Territory attacker, Territory target) {
-
-		if (attacker.getTerritoryFrontiers().contains(target)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+//	public boolean pathExist(Territory attacker, Territory target) {
+//
+//		if (attacker.getTerritoryFrontiers().contains(target)) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+//	}
 
 	/**
 	 * Regroup all 3 checks (antNumber, oneAntBehind and pathExist)
@@ -152,14 +179,14 @@ public class BugsButcheryService {
 	 * @param nbrDiceAttack
 	 * @return
 	 */
-	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
-		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+//	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
+//		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+//	}
 	
 	/** check if the defender has enough pawns to fightBack
 	 * @param territory
@@ -279,67 +306,67 @@ public class BugsButcheryService {
 
 	//---- MOVE ----//
 
-	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
-
-		// VALEURS INITIALES
-		potentialsTerritories.clear();
-		potentialsTerritories.addAll(player.getPlayerTerritoryList());
-		potentialsTerritories.addAll(unownedTerritories);
-		//	crossedTerritories = new ArrayList<Territory>();          
-		pathExist=0;
-		boolean thereIsAPath=false;
-
-		if(!potentialsTerritories.contains(territoryArrival)){
-			return false;
-		}
-
-		
-		moveOneStep(territoryStart, territoryArrival);
-
-		if (pathExist==1) {
-			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
-			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
-			thereIsAPath=true;
-		}
-		return thereIsAPath;
-	}
-
-
-	public boolean moveOneStep(Territory territory1, Territory territory2) {
-
-		potentialsTerritories.remove(territory1);
-		if(potentialsTerritories.size()==0) {
-			return false;
-		}//if 0 territory except territory1 (||& territories already crossed) = false
-
-		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
-		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
-
-
-		if(TerritoryFrontiersMine.size()==0) {
-			return false;
-		} // si pas de territoires frontaliers = false
-
-
-		else { 
-
-			for (Territory thisTerritory : TerritoryFrontiersMine) { // pour les territoires frontaliers
-
-				if (thisTerritory.equals(territory2)) {
-					pathExist=1;
-				} //quand la boucle tombe sur le territoire de destination,  = path exist
-
-				else {
-					//				crossedTerritories.add(thisTerritory);
-					//				potentialsTerritories.removeAll(crossedTerritories);
-					potentialsTerritories.remove(thisTerritory); //supprime de la liste des territoires à traiter
-					moveOneStep(thisTerritory, territory2); // continue à chercher le territoire de à partir de la nouvelle position 'thisterritoy'
-				}
-			}
-
-		}
-		return false;
-	}
+//	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
+//
+//		// VALEURS INITIALES
+//		potentialsTerritories.clear();
+//		potentialsTerritories.addAll(player.getPlayerTerritoryList());
+//		potentialsTerritories.addAll(unownedTerritories);
+//		//	crossedTerritories = new ArrayList<Territory>();          
+//		pathExist=0;
+//		boolean thereIsAPath=false;
+//
+//		if(!potentialsTerritories.contains(territoryArrival)){
+//			return false;
+//		}
+//
+//		
+//		moveOneStep(territoryStart, territoryArrival);
+//
+//		if (pathExist==1) {
+//			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
+//			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
+//			thereIsAPath=true;
+//		}
+//		return thereIsAPath;
+//	}
+//
+//
+//	public boolean moveOneStep(Territory territory1, Territory territory2) {
+//
+//		potentialsTerritories.remove(territory1);
+//		if(potentialsTerritories.size()==0) {
+//			return false;
+//		}//if 0 territory except territory1 (||& territories already crossed) = false
+//
+//		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
+//		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
+//
+//
+//		if(TerritoryFrontiersMine.size()==0) {
+//			return false;
+//		} // si pas de territoires frontaliers = false
+//
+//
+//		else { 
+//
+//			for (Territory thisTerritory : TerritoryFrontiersMine) { // pour les territoires frontaliers
+//
+//				if (thisTerritory.equals(territory2)) {
+//					pathExist=1;
+//				} //quand la boucle tombe sur le territoire de destination,  = path exist
+//
+//				else {
+//					//				crossedTerritories.add(thisTerritory);
+//					//				potentialsTerritories.removeAll(crossedTerritories);
+//					potentialsTerritories.remove(thisTerritory); //supprime de la liste des territoires à traiter
+//					moveOneStep(thisTerritory, territory2); // continue à chercher le territoire de à partir de la nouvelle position 'thisterritoy'
+//				}
+//			}
+//
+//		}
+//		return false;
+//	}
 
 
 	//---- Change player ----//

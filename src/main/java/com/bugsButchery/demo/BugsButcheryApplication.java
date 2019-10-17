@@ -1,7 +1,12 @@
 package com.bugsButchery.demo;
 
+
+
+import java.awt.List;
 import java.util.ArrayList;
-import java.util.List;
+
+import javax.annotation.Resource;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +16,7 @@ import com.bugsButchery.demo.TerritoryRepository;
 @SpringBootApplication
 public class BugsButcheryApplication {
 	
+
 	@Autowired
 	static TerritoryRepository myTerritoryRepository;
 
@@ -202,7 +208,6 @@ public class BugsButcheryApplication {
 
         
     }
-    
 
     
    
