@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 
@@ -50,16 +51,17 @@ public class BugsButcheryService {
 	 * @author Eloise
 	 * NON TESTE
 	 */
-//	public void upDatePlayerTerritoryFamilyList(Player player) {
-//		for (Territory t : player.getPlayerTerritoryList()) {
-//			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
-//			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
-//				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
-//			}
-//		}
-//	}
-//
-//
+	public void upDatePlayerTerritoryFamilyList(Player player) {
+		for (Territory t : player.getPlayerTerritoryList()) {
+			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
+			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
+				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+			}
+		}
+	}
+	
+
+
 //	/**
 //	 * Calculate the Refill for a new round
 //	 * @param player
@@ -67,15 +69,15 @@ public class BugsButcheryService {
 //	 * @author Eloise
 //	 * NON TESTE
 //	 */
-//	public void refillAvailableAnts(Player player) {
-//		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
-//		int refillByFamily = 0;
-//		for (Family f : player.getPlayerTerritoryFamilyList()) {
-//			refillByFamily =+ f.getFamilyValue();
-//		}
-//		int refillAvailableAnts = refillByTerritory + refillByFamily;
-//		player.setPlayerAvailableAnts(refillAvailableAnts);
-//	}
+	public void refillAvailableAnts(Player player) {
+		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		int refillByFamily = 0;
+		for (Family f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ f.getFamilyValue();
+		}
+		int refillAvailableAnts = refillByTerritory + refillByFamily;
+		player.setPlayerAvailableAnts(refillAvailableAnts);
+	}
 
 	//Phase 2 attack /optional
 	/**
