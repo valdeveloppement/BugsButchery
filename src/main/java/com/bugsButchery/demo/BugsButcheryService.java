@@ -197,22 +197,31 @@ public class BugsButcheryService {
 			if (resultCurrent.size() < 2 || resultTarget.size() < 2) {
 				if (resultCurrent.get(0) > resultTarget.get(0)) {
 					//System.out.println("target -1");
+					target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 				}
 				else {
-					//System.out.println("current -1");
+					//System.out.println("attacker -1");
+					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+					
 				}
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
 				//System.out.println("target -2");
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-2);
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) <= resultTarget.get(1)) {
-				//System.out.println("current -1 target -1");
+				//System.out.println("attacker -1 target -1");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 			}
 			else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
-				//System.out.println("current -1 target -1");
+				//System.out.println("attacker -1 target -1");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 			}
 			else {
-				//System.out.println("current -2");
+				//System.out.println("attacker -2");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-2);
 			}
 			if(checkConquest(target)) {
 				//move()
