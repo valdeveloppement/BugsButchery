@@ -49,17 +49,18 @@ public class BugsButcheryService {
 	 * @return void
 	 * @author Eloise
 	 * NON TESTE
-//	 */
-//	public void upDatePlayerTerritoryFamilyList(Player player) {
-//		for (Territory t : player.getPlayerTerritoryList()) {
-//			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
-//			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
-//				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
-//			}
-//		}
-//	}
-//
-//
+	 */
+	public void upDatePlayerTerritoryFamilyList(Player player) {
+		for (Territory t : player.getPlayerTerritoryList()) {
+			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
+			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
+				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+			}
+		}
+	}
+	
+
+
 //	/**
 //	 * Calculate the Refill for a new round
 //	 * @param player
