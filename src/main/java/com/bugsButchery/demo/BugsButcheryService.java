@@ -49,7 +49,7 @@ public class BugsButcheryService {
 	 * @return void
 	 * @author Eloise
 	 * NON TESTE
-	 */
+//	 */
 //	public void upDatePlayerTerritoryFamilyList(Player player) {
 //		for (Territory t : player.getPlayerTerritoryList()) {
 //			ArrayList<Territory> allTerritoryInAFamily = myFamilyRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
@@ -291,7 +291,7 @@ public class BugsButcheryService {
 			return false;
 		}//if 0 territory except territory1 (||& territories already crossed) = false
 
-		ArrayList<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
+		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
 		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
 
