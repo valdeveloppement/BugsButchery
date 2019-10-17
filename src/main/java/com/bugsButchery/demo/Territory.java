@@ -1,6 +1,7 @@
 package com.bugsButchery.demo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class Territory {
 
@@ -24,12 +27,13 @@ public class Territory {
 	private String territoryName;
 	private int territoryValue;
 
-	@ManyToMany
-	@JoinTable(
-			  name = "frontier", 
-			  joinColumns = @JoinColumn(name = "frontier_id"),
-			  inverseJoinColumns = @JoinColumn(name = "territory_id"))
-	private ArrayList<Territory> territoryFrontiers;
+	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//			  name = "frontier", 
+//			  joinColumns = @JoinColumn(name = "frontier_id"),
+//			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
+	private List<Territory> territoryFrontiers;
+ 
 	private boolean isAnthill;
 	@ManyToOne
 	private Family territoryFamily;
@@ -59,10 +63,10 @@ public class Territory {
 	public void setTerritoryValue(int territoryValue) {
 		this.territoryValue = territoryValue;
 	}
-	public ArrayList<Territory> getTerritoryFrontiers() {
+	public List<Territory> getTerritoryFrontiers() {
 		return territoryFrontiers;
 	}
-	public void setTerritoryFrontiers(ArrayList<Territory> territoryFrontiers) {
+	public void setTerritoryFrontiers(List<Territory> territoryFrontiers) {
 		this.territoryFrontiers = territoryFrontiers;
 	}
 	public Player getTerritoryOwner() {

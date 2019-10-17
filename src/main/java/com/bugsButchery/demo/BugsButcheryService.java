@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 
@@ -41,7 +40,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round
+	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
 
 
 	/** 
@@ -69,15 +68,15 @@ public class BugsButcheryService {
 //	 * @author Eloise
 //	 * NON TESTE
 //	 */
-	public void refillAvailableAnts(Player player) {
-		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
-		int refillByFamily = 0;
-		for (Family f : player.getPlayerTerritoryFamilyList()) {
-			refillByFamily =+ f.getFamilyValue();
-		}
-		int refillAvailableAnts = refillByTerritory + refillByFamily;
-		player.setPlayerAvailableAnts(refillAvailableAnts);
-	}
+//	public void refillAvailableAnts(Player player) {
+//		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+//		int refillByFamily = 0;
+//		for (Family f : player.getPlayerTerritoryFamilyList()) {
+//			refillByFamily =+ f.getFamilyValue();
+//		}
+//		int refillAvailableAnts = refillByTerritory + refillByFamily;
+//		player.setPlayerAvailableAnts(refillAvailableAnts);
+//	}
 
 	//Phase 2 attack /optional
 	/**
@@ -197,22 +196,31 @@ public class BugsButcheryService {
 			if (resultCurrent.size() < 2 || resultTarget.size() < 2) {
 				if (resultCurrent.get(0) > resultTarget.get(0)) {
 					//System.out.println("target -1");
+					target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 				}
 				else {
-					//System.out.println("current -1");
+					//System.out.println("attacker -1");
+					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+					
 				}
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
 				//System.out.println("target -2");
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-2);
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) <= resultTarget.get(1)) {
-				//System.out.println("current -1 target -1");
+				//System.out.println("attacker -1 target -1");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 			}
 			else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
-				//System.out.println("current -1 target -1");
+				//System.out.println("attacker -1 target -1");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
+				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 			}
 			else {
-				//System.out.println("current -2");
+				//System.out.println("attacker -2");
+				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-2);
 			}
 			if(checkConquest(target)) {
 				//move()
@@ -284,7 +292,7 @@ public class BugsButcheryService {
 			return false;
 		}//if 0 territory except territory1 (||& territories already crossed) = false
 
-		ArrayList<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
+		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
 		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
 
