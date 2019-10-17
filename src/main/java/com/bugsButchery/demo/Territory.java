@@ -3,18 +3,38 @@ package com.bugsButchery.demo;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+@Entity
 public class Territory {
 
+	@Id
+	@GeneratedValue
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
+//	@ManyToMany
+//	@JoinTable(
+//			  name = "frontier", 
+//			  joinColumns = @JoinColumn(name = "frontier_id"),
+//			  inverseJoinColumns = @JoinColumn(name = "territory_id"))
+	@Transient		
 	private ArrayList<Territory> territoryFrontiers;
-	@Column(name="territory_owner_id")
-	private Player territoryOwner;
 	private boolean isAnthill;
+	@ManyToOne
 	private Family territoryFamily;
-	private int territoryAntsNb;
+	private int territoryAntsNb;	
+	@Transient
+	private Player territoryOwner;
 	
 	public Territory() {
 		super();

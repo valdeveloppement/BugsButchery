@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FamilyRepository extends JpaRepository<Family, Integer>{
 
-	ArrayList<Territory> findAllByTerritoryFamily(Family territoryFamily);
+//	ArrayList<Territory> findAllByTerritoryFamily(Family territoryFamily);
 
 }
