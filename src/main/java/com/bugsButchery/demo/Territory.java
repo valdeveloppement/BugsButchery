@@ -2,6 +2,7 @@ package com.bugsButchery.demo;
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,12 +23,12 @@ public class Territory {
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
-//	@ManyToMany
-//	@JoinTable(
-//			  name = "frontier", 
-//			  joinColumns = @JoinColumn(name = "frontier_id"),
-//			  inverseJoinColumns = @JoinColumn(name = "territory_id"))
-	@Transient		
+
+	@ManyToMany
+	@JoinTable(
+			  name = "frontier", 
+			  joinColumns = @JoinColumn(name = "frontier_id"),
+			  inverseJoinColumns = @JoinColumn(name = "territory_id"))
 	private ArrayList<Territory> territoryFrontiers;
 	private boolean isAnthill;
 	@ManyToOne
