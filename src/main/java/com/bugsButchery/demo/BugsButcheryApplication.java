@@ -1,5 +1,6 @@
 package com.bugsButchery.demo;
 
+
 import java.awt.List;
 import java.util.ArrayList;
 
@@ -15,8 +16,6 @@ public class BugsButcheryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BugsButcheryApplication.class, args);
-		
-	
 
 	}
 		
