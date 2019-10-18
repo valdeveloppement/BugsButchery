@@ -26,6 +26,8 @@ public class Player {
 		this.playerName = playerName;
 		this.playerAntsBreed = playerAntsBreed;
 		this.playerAvailableAnts = playerAvailableAnts;
+		this.playerTerritoryList = new ArrayList<Territory>();
+		this.playerTerritoryFamilyList = new ArrayList<Integer>();
 	}
 
 
