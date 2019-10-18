@@ -24,6 +24,8 @@ public class BugsButcheryService {
 	protected int pathExist;
 
 
+	
+	
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
