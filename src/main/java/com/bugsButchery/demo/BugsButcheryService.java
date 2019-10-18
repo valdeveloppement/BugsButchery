@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class BugsButcheryService {
 
@@ -16,6 +17,7 @@ public class BugsButcheryService {
 	
 	@Autowired
 	FamilyRepository myFamilyRepository;
+	
 
 	
 
@@ -40,8 +42,30 @@ public class BugsButcheryService {
 	protected Player playerTurn; // = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
+	
+	//---- get & set ----//
+	
+	public Player getPlayerTurn() {
+		return playerTurn;
+	}
+
+	public void setPlayerTurn(Player playerTurn) {
+		this.playerTurn = playerTurn;
+	}
+	
+	public ArrayList<Player> getPlayersAlive() {
+		return playersAlive;
+	}
 
 
+	public void setPlayersAlive(ArrayList<Player> playersAlive) {
+		this.playersAlive = playersAlive;
+	}
+
+	public List<Territory> findAll() {
+		return myTerritoryRepository.findAll();
+	}
+	
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -58,7 +82,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round
+	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
 
 
 	/** 
@@ -66,7 +90,6 @@ public class BugsButcheryService {
 	 * @param player
 	 * @return void
 	 * @author Eloise
-	 * NON TESTE
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		for (Territory t : player.getPlayerTerritoryList()) {
@@ -76,24 +99,30 @@ public class BugsButcheryService {
 			}
 		}
 	}
-	
 
-
-	/**
-	 * Calculate the Refill for a new round
-	 * @param player
-	 * @return int Refill
-	 * @author Eloise
-	 * NON TESTE
-	 */
+//	/**
+//	 * Calculate the Refill for a new round
+//	 * @param player
+//	 * @return int Refill
+//	 * @author Eloise
+//	 */
 	public void refillAvailableAnts(Player player) {
-		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
+
+		upDatePlayerTerritoryFamilyList(player);
+
+		int refillByTerritory; 
+		if((player.getPlayerTerritoryList().size()/3) <= 3) {
+			refillByTerritory = 3;
+		} else {
+			refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		}
 		int refillByFamily = 0;
-		for (Family f : player.getPlayerTerritoryFamilyList()) {
-			refillByFamily =+ f.getFamilyValue();
+		for (int f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ myFamilyRepository.findById(f).get().getFamilyValue();
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
+
 	}
 
 	//Phase 2 attack /optional
@@ -219,7 +248,6 @@ public class BugsButcheryService {
 				else {
 					//System.out.println("attacker -1");
 					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-					
 				}
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
@@ -268,11 +296,11 @@ public class BugsButcheryService {
 	 * @param target
 	 * @param pawnNbr
 	 */
-	//	public void moveAfterConquest(Territory attacker, Territory target, int antNbr) {
-	//		(attacker.getTerritoryAntsNb() - antNbr);
-	//		(target.getTerritoryAntsNb() + antNbr);
-	//		//NOT FINISH 
-	//	}
+//		public void moveAfterConquest(Territory attacker, Territory target, int antNbr) {
+//			(attacker.getTerritoryAntsNb() - antNbr);
+//			(target.getTerritoryAntsNb() + antNbr);
+//			//NOT FINISH 
+//		}
 
 
 	//---- MOVE ----//
@@ -408,4 +436,5 @@ public class BugsButcheryService {
 		}
 	}
 
+	
 }
