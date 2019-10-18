@@ -40,7 +40,7 @@ public class Territory {
 			  name = "territory", 
 			  joinColumns = @JoinColumn(name = "family_territory"),
 			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
-	private Family territoryFamily;
+	private int territoryFamily;
 	@Transient
 	private int territoryAntsNb;	
 	@Transient
@@ -86,10 +86,10 @@ public class Territory {
 	public void setAnthill(boolean isAnthill) {
 		this.isAnthill = isAnthill;
 	}
-	public Family getTerritoryFamily() {
+	public int getTerritoryFamily() {
 		return territoryFamily;
 	}
-	public void setTerritoryFamily(Family territoryFamily) {
+	public void setTerritoryFamily(int territoryFamily) {
 		this.territoryFamily = territoryFamily;
 	}
 	public int getTerritoryAntsNb() {

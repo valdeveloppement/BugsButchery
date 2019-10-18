@@ -9,7 +9,7 @@ public class Player {
 	private String playerName;
 	private String playerAntsBreed;
 	private ArrayList<Territory> playerTerritoryList; 
-	private ArrayList<Family> playerTerritoryFamilyList;
+	private ArrayList<Integer> playerTerritoryFamilyList;
 	private int playerAvailableAnts;
 	
 	//---- constructor ----//
@@ -25,10 +25,6 @@ public class Player {
 		this.playerId = playerId;
 		this.playerName = playerName;
 		this.playerAntsBreed = playerAntsBreed;
-
-
-		this.playerTerritoryList = playerTerritoryList;
-		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
 		this.playerAvailableAnts = playerAvailableAnts;
 	}
 
@@ -61,13 +57,13 @@ public class Player {
 	public void setPlayerAvailableAnts(int playerAvailableAnts) {
 		this.playerAvailableAnts = playerAvailableAnts;
 	}
-	public ArrayList<Family> getPlayerTerritoryFamilyList() {
+	public ArrayList<Integer> getPlayerTerritoryFamilyList() {
 		return playerTerritoryFamilyList;
 	}
 	public int getPlayerAvailableAnts() {
 		return playerAvailableAnts;
 	}
-	public void setPlayerTerritoryFamilyList(ArrayList<Family> playerTerritoryFamilyList) {
+	public void setPlayerTerritoryFamilyList(ArrayList<Integer> playerTerritoryFamilyList) {
 		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
 	}
 		

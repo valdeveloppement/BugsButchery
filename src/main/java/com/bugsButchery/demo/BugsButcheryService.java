@@ -119,8 +119,8 @@ public class BugsButcheryService {
 			refillByTerritory = player.getPlayerTerritoryList().size()/3;
 		}
 		int refillByFamily = 0;
-		for (Family f : player.getPlayerTerritoryFamilyList()) {
-			refillByFamily =+ f.getFamilyValue();
+		for (int f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ myFamilyRepository.findById(f).get().getFamilyValue();
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
