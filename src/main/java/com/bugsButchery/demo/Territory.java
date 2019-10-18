@@ -34,15 +34,10 @@ public class Territory {
 			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
 	private List<Territory> territoryFrontiers;
 	@Transient
-	private boolean isAnthill;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(
-			  name = "territory", 
-			  joinColumns = @JoinColumn(name = "family_territory"),
-			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
-	private Family territoryFamily;
+	private boolean isAnthill;	
+	private int territoryFamily;
 	@Transient
-	private int territoryAntsNb;	
+	private int territoryAntsNb=0;	
 	@Transient
 	private Player territoryOwner;
 	
@@ -86,10 +81,10 @@ public class Territory {
 	public void setAnthill(boolean isAnthill) {
 		this.isAnthill = isAnthill;
 	}
-	public Family getTerritoryFamily() {
+	public int getTerritoryFamily() {
 		return territoryFamily;
 	}
-	public void setTerritoryFamily(Family territoryFamily) {
+	public void setTerritoryFamily(int territoryFamily) {
 		this.territoryFamily = territoryFamily;
 	}
 	public int getTerritoryAntsNb() {

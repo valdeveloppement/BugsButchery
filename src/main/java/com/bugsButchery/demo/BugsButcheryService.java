@@ -79,7 +79,6 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
 
 
 	/** 
@@ -96,8 +95,6 @@ public class BugsButcheryService {
 			}
 		}
 	}
-	
-
 
 //	/**
 //	 * Calculate the Refill for a new round
@@ -116,15 +113,11 @@ public class BugsButcheryService {
 			refillByTerritory = player.getPlayerTerritoryList().size()/3;
 		}
 		int refillByFamily = 0;
-		for (Family f : player.getPlayerTerritoryFamilyList()) {
-			refillByFamily =+ f.getFamilyValue();
+		for (int f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ myFamilyRepository.findById(f).get().getFamilyValue();
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
-
-		
-	
-		
 
 	}
 
@@ -418,9 +411,9 @@ public class BugsButcheryService {
 	 */
 	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
 		
-		if (territory.getTerritoryOwner() == null) {
+		if (territory.getTerritoryAntsNb() == 0) {
 		//si le territoire séléctionner est égal a vide
-			player.getPlayerTerritoryList().add(territory);
+			player.getPlayerTerritoryList();										/*.add(territory);*/
 			//ajoute territoire a la liste de territoire du player
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
 			//enlever une fourmi au compte total de fourmi du player
