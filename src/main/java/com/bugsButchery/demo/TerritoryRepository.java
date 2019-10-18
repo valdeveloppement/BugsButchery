@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TerritoryRepository extends JpaRepository<Territory, Integer>{
 	
 	ArrayList<Territory> findAllByTerritoryFamily(Family territoryFamily);
-
+	
 }

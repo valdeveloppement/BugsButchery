@@ -8,23 +8,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class BugsButcheryService {
 
 	@Autowired
-
 	TerritoryRepository myTerritoryRepository;
+	
+	@Autowired
 	FamilyRepository myFamilyRepository;
+	
 
+	
+
+	public TerritoryRepository getMyTerritoryRepository() {
+		return myTerritoryRepository;
+	}
+
+	public void setMyTerritoryRepository(TerritoryRepository myTerritoryRepository) {
+		this.myTerritoryRepository = myTerritoryRepository;
+	}
+
+	public FamilyRepository getMyFamilyRepository() {
+		return myFamilyRepository;
+	}
+
+	public void setMyFamilyRepository(FamilyRepository myFamilyRepository) {
+		this.myFamilyRepository = myFamilyRepository;
+	}
 
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
 	protected ArrayList<Player> playersAlive = new ArrayList<Player>();
 	protected Player playerTurn; // = playersAlive.get(0);
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
-
-
 	
+	//---- get & set ----//
+	
+	public Player getPlayerTurn() {
+		return playerTurn;
+	}
+
+	public void setPlayerTurn(Player playerTurn) {
+		this.playerTurn = playerTurn;
+	}
+	
+	public ArrayList<Player> getPlayersAlive() {
+		return playersAlive;
+	}
+
+
+	public void setPlayersAlive(ArrayList<Player> playersAlive) {
+		this.playersAlive = playersAlive;
+	}
+
 	
 	//New Game
 	/**
@@ -42,7 +79,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round
+	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
 
 
 	/** 
@@ -50,7 +87,6 @@ public class BugsButcheryService {
 	 * @param player
 	 * @return void
 	 * @author Eloise
-	 * NON TESTE
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		for (Territory t : player.getPlayerTerritoryList()) {
@@ -68,17 +104,29 @@ public class BugsButcheryService {
 //	 * @param player
 //	 * @return int Refill
 //	 * @author Eloise
-//	 * NON TESTE
 //	 */
-//	public void refillAvailableAnts(Player player) {
-//		int refillByTerritory = player.getPlayerTerritoryList().size()/3;
-//		int refillByFamily = 0;
-//		for (Family f : player.getPlayerTerritoryFamilyList()) {
-//			refillByFamily =+ f.getFamilyValue();
-//		}
-//		int refillAvailableAnts = refillByTerritory + refillByFamily;
-//		player.setPlayerAvailableAnts(refillAvailableAnts);
-//	}
+	public void refillAvailableAnts(Player player) {
+
+		upDatePlayerTerritoryFamilyList(player);
+
+		int refillByTerritory; 
+		if((player.getPlayerTerritoryList().size()/3) <= 3) {
+			refillByTerritory = 3;
+		} else {
+			refillByTerritory = player.getPlayerTerritoryList().size()/3;
+		}
+		int refillByFamily = 0;
+		for (Family f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ f.getFamilyValue();
+		}
+		int refillAvailableAnts = refillByTerritory + refillByFamily;
+		player.setPlayerAvailableAnts(refillAvailableAnts);
+
+		
+	
+		
+
+	}
 
 	//Phase 2 attack /optional
 	/**
@@ -203,7 +251,6 @@ public class BugsButcheryService {
 				else {
 					//System.out.println("attacker -1");
 					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-					
 				}
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
@@ -252,11 +299,11 @@ public class BugsButcheryService {
 	 * @param target
 	 * @param pawnNbr
 	 */
-	//	public void moveAfterConquest(Territory attacker, Territory target, int antNbr) {
-	//		(attacker.getTerritoryAntsNb() - antNbr);
-	//		(target.getTerritoryAntsNb() + antNbr);
-	//		//NOT FINISH 
-	//	}
+//		public void moveAfterConquest(Territory attacker, Territory target, int antNbr) {
+//			(attacker.getTerritoryAntsNb() - antNbr);
+//			(target.getTerritoryAntsNb() + antNbr);
+//			//NOT FINISH 
+//		}
 
 
 	//---- MOVE ----//
@@ -392,4 +439,5 @@ public class BugsButcheryService {
 		}
 	}
 
+	
 }

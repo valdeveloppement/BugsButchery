@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.territory{
+ border : solid;
+
+}
+
+.button{
+padding-right: 0px;
+}
+
+.carte{
+  display: flex;
+  width: 50%;
+  justify-content: flex-start;
+  border: solid;
+}
+
+#aubergine{
+  background-color: blueviolet;
+}
+
+#kiwi{
+  background-color: lime;
+}
+
+#foie_gras{
+  background-color: pink;
+}
+
+#epinards{
+  background-color: olive;
+}
+
+#jambon{
+  background-color: indianred;
+}
+
+#framboise{
+  background-color: darkred;
+}
+
+#abricot{
+  background-color: darkorange;
+}
+
+
+#saucisse{
+  background-color: lightsalmon;
+}
+
+#poivron{
+  background-color: orangered;
+}
+
+.infos{
+  border: solid;
+  width: 90px;
+  height: 90px;
+}
