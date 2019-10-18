@@ -99,8 +99,6 @@ public class BugsButcheryService {
 			}
 		}
 	}
-	
-
 
 //	/**
 //	 * Calculate the Refill for a new round
@@ -124,10 +122,6 @@ public class BugsButcheryService {
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
-
-		
-	
-		
 
 	}
 
