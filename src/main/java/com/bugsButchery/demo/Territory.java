@@ -34,12 +34,7 @@ public class Territory {
 			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
 	private List<Territory> territoryFrontiers;
 	@Transient
-	private boolean isAnthill;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(
-			  name = "territory", 
-			  joinColumns = @JoinColumn(name = "family_territory"),
-			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
+	private boolean isAnthill;	
 	private int territoryFamily;
 	@Transient
 	private int territoryAntsNb;	
