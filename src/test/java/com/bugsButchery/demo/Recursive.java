@@ -36,6 +36,11 @@ public class Recursive {
       	Player eloise = new Player(4, "Eloise", "fourmis rouges", 30);
 
       	
+      	for (Territory entry : allTerritories) {
+      		for(Territory frontier : entry.getTerritoryFrontiers()) {
+      			System.out.println(frontier.getTerritoryName());
+      		}
+      	}
       	/////////////////AFFICHAGE///////////////
 //      		
 //          	System.out.println(""+maurane.getPlayerName()+"   "+ maurane.getPlayerAntsBreed());
@@ -108,7 +113,7 @@ public class Recursive {
       	for(int i=0 ;i<eloise.getPlayerTerritoryList().size(); i=i+1) {
       		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
       		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryAntsNb());
-      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner());
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner().getPlayerName());
       		
       	}
       	for(int i=0 ;i<eloise.getPlayerTerritoryFamilyList().size(); i=i+1) {
