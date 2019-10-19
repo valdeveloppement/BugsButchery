@@ -112,6 +112,7 @@ public class BugsButcheryService {
 
 		int refillByTerritory; 
 		if((player.getPlayerTerritoryList().size()/3) <= 3) {
+		
 			refillByTerritory = 3;
 		} else {
 			refillByTerritory = player.getPlayerTerritoryList().size()/3;
@@ -146,8 +147,8 @@ public class BugsButcheryService {
 	 * @param nbrDiceAttack
 	 * @return
 	 */
-	public boolean oneAntBehind(Territory territoty, int nbrDiceAttack) {
-		if (territoty.getTerritoryAntsNb() > nbrDiceAttack) {
+	public boolean oneAntBehind(Territory territory, int nbrDiceAttack) {
+		if (territory.getTerritoryAntsNb() > nbrDiceAttack) {
 			return true;
 		}
 		else {
@@ -193,7 +194,7 @@ public class BugsButcheryService {
 	 * @return 
 	 */
 	public boolean requestDefense(Territory defender, int nbrDiceDefense) {
-		if (defender.getTerritoryAntsNb() >= nbrDiceDefense && nbrDiceDefense <= 2) {
+		if (defender.getTerritoryAntsNb() > nbrDiceDefense && nbrDiceDefense <= 2) {
 			return true;
 		}
 		else {
@@ -307,6 +308,10 @@ public class BugsButcheryService {
 
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
+		if (antNbr>=territoryStart.getTerritoryAntsNb()) {
+			return false;
+			}
+		
 		// VALEURS INITIALES
 		potentialsTerritories.clear();
 		potentialsTerritories.addAll(player.getPlayerTerritoryList());
@@ -395,15 +400,20 @@ public class BugsButcheryService {
 	 * @param ants
 	 * @return
 	 */
-	public ArrayList<Territory> placeAnts(Player player, Territory territory, int ants) {
-		
-		if (player.getPlayerTerritoryList().contains(territory)) {
+	public boolean placeAnts(Player player, Territory territory, int ants) {
+		boolean check=false;
+		if (player.getPlayerTerritoryList().contains(territory) && ants<= player.getPlayerAvailableAnts()) {
 		//si le player possède le territoire (nommé ici territory) qu'on fait passer dans la méthode	
 			territory.setTerritoryAntsNb(territory.getTerritoryAntsNb() + ants);
 			//le territoire possédé ...
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - ants);
+			check=true;
 		}
-		return player.getPlayerTerritoryList();
+	
+		return check;
+		
+		
+		//return player.getPlayerTerritoryList();
 		//retourn la liste des territoires qui on changé dans la methode
 	}
 

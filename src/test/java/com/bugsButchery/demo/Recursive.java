@@ -37,10 +37,12 @@ public class Recursive {
 
       	
       	for (Territory entry : allTerritories) {
+      		System.out.println("Territoire :"+entry.getTerritoryName());
       		for(Territory frontier : entry.getTerritoryFrontiers()) {
-      			System.out.println(frontier.getTerritoryName());
+      			System.out.println("frontiere"+frontier.getTerritoryName());
       		}
       	}
+      	
       	/////////////////AFFICHAGE///////////////
 //      		
 //          	System.out.println(""+maurane.getPlayerName()+"   "+ maurane.getPlayerAntsBreed());
@@ -116,13 +118,7 @@ public class Recursive {
       		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner().getPlayerName());
       		
       	}
-      	for(int i=0 ;i<eloise.getPlayerTerritoryFamilyList().size(); i=i+1) {
-      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
-      	}
-  	
- 		
- 		
- 		
+   
  		
  		
  		//---- combat ----//
@@ -133,7 +129,7 @@ public class Recursive {
  		
       	/////////////////////AFFICHAGE////////////////////////
  		
- 		System.out.println(myService.getPlayerTurn().getPlayerName());
+ 		System.out.println("name of player playing"+myService.getPlayerTurn().getPlayerName());
  		
  		
  		
@@ -141,12 +137,12 @@ public class Recursive {
  		myService.refillAvailableAnts(maurane);
  		
  		//////////////////////////AFFICHAGE/////////////////////////
- 		System.out.println("nb ant terr1  before refill   "+allTerritories.get(1).getTerritoryAntsNb());
+ 		System.out.println("nb ant terr1  "+allTerritories.get(1).getTerritoryAntsNb());
  		
       	myService.placeAnts(maurane, allTerritories.get(1), 2);
       	myService.placeAnts(maurane, allTerritories.get(6), 1);
  		
- 		System.out.println("nb ant terr1  after refill   "+allTerritories.get(1).getTerritoryAntsNb());
+ 		System.out.println("nb ant terr1    "+allTerritories.get(1).getTerritoryAntsNb());
 
 
  		
