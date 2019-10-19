@@ -199,9 +199,9 @@ public class Recursive {
 
  		System.out.println("proprio du territoire attaqué   "+allTerritories.get(3).getTerritoryOwner().getPlayerName());
  		
- 		for(int i=0 ;i<allTerritories.size(); i=i+1) {
-      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
-      	}
+// 		for(int i=0 ;i<allTerritories.size(); i=i+1) {
+//      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
+//      	}
  		
  		
  		myService.changePlayer();

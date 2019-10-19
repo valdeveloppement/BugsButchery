@@ -192,7 +192,7 @@ public class BugsButcheryService {
 	 * @return 
 	 */
 	public boolean requestDefense(Territory defender, int nbrDiceDefense) {
-		if (defender.getTerritoryAntsNb() > nbrDiceDefense && nbrDiceDefense <= 2) {
+		if (defender.getTerritoryAntsNb() >= nbrDiceDefense && nbrDiceDefense <= 2) {
 			return true;
 		}
 		else {
@@ -226,7 +226,7 @@ public class BugsButcheryService {
 	 * @param nbrDiceDefender
 	 */
 	public void diceFight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender){
-		if(requestAttack(attacker, target, nbrDiceAttack)) {
+		if(requestAttack(attacker, target, nbrDiceAttack) && requestDefense(target, nbrDiceDefender)) {
 			ArrayList<Integer> resultCurrent = new ArrayList<Integer>();
 			ArrayList<Integer> resultTarget = new ArrayList<Integer>();
 			for (int i = 0; i < nbrDiceAttack; i++) {
@@ -270,6 +270,9 @@ public class BugsButcheryService {
 			if(checkConquest(target)) {
 				//move()
 				killAntHill(defender, target);
+				defender.getPlayerTerritoryList().remove(target);
+				target.setTerritoryOwner(current);
+				current.getPlayerTerritoryList().add(target);
 			}
 		}
 		else {
@@ -331,12 +334,12 @@ public class BugsButcheryService {
 
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
-
+		
 		potentialsTerritories.remove(territory1);
 		if(potentialsTerritories.size()==0) {
 			return false;
 		}//if 0 territory except territory1 (||& territories already crossed) = false
-
+		
 		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
 		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
