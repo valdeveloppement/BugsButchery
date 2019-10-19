@@ -193,7 +193,7 @@ public class BugsButcheryService {
 	 * @return 
 	 */
 	public boolean requestDefense(Territory defender, int nbrDiceDefense) {
-		if (defender.getTerritoryAntsNb() > nbrDiceDefense && nbrDiceDefense <= 2) {
+		if (defender.getTerritoryAntsNb() >= nbrDiceDefense && nbrDiceDefense <= 2) {
 			return true;
 		}
 		else {
@@ -327,7 +327,11 @@ public class BugsButcheryService {
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
+			System.out.println("Depart"+territoryStart.getTerritoryName());
+			System.out.println("Arrivée"+territoryArrival.getTerritoryName());
 			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
+			System.out.println("antnb:  "+antNbr);
+			System.out.println(territoryArrival.getTerritoryAntsNb());
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
