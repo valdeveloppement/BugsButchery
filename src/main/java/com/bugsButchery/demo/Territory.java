@@ -25,8 +25,8 @@ public class Territory {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
 			  name = "frontier", 
-			  joinColumns = @JoinColumn(name = "frontier_id"),
-			  inverseJoinColumns = @JoinColumn(name = "territory_id"))
+			  joinColumns = @JoinColumn(name = "territory_id"),
+			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
 
 	private List<Territory> territoryFrontiers;
 	@Transient

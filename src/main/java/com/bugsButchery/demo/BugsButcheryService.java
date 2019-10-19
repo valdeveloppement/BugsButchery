@@ -82,7 +82,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
+	//New Round
 
 
 	/** 
@@ -163,8 +163,7 @@ public class BugsButcheryService {
 	 * @return
 	 */
 	public boolean pathExist(Territory attacker, Territory target) {
-
-		if (attacker.getTerritoryFrontiers().contains(target)) {
+		if(attacker.getTerritoryFrontiers().contains(target)) {
 			return true;
 		}
 		else {
@@ -275,7 +274,7 @@ public class BugsButcheryService {
 			}
 		}
 		else {
-			//cant attack at least on check failed
+			System.out.println("cant fight");
 		}
 	}
 
