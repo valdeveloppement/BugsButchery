@@ -82,7 +82,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
+	//New Round
 
 
 	/** 
@@ -146,8 +146,8 @@ public class BugsButcheryService {
 	 * @param nbrDiceAttack
 	 * @return
 	 */
-	public boolean oneAntBehind(Territory territoty, int nbrDiceAttack) {
-		if (territoty.getTerritoryAntsNb() > nbrDiceAttack) {
+	public boolean oneAntBehind(Territory territory, int nbrDiceAttack) {
+		if (territory.getTerritoryAntsNb() > nbrDiceAttack) {
 			return true;
 		}
 		else {
@@ -162,8 +162,7 @@ public class BugsButcheryService {
 	 * @return
 	 */
 	public boolean pathExist(Territory attacker, Territory target) {
-
-		if (attacker.getTerritoryFrontiers().contains(target)) {
+		if(attacker.getTerritoryFrontiers().contains(target)) {
 			return true;
 		}
 		else {
@@ -193,7 +192,7 @@ public class BugsButcheryService {
 	 * @return 
 	 */
 	public boolean requestDefense(Territory defender, int nbrDiceDefense) {
-		if (defender.getTerritoryAntsNb() >= nbrDiceDefense && nbrDiceDefense <= 2) {
+		if (defender.getTerritoryAntsNb() > nbrDiceDefense && nbrDiceDefense <= 2) {
 			return true;
 		}
 		else {
@@ -274,7 +273,7 @@ public class BugsButcheryService {
 			}
 		}
 		else {
-			//cant attack at least on check failed
+			System.out.println("cant fight");
 		}
 	}
 
