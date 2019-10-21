@@ -22,16 +22,16 @@ public class Territory {
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			  name = "frontier", 
 			  joinColumns = @JoinColumn(name = "territory_id"),
 			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
 
 	private List<Territory> territoryFrontiers;
+	private int territoryFamily;
 	@Transient
 	private boolean isAnthill;	
-	private int territoryFamily;
 	@Transient
 	private int territoryAntsNb;	
 	@Transient

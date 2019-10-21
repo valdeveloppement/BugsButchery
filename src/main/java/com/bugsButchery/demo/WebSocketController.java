@@ -1,38 +1,73 @@
 package com.bugsButchery.demo;
 
-import java.time.LocalDate;
-
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-
 @Controller
 public class WebSocketController {
 
-	@MessageMapping("/command.sendPlayer")
-    @SendTo("/bugsbutchery")
-    public Player sendMessage(@Payload Player player) {
-    	player.setPlayerName(player.getPlayerName());
-    	player.setPlayerAntsBreed(player.getPlayerAntsBreed());
-        return player;
-    }
-	
 	//new player
+	@MessageMapping("/app.newPlayer")
+	@SendTo("/bugsbutchery")
+	public void newPlayer(@Payload Player player) {
+		
+	}
 	
 	//start
+	@MessageMapping("/app.startGame")
+	@SendTo("/bugsbutchery")
+	public Game startGame(@Payload Game game) {
+		
+		return game;
+	}
 	
 	//multi turn pick territory untill all taken
 		//
+	@MessageMapping("/app.pickTerritory")
+	@SendTo("/bugsbutchery")
+	public Game pickTerritory(@Payload Game game) {
+		
+		return game;
+	}
 	
 	//multi turn reinforcement untill all spent
 		//
-	
+	@MessageMapping("/app.addAnt")
+	@SendTo("/bugsbutchery")
+	public Game addAnt(@Payload Game game) {
+		
+		return game;
+	}
 	//multi turn game on
-		//reinforcement
-		//attack
-		//move
+	//reinforcement
+	@MessageMapping("/app.refill")
+	@SendTo("/bugsbutchery")
+	public Game refill(@Payload Game game) {
+		
+		return game;
+	}
+		
+	//attack
+	@MessageMapping("/app.requestAttack")
+	@SendTo("/bugsbutchery")
+	public Game requestAttack(@Payload Game game) {
+		
+		return game;
+	}
+	@MessageMapping("/app.requestDefense")
+	@SendTo("/bugsbutchery")
+	public Game requestDefense(@Payload Game game) {
+		
+		return game;
+	}
 	
-	
+	//move
+	@MessageMapping("/app.move")
+	@SendTo("/bugsbutchery")
+	public Game move(@Payload Game game) {
+		
+		return game;
+	}
 }

@@ -64,7 +64,7 @@ public class BugsButcheryService {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
-				myGame.setMessage("Vous avez acquis tous les territoires de la famille :" + );
+				myGame.setMessage("Vous avez acquis tous les territoires de la famille :" );
 			}
 		}
 	}
