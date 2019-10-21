@@ -1,5 +1,6 @@
 package com.bugsButchery.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -8,11 +9,14 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WebSocketController {
 
+	@Autowired
+	BugsButcheryService bugService;
+	
 	//new player
 	@MessageMapping("/app.newPlayer")
 	@SendTo("/bugsbutchery")
 	public void newPlayer(@Payload Player player) {
-		
+		bugService.createNewPlayer(player);
 	}
 	
 	//start
