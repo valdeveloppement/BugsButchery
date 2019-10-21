@@ -28,7 +28,6 @@ public class Recursive {
         
         for(Territory entry : myService.myTerritoryRepository.findAll()) {
         	allTerritories.add(entry);
-        	System.out.println(entry.getTerritoryName());
         }
       
         Player maurane = new Player(1, "Maurane", "fourmis violettes", 30);        
@@ -63,8 +62,7 @@ public class Recursive {
       	for(int i=0 ;i<myService.getPlayersAlive().size(); i=i+1) {
       		System.out.println(myService.getPlayersAlive().get(i).getPlayerName());
       	}
-      	System.out.println(allTerritories.get(1));
-      	System.out.println(maurane.getPlayerTerritoryList());
+
       
       	//choix des territoire par le placement des 1er fourmis de dans
       	myService.placeFirstAnts(maurane, allTerritories.get(1));
