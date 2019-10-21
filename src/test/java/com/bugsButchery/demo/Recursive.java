@@ -3,7 +3,6 @@ package com.bugsButchery.demo;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +35,15 @@ public class Recursive {
       	Player eloise = new Player(4, "Eloise", "fourmis rouges", 30);
 
       	
+
+      	for (Territory entry : allTerritories) {
+      		System.out.println("Territoire :"+entry.getTerritoryName());
+      		for(Territory frontier : entry.getTerritoryFrontiers()) {
+      			System.out.println("frontiere"+frontier.getTerritoryName());
+      		}
+      	}
+      	
+
       	/////////////////AFFICHAGE///////////////
 //      		
 //          	System.out.println(""+maurane.getPlayerName()+"   "+ maurane.getPlayerAntsBreed());
@@ -59,9 +67,9 @@ public class Recursive {
       
       	/////////////////AFFICHAGE///////////////
       	
-      	for(int i=0 ;i<myService.getPlayersAlive().size(); i=i+1) {
-      		System.out.println(myService.getPlayersAlive().get(i).getPlayerName());
-      	}
+//      	for(int i=0 ;i<myService.getPlayersAlive().size(); i=i+1) {
+//      		System.out.println(myService.getPlayersAlive().get(i).getPlayerName());
+//      	}
 
       
       	//choix des territoire par le placement des 1er fourmis de dans
@@ -80,9 +88,9 @@ public class Recursive {
       	
       	
       	//placement du reste des fourmis dans ses propre territoire
-      	myService.placeAnts(maurane, allTerritories.get(1), 10);
-      	myService.placeAnts(maurane, allTerritories.get(6), 15);
-      	myService.placeAnts(maurane, allTerritories.get(3), 2);
+      	myService.placeAnts(maurane, allTerritories.get(1), 4);
+      	myService.placeAnts(maurane, allTerritories.get(6), 4);
+      	myService.placeAnts(maurane, allTerritories.get(3), 4);
       	myService.placeAnts(valentin, allTerritories.get(7), 10);
       	myService.placeAnts(valentin, allTerritories.get(0), 18);
       	myService.placeAnts(sylvain, allTerritories.get(5), 10);
@@ -103,21 +111,16 @@ public class Recursive {
  
  		
       	/////////////////AFFICHAGE///////////////
-  		
+
       	System.out.println(""+eloise.getPlayerName()+"   "+ eloise.getPlayerAntsBreed());
       	for(int i=0 ;i<eloise.getPlayerTerritoryList().size(); i=i+1) {
       		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
       		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryAntsNb());
-      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner());
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner().getPlayerName());
       		
       	}
-      	for(int i=0 ;i<eloise.getPlayerTerritoryFamilyList().size(); i=i+1) {
-      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
-      	}
-  	
- 		
- 		
- 		
+   
+
  		
  		
  		//---- combat ----//
@@ -127,8 +130,8 @@ public class Recursive {
  		
  		
       	/////////////////////AFFICHAGE////////////////////////
- 		
- 		System.out.println(myService.getPlayerTurn().getPlayerName());
+ 		System.out.println("name of player playing"+myService.getPlayerTurn().getPlayerName());
+
  		
  		
  		
@@ -136,26 +139,32 @@ public class Recursive {
  		myService.refillAvailableAnts(maurane);
  		
  		//////////////////////////AFFICHAGE/////////////////////////
- 		System.out.println("nb ant terr1  before refill   "+allTerritories.get(1).getTerritoryAntsNb());
+
+ 		System.out.println("nb ant terr1  "+allTerritories.get(1).getTerritoryAntsNb());
+
  		
       	myService.placeAnts(maurane, allTerritories.get(1), 2);
       	myService.placeAnts(maurane, allTerritories.get(6), 1);
  		
- 		System.out.println("nb ant terr1  after refill   "+allTerritories.get(1).getTerritoryAntsNb());
+
+ 		System.out.println("nb ant terr1    "+allTerritories.get(1).getTerritoryAntsNb());
+
 
 
  		
  		//FAUT IL LES METTRE ?
- 		myService.requestAttack(maurane.getPlayerTerritoryList().get(0), eloise.getPlayerTerritoryList().get(0), 3);
- 		
+ 		myService.requestAttack(maurane.getPlayerTerritoryList().get(1), eloise.getPlayerTerritoryList().get(0), 3);
  		myService.requestDefense(eloise.getPlayerTerritoryList().get(0), 2);
- 		
- 		myService.diceFight(maurane, maurane.getPlayerTerritoryList().get(0), 3, eloise, eloise.getPlayerTerritoryList().get(0), 2);
+ 		myService.diceFight(maurane, maurane.getPlayerTerritoryList().get(1), 3, eloise, eloise.getPlayerTerritoryList().get(0), 2);
  		
  		//Vise la fourmiliere
  		//myService.diceFight(maurane, territoryMaurane.get(0), 3, eloise, territoryEloise.get(1), 2);
- 		
- 		myService.moveAvailable(maurane, maurane.getPlayerTerritoryList().get(0), maurane.getPlayerTerritoryList().get(1) , 5);
+ 		System.out.println("Nb de fourmis avant depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+ 		System.out.println("Nb de fourmis avant depart"+allTerritories.get(3).getTerritoryAntsNb());
+ 		myService.moveAvailable(maurane, maurane.getPlayerTerritoryList().get(0), allTerritories.get(3) , 5);
+ 		System.out.println("Nb de fourmis  apres depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+ 		System.out.println("Nb de fourmis  apres depart"+allTerritories.get(3).getTerritoryAntsNb());
+
  		
  		myService.changePlayer();
  		
@@ -170,38 +179,37 @@ public class Recursive {
  		
  		/////////////////////// Affichage//////////////////////////:
  		
- 		System.out.println("nb ant val before attack   "+valentin.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
- 		System.out.println("nb ant maurane before attack   "+maurane.getPlayerTerritoryList().get(2).getTerritoryAntsNb());
- 		System.out.println("proprio du territoire attaqué   "+allTerritories.get(3).getTerritoryOwner().getPlayerName());
-      	for(int i=0 ;i<allTerritories.size(); i=i+1) {
-      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
-      	}
+// 		System.out.println("nb ant val before attack   "+valentin.getPlayerTerritoryList().get(1).getTerritoryAntsNb());
+// 		System.out.println("nb ant maurane before attack   "+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+// 		System.out.println("proprio du territoire attaqué   "+allTerritories.get(3).getTerritoryOwner().getPlayerName());
+//      	for(int i=0 ;i<allTerritories.size(); i=i+1) {
+//      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
+//      	}
  		
  		
  		
  		//FAUT IL LES METTRE ?
- 		myService.requestAttack(valentin.getPlayerTerritoryList().get(0), maurane.getPlayerTerritoryList().get(2), 3);
+ 		myService.requestAttack(valentin.getPlayerTerritoryList().get(1), maurane.getPlayerTerritoryList().get(0), 3);
  		
  		myService.requestDefense(maurane.getPlayerTerritoryList().get(2), 2);
  		
- 		myService.diceFight(valentin, valentin.getPlayerTerritoryList().get(0), 3, maurane, maurane.getPlayerTerritoryList().get(2), 2);
+ 		myService.diceFight(valentin, valentin.getPlayerTerritoryList().get(1), 3, maurane, maurane.getPlayerTerritoryList().get(0), 2);
  		
  		
  		/////////////////////// Affichage//////////////////////////
 
- 		System.out.println("nb ant val after attack   "+valentin.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
- 		System.out.println("nb ant maurane after attack   "+maurane.getPlayerTerritoryList().get(2).getTerritoryAntsNb());
+ 		System.out.println("nb ant val after attack   "+valentin.getPlayerTerritoryList().get(1).getTerritoryAntsNb());
+ 		System.out.println("nb ant maurane after attack   "+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
 
  		System.out.println("proprio du territoire attaqué   "+allTerritories.get(3).getTerritoryOwner().getPlayerName());
  		
- 		for(int i=0 ;i<allTerritories.size(); i=i+1) {
-      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
-      	}
+// 		for(int i=0 ;i<allTerritories.size(); i=i+1) {
+//      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
+//      	}
  		
- 		
+ 		System.out.println("player avant changement :    "+myService.getPlayerTurn().getPlayerName());
  		myService.changePlayer();
-
-        
+ 		System.out.println("player apres changement :    "+myService.getPlayerTurn().getPlayerName());
     }
 
 		
