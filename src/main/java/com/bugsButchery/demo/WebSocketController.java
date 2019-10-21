@@ -12,7 +12,7 @@ public class WebSocketController {
 	@MessageMapping("/app.newPlayer")
 	@SendTo("/bugsbutchery")
 	public void newPlayer(@Payload Player player) {
-		
+		// if false => retourner une autre page pour les joueurs en trop 
 	}
 	
 	//start

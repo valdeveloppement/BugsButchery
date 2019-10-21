@@ -403,10 +403,14 @@ public class BugsButcheryService {
 	}
 	
 	
-	public void createNewPlayer(Player thisPlayer) {
-		thisPlayer.setPlayerAvailableAnts(15);
-		myGame.getPlayersAlive().add(thisPlayer);
-		
+	public boolean createNewPlayer(Player thisPlayer) {		
+		if(myGame.playersAlive.size() < 4) {
+			thisPlayer.setPlayerAvailableAnts(15);
+			myGame.getPlayersAlive().add(thisPlayer);
+			return true;
+		} else {
+			return false;
+		}
 	
 	}
 	
