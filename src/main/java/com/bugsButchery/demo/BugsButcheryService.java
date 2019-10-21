@@ -18,54 +18,22 @@ public class BugsButcheryService {
 	@Autowired
 	FamilyRepository myFamilyRepository;
 	
+	@Autowired
+	Game myGame;
 
-	
 
-	public TerritoryRepository getMyTerritoryRepository() {
-		return myTerritoryRepository;
-	}
-
-	public void setMyTerritoryRepository(TerritoryRepository myTerritoryRepository) {
-		this.myTerritoryRepository = myTerritoryRepository;
-	}
-
-	public FamilyRepository getMyFamilyRepository() {
-		return myFamilyRepository;
-	}
-
-	public void setMyFamilyRepository(FamilyRepository myFamilyRepository) {
-		this.myFamilyRepository = myFamilyRepository;
-	}
-
-	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
-	protected ArrayList<Player> playersAlive = new ArrayList<Player>();
-	protected Player playerTurn; // = playersAlive.get(0);
-	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
-	protected int pathExist;
-	
-	//---- get & set ----//
-	
-	public Player getPlayerTurn() {
-		return playerTurn;
-	}
-
-	public void setPlayerTurn(Player playerTurn) {
-		this.playerTurn = playerTurn;
+	//Trouver ou appeler ces fonctions !!
+	public void createAllTerritories() {
+    for(Territory entry : myTerritoryRepository.findAll()) {
+    	myGame.getAllTerritories().add(entry);
+    }
 	}
 	
-	public ArrayList<Player> getPlayersAlive() {
-		return playersAlive;
-	}
-
-
-	public void setPlayersAlive(ArrayList<Player> playersAlive) {
-		this.playersAlive = playersAlive;
-	}
-
-	public List<Territory> findAll() {
-		return myTerritoryRepository.findAll();
-	}
-	
+	public void createAllFamilies() {
+	    for(Family entry : myFamilyRepository.findAll()) {
+	    	myGame.getAllFamilies().add(entry);
+	    }
+		}
 	//New Game
 	/**
 	 * check if all territory are assigned to a player
@@ -96,6 +64,7 @@ public class BugsButcheryService {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+				myGame.setMessage("Vous avez acquis tous les territoires de la famille :" + );
 			}
 		}
 	}
@@ -285,9 +254,9 @@ public class BugsButcheryService {
 	public void killAntHill(Player player, Territory territory) {
 		if(territory.isAnthill()) {
 			for (Territory entry :player.getPlayerTerritoryList()) {
-				playersAlive.remove(player);
+				myGame.getPlayersAlive().remove(player);
 				entry.setTerritoryOwner(null);
-				unownedTerritories.add(entry);
+				myGame.getUnownedTerritories().add(entry);
 			}
 		}
 	}
@@ -315,21 +284,21 @@ public class BugsButcheryService {
 			}
 		
 		// VALEURS INITIALES
-		potentialsTerritories.clear();
-		potentialsTerritories.addAll(player.getPlayerTerritoryList());
-		potentialsTerritories.addAll(unownedTerritories);
+		myGame.getPotentialsTerritories().clear();
+		myGame.getPotentialsTerritories().addAll(player.getPlayerTerritoryList());
+		myGame.getPotentialsTerritories().addAll(myGame.getUnownedTerritories());
 		//	crossedTerritories = new ArrayList<Territory>();          
-		pathExist=0;
+		myGame.setPathExist(0);
 		boolean thereIsAPath=false;
 
-		if(!potentialsTerritories.contains(territoryArrival)){
+		if(!myGame.getPotentialsTerritories().contains(territoryArrival)){
 			return false;
 		}
 
 		
 		moveOneStep(territoryStart, territoryArrival);
 
-		if (pathExist==1) {
+		if (myGame.getPathExist()==1) {
 			System.out.println("Depart"+territoryStart.getTerritoryName());
 			System.out.println("Arrivée"+territoryArrival.getTerritoryName());
 			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
@@ -344,13 +313,13 @@ public class BugsButcheryService {
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
 		
-		potentialsTerritories.remove(territory1);
-		if(potentialsTerritories.size()==0) {
+		myGame.getPotentialsTerritories().remove(territory1);
+		if(myGame.getPotentialsTerritories().size()==0) {
 			return false;
 		}//if 0 territory except territory1 (||& territories already crossed) = false
 		
 		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
-		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
+		TerritoryFrontiersMine.retainAll(myGame.getPotentialsTerritories()); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
 
 		if(TerritoryFrontiersMine.size()==0) {
@@ -363,13 +332,13 @@ public class BugsButcheryService {
 			for (Territory thisTerritory : TerritoryFrontiersMine) { // pour les territoires frontaliers
 
 				if (thisTerritory.equals(territory2)) {
-					pathExist=1;
+					myGame.setPathExist(1);
 				} //quand la boucle tombe sur le territoire de destination,  = path exist
 
 				else {
 					//				crossedTerritories.add(thisTerritory);
 					//				potentialsTerritories.removeAll(crossedTerritories);
-					potentialsTerritories.remove(thisTerritory); //supprime de la liste des territoires à traiter
+					myGame.getPotentialsTerritories().remove(thisTerritory); //supprime de la liste des territoires à traiter
 					moveOneStep(thisTerritory, territory2); // continue à chercher le territoire de à partir de la nouvelle position 'thisterritoy'
 				}
 			}
@@ -382,19 +351,19 @@ public class BugsButcheryService {
 	//---- Change player ----//
 
 	public void changePlayer() {
-		int roundSize= playersAlive.size();
-		int roundPosition= playersAlive.indexOf(playerTurn);
+		int roundSize= myGame.getPlayersAlive().size();
+		int roundPosition= myGame.getPlayersAlive().indexOf(myGame.getPlayerTurn());
 		if(roundSize!=roundPosition+1) {
-			playerTurn = playersAlive.get(roundPosition+1);
-		}
+			myGame.setPlayerTurn(myGame.getPlayersAlive().get(roundPosition+1));
+		}  
 		else {
-			playerTurn = playersAlive.get(0);
+			myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
 		}
 	}
 	
 	
 	public void addPlayer(Player thisPlayer) {
-		playersAlive.add(thisPlayer);
+		myGame.getPlayersAlive().add(thisPlayer);
 		
 	}
 
