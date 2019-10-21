@@ -364,11 +364,28 @@ public class BugsButcheryService {
 	}
 	
 	
+	
+	
 	public void addPlayer(Player thisPlayer) {
 		myGame.getPlayersAlive().add(thisPlayer);
 		
 	}
+	
+	
+	public void createNewPlayer(Player thisPlayer) {
+		thisPlayer.setPlayerAvailableAnts(15);
+		myGame.getPlayersAlive().add(thisPlayer);
+		
+	
+	}
+	
+	
+	
 
+
+	
+	
+	
 
 	/**
 	 * placer le nombre de fourmis que l'on veut sur un territoire possédé
@@ -424,5 +441,7 @@ public class BugsButcheryService {
 		}
 	}
 
+	
+	
 	
 }
