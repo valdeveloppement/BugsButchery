@@ -401,8 +401,7 @@ public class BugsButcheryService {
 		myGame.getPlayersAlive().add(thisPlayer);
 		myGame.setMessage(thisPlayer.getPlayerName() + " a rejoint la partie !");
 	}
-	
-	
+
 	public boolean createNewPlayer(Player thisPlayer) {		
 		if(myGame.playersAlive.size() < 4) {
 			thisPlayer.setPlayerAvailableAnts(15);
@@ -411,15 +410,8 @@ public class BugsButcheryService {
 		} else {
 			return false;
 		}
-	
+
 	}
-	
-	
-	
-
-
-	
-	
 	
 
 	/**
