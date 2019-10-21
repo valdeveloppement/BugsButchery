@@ -22,12 +22,14 @@ public class BugsButcheryService {
 	Game myGame;
 
 
+
 	//Trouver ou appeler ces fonctions !!
 	public void createAllTerritories() {
     for(Territory entry : myTerritoryRepository.findAll()) {
     	myGame.getAllTerritories().add(entry);
     }
 	}
+
 	
 	public void createAllFamilies() {
 	    for(Family entry : myFamilyRepository.findAll()) {
@@ -64,7 +66,9 @@ public class BugsButcheryService {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
-				myGame.setMessage("Vous avez acquis tous les territoires de la famille :" );
+
+//				myGame.setMessage("Vous avez acquis tous les territoires de la famille :" + );
+
 			}
 		}
 	}
@@ -362,11 +366,28 @@ public class BugsButcheryService {
 	}
 	
 	
+	
+	
 	public void addPlayer(Player thisPlayer) {
 		myGame.getPlayersAlive().add(thisPlayer);
 		
 	}
+	
+	
+	public void createNewPlayer(Player thisPlayer) {
+		thisPlayer.setPlayerAvailableAnts(15);
+		myGame.getPlayersAlive().add(thisPlayer);
+		
+	
+	}
+	
+	
+	
 
+
+	
+	
+	
 
 	/**
 	 * placer le nombre de fourmis que l'on veut sur un territoire possédé
@@ -422,5 +443,7 @@ public class BugsButcheryService {
 		}
 	}
 
+	
+	
 	
 }
