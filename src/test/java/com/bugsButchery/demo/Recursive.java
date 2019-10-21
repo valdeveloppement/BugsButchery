@@ -35,12 +35,15 @@ public class Recursive {
       	Player eloise = new Player(4, "Eloise", "fourmis rouges", 30);
 
       	
-//      	for (Territory entry : allTerritories) {
-//      		System.out.println(entry.getTerritoryName());
-//      		for(Territory frontier : entry.getTerritoryFrontiers()) {
-//      			System.out.println(frontier.getTerritoryId());
-//      		}
-//      	}
+
+      	for (Territory entry : allTerritories) {
+      		System.out.println("Territoire :"+entry.getTerritoryName());
+      		for(Territory frontier : entry.getTerritoryFrontiers()) {
+      			System.out.println("frontiere"+frontier.getTerritoryName());
+      		}
+      	}
+      	
+
       	/////////////////AFFICHAGE///////////////
 //      		
 //          	System.out.println(""+maurane.getPlayerName()+"   "+ maurane.getPlayerAntsBreed());
@@ -108,21 +111,16 @@ public class Recursive {
  
  		
       	/////////////////AFFICHAGE///////////////
-  		
-//      	System.out.println(""+eloise.getPlayerName()+"   "+ eloise.getPlayerAntsBreed());
-//      	for(int i=0 ;i<eloise.getPlayerTerritoryList().size(); i=i+1) {
-//      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
-//      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryAntsNb());
-//      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner().getPlayerName());
-//      		
-//      	}
-//      	for(int i=0 ;i<eloise.getPlayerTerritoryFamilyList().size(); i=i+1) {
-//      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
-//      	}
-  	
- 		
- 		
- 		
+
+      	System.out.println(""+eloise.getPlayerName()+"   "+ eloise.getPlayerAntsBreed());
+      	for(int i=0 ;i<eloise.getPlayerTerritoryList().size(); i=i+1) {
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryAntsNb());
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner().getPlayerName());
+      		
+      	}
+   
+
  		
  		
  		//---- combat ----//
@@ -132,8 +130,8 @@ public class Recursive {
  		
  		
       	/////////////////////AFFICHAGE////////////////////////
- 		
-// 		System.out.println(myService.getPlayerTurn().getPlayerName());
+ 		System.out.println("name of player playing"+myService.getPlayerTurn().getPlayerName());
+
  		
  		
  		
@@ -141,26 +139,32 @@ public class Recursive {
  		myService.refillAvailableAnts(maurane);
  		
  		//////////////////////////AFFICHAGE/////////////////////////
-// 		System.out.println("nb ant terr1  before refill   "+allTerritories.get(1).getTerritoryAntsNb());
+
+ 		System.out.println("nb ant terr1  "+allTerritories.get(1).getTerritoryAntsNb());
+
  		
       	myService.placeAnts(maurane, allTerritories.get(1), 2);
       	myService.placeAnts(maurane, allTerritories.get(6), 1);
  		
-// 		System.out.println("nb ant terr1  after refill   "+allTerritories.get(1).getTerritoryAntsNb());
+
+ 		System.out.println("nb ant terr1    "+allTerritories.get(1).getTerritoryAntsNb());
+
 
 
  		
  		//FAUT IL LES METTRE ?
  		myService.requestAttack(maurane.getPlayerTerritoryList().get(1), eloise.getPlayerTerritoryList().get(0), 3);
- 		
  		myService.requestDefense(eloise.getPlayerTerritoryList().get(0), 2);
- 		
  		myService.diceFight(maurane, maurane.getPlayerTerritoryList().get(1), 3, eloise, eloise.getPlayerTerritoryList().get(0), 2);
  		
  		//Vise la fourmiliere
  		//myService.diceFight(maurane, territoryMaurane.get(0), 3, eloise, territoryEloise.get(1), 2);
- 		
- 		myService.moveAvailable(maurane, maurane.getPlayerTerritoryList().get(0), maurane.getPlayerTerritoryList().get(1) , 5);
+ 		System.out.println("Nb de fourmis avant depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+ 		System.out.println("Nb de fourmis avant depart"+allTerritories.get(3).getTerritoryAntsNb());
+ 		myService.moveAvailable(maurane, maurane.getPlayerTerritoryList().get(0), allTerritories.get(3) , 5);
+ 		System.out.println("Nb de fourmis  apres depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+ 		System.out.println("Nb de fourmis  apres depart"+allTerritories.get(3).getTerritoryAntsNb());
+
  		
  		myService.changePlayer();
  		
@@ -203,9 +207,9 @@ public class Recursive {
 //      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
 //      	}
  		
- 		
+ 		System.out.println("player avant changement :    "+myService.getPlayerTurn().getPlayerName());
  		myService.changePlayer();
-
+ 		System.out.println("player apres changement :    "+myService.getPlayerTurn().getPlayerName());
     }
 
 		

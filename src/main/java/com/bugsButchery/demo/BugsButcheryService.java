@@ -112,6 +112,7 @@ public class BugsButcheryService {
 
 		int refillByTerritory; 
 		if((player.getPlayerTerritoryList().size()/3) <= 3) {
+		
 			refillByTerritory = 3;
 		} else {
 			refillByTerritory = player.getPlayerTerritoryList().size()/3;
@@ -309,6 +310,10 @@ public class BugsButcheryService {
 
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
+		if (antNbr>=territoryStart.getTerritoryAntsNb()) {
+			return false;
+			}
+		
 		// VALEURS INITIALES
 		potentialsTerritories.clear();
 		potentialsTerritories.addAll(player.getPlayerTerritoryList());
@@ -325,7 +330,11 @@ public class BugsButcheryService {
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
+			System.out.println("Depart"+territoryStart.getTerritoryName());
+			System.out.println("Arrivée"+territoryArrival.getTerritoryName());
 			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
+			System.out.println("antnb:  "+antNbr);
+			System.out.println(territoryArrival.getTerritoryAntsNb());
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
@@ -397,15 +406,20 @@ public class BugsButcheryService {
 	 * @param ants
 	 * @return
 	 */
-	public ArrayList<Territory> placeAnts(Player player, Territory territory, int ants) {
-		
-		if (player.getPlayerTerritoryList().contains(territory)) {
+	public boolean placeAnts(Player player, Territory territory, int ants) {
+		boolean check=false;
+		if (player.getPlayerTerritoryList().contains(territory) && ants<= player.getPlayerAvailableAnts()) {
 		//si le player possède le territoire (nommé ici territory) qu'on fait passer dans la méthode	
 			territory.setTerritoryAntsNb(territory.getTerritoryAntsNb() + ants);
 			//le territoire possédé ...
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - ants);
+			check=true;
 		}
-		return player.getPlayerTerritoryList();
+	
+		return check;
+		
+		
+		//return player.getPlayerTerritoryList();
 		//retourn la liste des territoires qui on changé dans la methode
 	}
 
