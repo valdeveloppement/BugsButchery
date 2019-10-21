@@ -33,7 +33,7 @@ public class Territory {
 	private boolean isAnthill;	
 	private int territoryFamily;
 	@Transient
-	private int territoryAntsNb;	
+	private int territoryAntsNb=0;	
 	@Transient
 	private Player territoryOwner;
 	
