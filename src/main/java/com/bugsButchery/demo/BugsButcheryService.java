@@ -82,7 +82,7 @@ public class BugsButcheryService {
 		return true;
 	}
 
-	//New Round>>>>>>> 97aac8f970963a9387b27b65a1b9dc43d8cf251d
+	//New Round
 
 
 	/** 
@@ -99,8 +99,6 @@ public class BugsButcheryService {
 			}
 		}
 	}
-	
-
 
 //	/**
 //	 * Calculate the Refill for a new round
@@ -114,20 +112,17 @@ public class BugsButcheryService {
 
 		int refillByTerritory; 
 		if((player.getPlayerTerritoryList().size()/3) <= 3) {
+		
 			refillByTerritory = 3;
 		} else {
 			refillByTerritory = player.getPlayerTerritoryList().size()/3;
 		}
 		int refillByFamily = 0;
-		for (Family f : player.getPlayerTerritoryFamilyList()) {
-			refillByFamily =+ f.getFamilyValue();
+		for (int f : player.getPlayerTerritoryFamilyList()) {
+			refillByFamily =+ myFamilyRepository.findById(f).get().getFamilyValue();
 		}
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
-
-		
-	
-		
 
 	}
 
@@ -152,8 +147,8 @@ public class BugsButcheryService {
 	 * @param nbrDiceAttack
 	 * @return
 	 */
-	public boolean oneAntBehind(Territory territoty, int nbrDiceAttack) {
-		if (territoty.getTerritoryAntsNb() > nbrDiceAttack) {
+	public boolean oneAntBehind(Territory territory, int nbrDiceAttack) {
+		if (territory.getTerritoryAntsNb() > nbrDiceAttack) {
 			return true;
 		}
 		else {
@@ -168,8 +163,7 @@ public class BugsButcheryService {
 	 * @return
 	 */
 	public boolean pathExist(Territory attacker, Territory target) {
-
-		if (attacker.getTerritoryFrontiers().contains(target)) {
+		if(attacker.getTerritoryFrontiers().contains(target)) {
 			return true;
 		}
 		else {
@@ -233,7 +227,7 @@ public class BugsButcheryService {
 	 * @param nbrDiceDefender
 	 */
 	public void diceFight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender){
-		if(requestAttack(attacker, target, nbrDiceAttack)) {
+		if(requestAttack(attacker, target, nbrDiceAttack) && requestDefense(target, nbrDiceDefender)) {
 			ArrayList<Integer> resultCurrent = new ArrayList<Integer>();
 			ArrayList<Integer> resultTarget = new ArrayList<Integer>();
 			for (int i = 0; i < nbrDiceAttack; i++) {
@@ -248,39 +242,42 @@ public class BugsButcheryService {
 
 			if (resultCurrent.size() < 2 || resultTarget.size() < 2) {
 				if (resultCurrent.get(0) > resultTarget.get(0)) {
-					//System.out.println("target -1");
+					System.out.println("target -1");
 					target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 				}
 				else {
-					//System.out.println("attacker -1");
+					System.out.println("attacker -1");
 					attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 				}
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
-				//System.out.println("target -2");
+				System.out.println("target -2");
 				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-2);
 			}
 			else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) <= resultTarget.get(1)) {
-				//System.out.println("attacker -1 target -1");
+				System.out.println("attacker -1 target -1");
 				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 			}
 			else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
-				//System.out.println("attacker -1 target -1");
+				System.out.println("attacker -1 target -1");
 				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
 			}
 			else {
-				//System.out.println("attacker -2");
+				System.out.println("attacker -2");
 				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-2);
 			}
 			if(checkConquest(target)) {
 				//move()
 				killAntHill(defender, target);
+				defender.getPlayerTerritoryList().remove(target);
+				target.setTerritoryOwner(current);
+				current.getPlayerTerritoryList().add(target);
 			}
 		}
 		else {
-			//cant attack at least on check failed
+			System.out.println("cant fight");
 		}
 	}
 
@@ -313,6 +310,10 @@ public class BugsButcheryService {
 
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
+		if (antNbr>=territoryStart.getTerritoryAntsNb()) {
+			return false;
+			}
+		
 		// VALEURS INITIALES
 		potentialsTerritories.clear();
 		potentialsTerritories.addAll(player.getPlayerTerritoryList());
@@ -329,7 +330,11 @@ public class BugsButcheryService {
 		moveOneStep(territoryStart, territoryArrival);
 
 		if (pathExist==1) {
+			System.out.println("Depart"+territoryStart.getTerritoryName());
+			System.out.println("Arrivée"+territoryArrival.getTerritoryName());
 			territoryStart.setTerritoryAntsNb(territoryStart.getTerritoryAntsNb()-antNbr);
+			System.out.println("antnb:  "+antNbr);
+			System.out.println(territoryArrival.getTerritoryAntsNb());
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
@@ -338,12 +343,12 @@ public class BugsButcheryService {
 
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
-
+		
 		potentialsTerritories.remove(territory1);
 		if(potentialsTerritories.size()==0) {
 			return false;
 		}//if 0 territory except territory1 (||& territories already crossed) = false
-
+		
 		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
 		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
@@ -401,15 +406,20 @@ public class BugsButcheryService {
 	 * @param ants
 	 * @return
 	 */
-	public ArrayList<Territory> placeAnts(Player player, Territory territory, int ants) {
-		
-		if (player.getPlayerTerritoryList().contains(territory)) {
+	public boolean placeAnts(Player player, Territory territory, int ants) {
+		boolean check=false;
+		if (player.getPlayerTerritoryList().contains(territory) && ants<= player.getPlayerAvailableAnts()) {
 		//si le player possède le territoire (nommé ici territory) qu'on fait passer dans la méthode	
 			territory.setTerritoryAntsNb(territory.getTerritoryAntsNb() + ants);
 			//le territoire possédé ...
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - ants);
+			check=true;
 		}
-		return player.getPlayerTerritoryList();
+	
+		return check;
+		
+		
+		//return player.getPlayerTerritoryList();
 		//retourn la liste des territoires qui on changé dans la methode
 	}
 
@@ -424,6 +434,7 @@ public class BugsButcheryService {
 		if (territory.getTerritoryOwner() == null) {
 		//si le territoire séléctionner est égal a vide
 			player.getPlayerTerritoryList().add(territory);
+			territory.setTerritoryOwner(player);
 			//ajoute territoire a la liste de territoire du player
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
 			//enlever une fourmi au compte total de fourmi du player

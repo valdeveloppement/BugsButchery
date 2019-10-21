@@ -1,22 +1,18 @@
 package com.bugsButchery.demo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Cascade;
+
 
 @Entity
 public class Territory {
@@ -26,21 +22,16 @@ public class Territory {
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
-
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
 			  name = "frontier", 
-			  joinColumns = @JoinColumn(name = "frontier_id"),
-			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
+			  joinColumns = @JoinColumn(name = "territory_id"),
+			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
+
 	private List<Territory> territoryFrontiers;
 	@Transient
-	private boolean isAnthill;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(
-			  name = "territory", 
-			  joinColumns = @JoinColumn(name = "family_territory"),
-			  inverseJoinColumns = @JoinColumn(name = "territory_id"))	
-	private Family territoryFamily;
+	private boolean isAnthill;	
+	private int territoryFamily;
 	@Transient
 	private int territoryAntsNb;	
 	@Transient
@@ -86,10 +77,10 @@ public class Territory {
 	public void setAnthill(boolean isAnthill) {
 		this.isAnthill = isAnthill;
 	}
-	public Family getTerritoryFamily() {
+	public int getTerritoryFamily() {
 		return territoryFamily;
 	}
-	public void setTerritoryFamily(Family territoryFamily) {
+	public void setTerritoryFamily(int territoryFamily) {
 		this.territoryFamily = territoryFamily;
 	}
 	public int getTerritoryAntsNb() {

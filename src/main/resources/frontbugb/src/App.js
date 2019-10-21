@@ -7,35 +7,39 @@ import Infos from './Infos.js';
 class App extends React.Component{
 constructor(props) {
   super(props);
-  this.alert = this.alert.bind(this)
 
+this.state = {
+  isAttack: false,
+  isMove: false
+}
 }
 
-if(attack = true){
-    alert = alert() {
-      alert("hello")
-    }
-      }
-} else if(move = true) {
-  alert()
-}
 
-alert(){
-alert("hello")
-}
+alert = () => {
+  alert(`${this.value}`)
+  }
 
-attack(){
+attack = () => {
+this.setState({isAttack: true});
 alert(`${this.value}`)
 }
 
-move(){
+move = () => {
+this.setState({isMove: true});
 alert(`${this.value}` )
 }
-suivant(){
- alert(`${this.value}`)
+
+suivant = () => {
+alert(`${this.value}`)
 }
 
   render() {
+    const isAttack = this.state.isAttack;
+    let button;
+
+  if (isAttack) {
+      button = <Button value="send" />
+    } 
 
    return (
 <div> 
@@ -56,6 +60,7 @@ suivant(){
 <Button action={this.attack} value="attack" />
 <Button action={this.move} value="move"/>
 <Button action={this.suivant} value="Suivant" />
+{button}
 </div>
     )
   }

@@ -3,7 +3,6 @@ package com.bugsButchery.demo;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,51 +15,203 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Recursive {
 
 	@Autowired
-	BugsButcheryService bugg;
+	BugsButcheryService myService;
 	
 	@Test
 	public void test() {
-		
-		List<Territory> allTerritories = new ArrayList<Territory>();
-		ArrayList<Territory> territoryMaurane = new ArrayList<Territory>();
-		ArrayList<Territory> territorySylvain = new ArrayList<Territory>();
-		ArrayList<Territory> territoryValentin = new ArrayList<Territory>();
-		ArrayList<Territory> territoryEloise = new ArrayList<Territory>();
-		ArrayList<Family> familyMaurane = new ArrayList<Family>();
-		ArrayList<Family> familySylvain = new ArrayList<Family>();
-		ArrayList<Family> familyValentin = new ArrayList<Family>();
-		ArrayList<Family> familyEloise = new ArrayList<Family>();
-		
-		
-		for (Territory entry : bugg.myTerritoryRepository.findAll()) {
-			allTerritories.add(entry);
-			System.out.println(entry);
-		}
-	    
-	    System.out.println(allTerritories);
-		
-		      Player maurane = new Player(1, "Maurane", "fourmis violettes", territoryMaurane, familyMaurane, 30);
-		      Player valentin = new Player(2, "Valentin", "fourmis noires", territoryValentin, familyValentin, 30);
-		      Player sylvain = new Player(3, "Sylvain", "fourmis vertes", territorySylvain, familySylvain, 30);
-		      Player eloise = new Player(4, "Eloise", "fourmis rouges", territoryEloise, familyEloise, 30);
-		
-		
-		
-		      bugg.addPlayer(maurane);
-		      bugg.addPlayer(valentin);
-		      bugg.addPlayer(sylvain);
-		      bugg.addPlayer(eloise);
-		
-		      bugg.placeFirstAnts(maurane, allTerritories.get(1) );
-		      bugg.placeFirstAnts(maurane, allTerritories.get(6));
-		      bugg.placeFirstAnts( maurane, allTerritories.get(3));
-		      bugg.placeFirstAnts(valentin, allTerritories.get(7));
-		      bugg.placeFirstAnts(valentin, allTerritories.get(0));
-		      bugg.placeFirstAnts(sylvain, allTerritories.get(5));
-		      bugg.placeFirstAnts(eloise, allTerritories.get(8));
-		      bugg.placeFirstAnts(eloise, allTerritories.get(2));
-		      bugg.placeFirstAnts(eloise, allTerritories.get(4));
-	    }
+//---- commencement partie ----//
+    	
+        
+        ArrayList<Territory> allTerritories = new ArrayList<Territory>();
+        
+        
+        for(Territory entry : myService.myTerritoryRepository.findAll()) {
+        	allTerritories.add(entry);
+        }
+      
+        Player maurane = new Player(1, "Maurane", "fourmis violettes", 30);        
+      	Player valentin = new Player(2, "Valentin", "fourmis noires", 30);
+      	Player sylvain = new Player(3, "Sylvain", "fourmis vertes", 30);
+      	Player eloise = new Player(4, "Eloise", "fourmis rouges", 30);
+
+      	
+
+      	for (Territory entry : allTerritories) {
+      		System.out.println("Territoire :"+entry.getTerritoryName());
+      		for(Territory frontier : entry.getTerritoryFrontiers()) {
+      			System.out.println("frontiere"+frontier.getTerritoryName());
+      		}
+      	}
+      	
+
+      	/////////////////AFFICHAGE///////////////
+//      		
+//          	System.out.println(""+maurane.getPlayerName()+"   "+ maurane.getPlayerAntsBreed());
+//          	for(int i=0 ;i<maurane.getPlayerTerritoryList().size(); i=i+1) {
+//          		System.out.println(maurane.getPlayerTerritoryList().get(i).getTerritoryName());
+//          	}
+//          	for(int i=0 ;i<maurane.getPlayerTerritoryFamilyList().size(); i=i+1) {
+//          		System.out.println(maurane.getPlayerTerritoryList().get(i).getTerritoryName());
+//          	}
+//      	
+
+      	
+      	
+      	
+      	//ajout des player dans playersAlive
+      	myService.addPlayer(maurane);
+      	myService.addPlayer(valentin);
+      	myService.addPlayer(sylvain);
+      	myService.addPlayer(eloise);
+      	
+      
+      	/////////////////AFFICHAGE///////////////
+      	
+//      	for(int i=0 ;i<myService.getPlayersAlive().size(); i=i+1) {
+//      		System.out.println(myService.getPlayersAlive().get(i).getPlayerName());
+//      	}
+
+      
+      	//choix des territoire par le placement des 1er fourmis de dans
+      	myService.placeFirstAnts(maurane, allTerritories.get(1));
+      	myService.placeFirstAnts(maurane, allTerritories.get(6));
+      	myService.placeFirstAnts(maurane, allTerritories.get(3));
+      	myService.placeFirstAnts(valentin, allTerritories.get(7));
+      	myService.placeFirstAnts(valentin, allTerritories.get(0));
+      	myService.placeFirstAnts(sylvain, allTerritories.get(5));
+      	myService.placeFirstAnts(sylvain, allTerritories.get(8));
+      	myService.placeFirstAnts(eloise, allTerritories.get(2));
+      	myService.placeFirstAnts(eloise, allTerritories.get(4));
+      	
+      	
+      	
+      	
+      	
+      	//placement du reste des fourmis dans ses propre territoire
+      	myService.placeAnts(maurane, allTerritories.get(1), 4);
+      	myService.placeAnts(maurane, allTerritories.get(6), 4);
+      	myService.placeAnts(maurane, allTerritories.get(3), 4);
+      	myService.placeAnts(valentin, allTerritories.get(7), 10);
+      	myService.placeAnts(valentin, allTerritories.get(0), 18);
+      	myService.placeAnts(sylvain, allTerritories.get(5), 10);
+      	myService.placeAnts(sylvain, allTerritories.get(8), 18);
+      	myService.placeAnts(eloise, allTerritories.get(2), 10);
+      	myService.placeAnts(eloise, allTerritories.get(4), 18);
+      	//on peut mettre territoryMaurane etc...
+      	
+
+
+      	
+      	
+
+		myService.addAntsHill(maurane, maurane.getPlayerTerritoryList().get(2));
+ 		myService.addAntsHill(valentin, valentin.getPlayerTerritoryList().get(1));
+ 		myService.addAntsHill(sylvain, sylvain.getPlayerTerritoryList().get(1));
+ 		myService.addAntsHill(eloise, eloise.getPlayerTerritoryList().get(1));
+ 
+ 		
+      	/////////////////AFFICHAGE///////////////
+
+      	System.out.println(""+eloise.getPlayerName()+"   "+ eloise.getPlayerAntsBreed());
+      	for(int i=0 ;i<eloise.getPlayerTerritoryList().size(); i=i+1) {
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryName());
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryAntsNb());
+      		System.out.println(eloise.getPlayerTerritoryList().get(i).getTerritoryOwner().getPlayerName());
+      		
+      	}
+   
+
+ 		
+ 		
+ 		//---- combat ----//
+ 		
+ 		//myService.changePlayer
+ 		myService.setPlayerTurn(myService.getPlayersAlive().get(0));
+ 		
+ 		
+      	/////////////////////AFFICHAGE////////////////////////
+ 		System.out.println("name of player playing"+myService.getPlayerTurn().getPlayerName());
+
+ 		
+ 		
+ 		
+ 		
+ 		myService.refillAvailableAnts(maurane);
+ 		
+ 		//////////////////////////AFFICHAGE/////////////////////////
+
+ 		System.out.println("nb ant terr1  "+allTerritories.get(1).getTerritoryAntsNb());
+
+ 		
+      	myService.placeAnts(maurane, allTerritories.get(1), 2);
+      	myService.placeAnts(maurane, allTerritories.get(6), 1);
+ 		
+
+ 		System.out.println("nb ant terr1    "+allTerritories.get(1).getTerritoryAntsNb());
+
+
+
+ 		
+ 		//FAUT IL LES METTRE ?
+ 		myService.requestAttack(maurane.getPlayerTerritoryList().get(1), eloise.getPlayerTerritoryList().get(0), 3);
+ 		myService.requestDefense(eloise.getPlayerTerritoryList().get(0), 2);
+ 		myService.diceFight(maurane, maurane.getPlayerTerritoryList().get(1), 3, eloise, eloise.getPlayerTerritoryList().get(0), 2);
+ 		
+ 		//Vise la fourmiliere
+ 		//myService.diceFight(maurane, territoryMaurane.get(0), 3, eloise, territoryEloise.get(1), 2);
+ 		System.out.println("Nb de fourmis avant depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+ 		System.out.println("Nb de fourmis avant depart"+allTerritories.get(3).getTerritoryAntsNb());
+ 		myService.moveAvailable(maurane, maurane.getPlayerTerritoryList().get(0), allTerritories.get(3) , 5);
+ 		System.out.println("Nb de fourmis  apres depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+ 		System.out.println("Nb de fourmis  apres depart"+allTerritories.get(3).getTerritoryAntsNb());
+
+ 		
+ 		myService.changePlayer();
+ 		
+ 		
+ 		
+ 		
+/////////////   2nd tour   ////////////////
+ 		
+ 		myService.refillAvailableAnts(valentin);
+ 		
+ 		//si des fourmi les placer
+ 		
+ 		/////////////////////// Affichage//////////////////////////:
+ 		
+// 		System.out.println("nb ant val before attack   "+valentin.getPlayerTerritoryList().get(1).getTerritoryAntsNb());
+// 		System.out.println("nb ant maurane before attack   "+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+// 		System.out.println("proprio du territoire attaqué   "+allTerritories.get(3).getTerritoryOwner().getPlayerName());
+//      	for(int i=0 ;i<allTerritories.size(); i=i+1) {
+//      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
+//      	}
+ 		
+ 		
+ 		
+ 		//FAUT IL LES METTRE ?
+ 		myService.requestAttack(valentin.getPlayerTerritoryList().get(1), maurane.getPlayerTerritoryList().get(0), 3);
+ 		
+ 		myService.requestDefense(maurane.getPlayerTerritoryList().get(2), 2);
+ 		
+ 		myService.diceFight(valentin, valentin.getPlayerTerritoryList().get(1), 3, maurane, maurane.getPlayerTerritoryList().get(0), 2);
+ 		
+ 		
+ 		/////////////////////// Affichage//////////////////////////
+
+ 		System.out.println("nb ant val after attack   "+valentin.getPlayerTerritoryList().get(1).getTerritoryAntsNb());
+ 		System.out.println("nb ant maurane after attack   "+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
+
+ 		System.out.println("proprio du territoire attaqué   "+allTerritories.get(3).getTerritoryOwner().getPlayerName());
+ 		
+// 		for(int i=0 ;i<allTerritories.size(); i=i+1) {
+//      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
+//      	}
+ 		
+ 		System.out.println("player avant changement :    "+myService.getPlayerTurn().getPlayerName());
+ 		myService.changePlayer();
+ 		System.out.println("player apres changement :    "+myService.getPlayerTurn().getPlayerName());
+    }
+
 		
 }
 
