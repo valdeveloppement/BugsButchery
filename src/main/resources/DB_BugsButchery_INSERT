@@ -54,3 +54,5 @@ INSERT INTO frontier (territory_id, frontier_id) VALUES (5, 9);
 INSERT INTO frontier (territory_id, frontier_id) VALUES (6, 7);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (8, 9);
+
+// INSERT INTO frontier (territory_id, frontier_id) VALUES (1, 2), (1, 4), ...;
