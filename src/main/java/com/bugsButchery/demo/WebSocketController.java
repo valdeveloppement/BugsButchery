@@ -17,70 +17,83 @@ public class WebSocketController {
 	
 
 	//new player
+		//
     @MessageMapping("/newPlayer")
     @SendTo("/bugsbutchery")
-    public Player test(Player player) throws Exception {
+    public Game test(Player player) {
         System.out.println("it works");
         bugService.createNewPlayer(player);
         System.out.println(player.getPlayerName());
-        return player;
+        return bugService.myGame;
     }
       
 	
 	//start
-	@MessageMapping("/app/startGame")
+    	//
+	@MessageMapping("/startGame")
 	@SendTo("/bugsbutchery")
-	public Game startGame(@Payload Game game) {
-		return game;
+	public Game startGame(Game game) {
+		return bugService.myGame;
 	}
 	
 	//multi turn pick territory untill all taken
 		//
-	@MessageMapping("/app/pickTerritory")
+	@MessageMapping("/pickTerritory")
 	@SendTo("/bugsbutchery")
-	public Game pickTerritory(@Payload Game game, Player player, Territory territory) {
+	public Game pickTerritory(Player player, Territory territory) {
 		bugService.placeFirstAnts(player, territory);
-		return game;
+		return bugService.myGame;
 	}
+	
 	
 	//multi turn reinforcement untill all spent
 		//
-	@MessageMapping("/app/addAnt")
+	@MessageMapping("/addAnt")
 	@SendTo("/bugsbutchery")
-	public Game addAnt(@Payload Game game, Player player, Territory territory, int ants) {
+	public Game addAnt(Player player, Territory territory, int ants) {
 		bugService.placeAnts(player, territory, ants);
-		return game;
+		return bugService.myGame;
 	}
-	//multi turn game on
-	//reinforcement
-	@MessageMapping("/app/refill")
+	
+	//multi turn pick anthill
+		//
+	@MessageMapping("/addAnthill")
 	@SendTo("/bugsbutchery")
-	public Game refill(@Payload Game game, Player player) {
+	public Game addAnthill(Player player, Territory territory, int ants) {
+		bugService.addAntsHill(player, territory);
+		return bugService.myGame;
+	}
+	
+	//multi turn game on
+		//reinforcement
+	@MessageMapping("/refill")
+	@SendTo("/bugsbutchery")
+	public Game refill(Player player) {
 		bugService.refillAvailableAnts(player);
-		return game;
+		return bugService.myGame;
 	}
 		
 	//attack
-	@MessageMapping("/app/requestAttack")
+	@MessageMapping("/requestAttack")
 	@SendTo("/bugsbutchery")
-	public Game requestAttack(@Payload Game game, Territory attacker, Territory target, int nbrDiceAttack) {
+	public Game requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
 		bugService.requestAttack(attacker, target, nbrDiceAttack);
-		return game;
+		return bugService.myGame;
 	}
 	
-	@MessageMapping("/app/requestDefense")
+	@MessageMapping("/requestDefense")
 	@SendTo("/bugsbutchery")
-	public Game requestDefense(@Payload Game game, Territory defender, int nbrDiceDefense) {
+	public Game requestDefense(Territory defender, int nbrDiceDefense) {
 		bugService.requestDefense(defender, nbrDiceDefense);
-		return game;
+		return bugService.myGame;
 		
 	}
 	
 	//move
-	@MessageMapping("/app/move")
+	@MessageMapping("/move")
 	@SendTo("/bugsbutchery")
-	public Game move(@Payload Game game, Player player, Territory territoryStart, Territory territoryArrival, int antNbr) {
+	public Game move(Player player, Territory territoryStart, Territory territoryArrival, int antNbr) {
 		bugService.moveAvailable(player, territoryStart, territoryArrival, antNbr);
-		return game;
+		return bugService.myGame;
 	}
 }
