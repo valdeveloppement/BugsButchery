@@ -15,7 +15,7 @@ public class WebSocketController {
 	@Autowired
 	BugsButcheryService bugService;
 	
-<<<<<<< HEAD
+
 //	//new player
 //	@MessageMapping("/app.newPlayer")
 //	@SendTo("/bugsbutchery")
@@ -34,19 +34,6 @@ public class WebSocketController {
         Thread.sleep(100); // simulated delay
        
     }
-=======
-	//new player
-	@MessageMapping("/app/newPlayer")
-	@SendTo("/bugsbutchery")
-	public Game newPlayer(@Payload Game game, Player player) {
-
-		// if false => retourner une autre page pour les joueurs en trop 
-
-		bugService.createNewPlayer(player);
-		return game;
-
-	}
->>>>>>> 09bc6e112fe9d3f48b9894e9af9705ee45d09ee3
 	
 	//start
 	@MessageMapping("/app/startGame")
