@@ -401,13 +401,18 @@ public class BugsButcheryService {
 		myGame.getPlayersAlive().add(thisPlayer);
 		myGame.setMessage(thisPlayer.getPlayerName() + " a rejoint la partie !");
 	}
-	
-	
-	public void createNewPlayer(Player thisPlayer) {
-		thisPlayer.setPlayerAvailableAnts(15);
-		myGame.getPlayersAlive().add(thisPlayer);
-		System.out.println(thisPlayer.getPlayerName());
-		System.out.println(myGame.getPlayersAlive().get(0).getPlayerName());
+
+
+	public boolean createNewPlayer(Player thisPlayer) {		
+		if(myGame.playersAlive.size() < 4) {
+			thisPlayer.setPlayerAvailableAnts(15);
+			myGame.getPlayersAlive().add(thisPlayer);
+			return true;
+		} else {
+			return false;
+		}
+
+
 	}
 	
 
