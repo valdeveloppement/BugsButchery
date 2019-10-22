@@ -407,6 +407,7 @@ public class BugsButcheryService {
 		thisPlayer.setPlayerAvailableAnts(15);
 		myGame.getPlayersAlive().add(thisPlayer);
 		System.out.println(thisPlayer.getPlayerName());
+		System.out.println(myGame.getPlayersAlive().get(0).getPlayerName());
 	}
 	
 

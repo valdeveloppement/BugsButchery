@@ -5,6 +5,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.util.HtmlUtils;
+
+
 
 @Controller
 public class WebSocketController {
@@ -12,12 +15,24 @@ public class WebSocketController {
 	@Autowired
 	BugsButcheryService bugService;
 	
-	//new player
+//	//new player
+//	@MessageMapping("/app.newPlayer")
+//	@SendTo("/bugsbutchery")
+//	public void newPlayer(@Payload Player player) {
+//		System.out.println("sdfergfte");
+//		bugService.createNewPlayer(player);
+//
+//	}
+	
+	
+	
 	@MessageMapping("/app.newPlayer")
-	@SendTo("/bugsbutchery")
-	public void newPlayer(@Payload Player player) {
-		bugService.createNewPlayer(player);
-	}
+    @SendTo("/bugsbutchery")
+	public void newPlayer(Player player) throws Exception {
+    	System.out.println("zded");
+        Thread.sleep(100); // simulated delay
+       
+    }
 	
 	//start
 	@MessageMapping("/app.startGame")
