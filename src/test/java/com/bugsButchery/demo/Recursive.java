@@ -17,6 +17,9 @@ public class Recursive {
 	@Autowired
 	BugsButcheryService myService;
 	
+	@Autowired
+	Game myGame;
+	
 	@Test
 	public void test() {
 //---- commencement partie ----//
@@ -59,10 +62,10 @@ public class Recursive {
       	
       	
       	//ajout des player dans playersAlive
-      	myService.addPlayer(maurane);
-      	myService.addPlayer(valentin);
-      	myService.addPlayer(sylvain);
-      	myService.addPlayer(eloise);
+      	myService.createNewPlayer(maurane);
+      	myService.createNewPlayer(valentin);
+      	myService.createNewPlayer(sylvain);
+      	myService.createNewPlayer(eloise);
       	
       
       	/////////////////AFFICHAGE///////////////
@@ -126,11 +129,11 @@ public class Recursive {
  		//---- combat ----//
  		
  		//myService.changePlayer
- 		myService.setPlayerTurn(myService.getPlayersAlive().get(0));
+ 		myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
  		
  		
       	/////////////////////AFFICHAGE////////////////////////
- 		System.out.println("name of player playing"+myService.getPlayerTurn().getPlayerName());
+ 		System.out.println("name of player playing"+myGame.getPlayerTurn().getPlayerName());
 
  		
  		
@@ -207,9 +210,9 @@ public class Recursive {
 //      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
 //      	}
  		
- 		System.out.println("player avant changement :    "+myService.getPlayerTurn().getPlayerName());
+ 		System.out.println("player avant changement :    "+myGame.getPlayerTurn().getPlayerName());
  		myService.changePlayer();
- 		System.out.println("player apres changement :    "+myService.getPlayerTurn().getPlayerName());
+ 		System.out.println("player apres changement :    "+myGame.getPlayerTurn().getPlayerName());
     }
 
 		
