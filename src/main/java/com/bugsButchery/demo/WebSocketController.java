@@ -16,6 +16,7 @@ public class WebSocketController {
 	BugsButcheryService bugService;
 	
 
+
 	//new player
     @MessageMapping("/newPlayer")
     @SendTo("/bugsbutchery")
