@@ -62,10 +62,10 @@ public class Recursive {
       	
       	
       	//ajout des player dans playersAlive
-      	myService.addPlayer(maurane);
-      	myService.addPlayer(valentin);
-      	myService.addPlayer(sylvain);
-      	myService.addPlayer(eloise);
+      	myService.createNewPlayer(maurane);
+      	myService.createNewPlayer(valentin);
+      	myService.createNewPlayer(sylvain);
+      	myService.createNewPlayer(eloise);
       	
       
       	/////////////////AFFICHAGE///////////////

@@ -397,16 +397,20 @@ public class BugsButcheryService {
 	
 	
 	
-	public void addPlayer(Player thisPlayer) {
-		myGame.getPlayersAlive().add(thisPlayer);
-		myGame.setMessage(thisPlayer.getPlayerName() + " a rejoint la partie !");
-	}
+//	public void addPlayer(Player thisPlayer) {
+//		myGame.getPlayersAlive().add(thisPlayer);
+//		myGame.setMessage(thisPlayer.getPlayerName() + " a rejoint la partie !");
+//		System.out.println(myGame.getPlayersAlive().get(0).getPlayerName());
+//		System.out.println(thisPlayer.getPlayerName() + " a rejoint la partie !");
+//	}
 
 
 	public boolean createNewPlayer(Player thisPlayer) {		
 		if(myGame.playersAlive.size() < 4) {
-			thisPlayer.setPlayerAvailableAnts(15);
+			thisPlayer.setPlayerAvailableAnts(15);			
 			myGame.getPlayersAlive().add(thisPlayer);
+			myGame.setMessage(thisPlayer.getPlayerName() + " a rejoint la partie !");
+			System.out.println(myGame.getPlayersAlive().get(0).getPlayerName());
 			return true;
 		} else {
 			return false;
