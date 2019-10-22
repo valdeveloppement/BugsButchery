@@ -16,31 +16,22 @@ public class WebSocketController {
 	BugsButcheryService bugService;
 	
 
-//	//new player
-//	@MessageMapping("/app.newPlayer")
-//	@SendTo("/bugsbutchery")
-//	public void newPlayer(@Payload Player player) {
-//		System.out.println("sdfergfte");
-//		bugService.createNewPlayer(player);
-//
-//	}
-	
-	
-	
-	@MessageMapping("/newPlayer")
+
+	//new player
+    @MessageMapping("/newPlayer")
     @SendTo("/bugsbutchery")
-	public Player newPlayer(Player player) throws Exception {
-		System.out.println(player.getPlayerName());
-		System.out.println(player.getPlayerAntsBreed());
-		return player;
+    public Player test(Player player) throws Exception {
+        System.out.println("it works");
+        bugService.createNewPlayer(player);
+        System.out.println(player.getPlayerName());
+        return player;
     }
+      
 	
 	//start
 	@MessageMapping("/app/startGame")
 	@SendTo("/bugsbutchery")
 	public Game startGame(@Payload Game game) {
-		
-		
 		return game;
 	}
 	

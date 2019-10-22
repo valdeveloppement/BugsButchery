@@ -29,8 +29,8 @@ public class TestMethod {
 		Player maurane = new Player(1, "Maurane", "fourmis violettes", 30);
 		Player sylvain = new Player(2, "Sylvain", "fourmis vertes", 30);
 		
-		myService.addPlayer(maurane);
-		myService.addPlayer(sylvain);
+		myService.createNewPlayer(maurane);
+		myService.createNewPlayer(sylvain);
 		
 		myService.placeFirstAnts(maurane, allTerritories.get(0));
       	myService.placeFirstAnts(sylvain, allTerritories.get(1));
