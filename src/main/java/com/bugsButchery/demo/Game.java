@@ -18,9 +18,9 @@ public class Game {
 	protected ArrayList<Territory> allTerritories = new ArrayList<Territory>();
     protected ArrayList<Family> allFamilies = new ArrayList<Family>();
     protected String message;
+	protected int nbAnthill=0;
 
-    
-    protected HashMap<String, Boolean> divOn = new HashMap<String, Boolean>(){{
+	protected HashMap<String, Boolean> divOn = new HashMap<String, Boolean>(){{
     	//put("logInOn", true);
     	put("full", false);
     	//put("sasOn", false);
@@ -40,6 +40,12 @@ public class Game {
     //ecrans5(+n), gameOn: 	e.playerAlive, gameSetOn == false, gameOn == true 
     
     
+    public int getNbAnthill() {
+		return nbAnthill;
+	}
+	public void setNbAnthill(int nbAnthill) {
+		this.nbAnthill = nbAnthill;
+	}
 	public HashMap<String, Boolean> getDivOn() {
 		return divOn;
 	}

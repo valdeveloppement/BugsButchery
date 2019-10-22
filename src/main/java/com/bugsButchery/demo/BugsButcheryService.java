@@ -30,7 +30,7 @@ public class BugsButcheryService {
 			myGame.divOn.replace("full", true);	
 		}
 	}
-	
+
 	public void checkNewGameButton() {
 		if(myGame.playersAlive.size() > 1) {
 			myGame.divOn.replace("newGameButton", true);
@@ -106,6 +106,7 @@ public class BugsButcheryService {
 //	 * @return int Refill
 //	 */
 	public void refillAvailableAnts(Player player) {
+		
 		myGame.divOn.replace("availableAntsRefill", true);
 		int refillByTerritory; 
 		if((player.getPlayerTerritoryList().size()/3) <= 3) {
@@ -512,11 +513,18 @@ public class BugsButcheryService {
 	 * @param territory
 	 */
 	public void addAntsHill(Player player, Territory territory) {
+		myGame.setNbAnthill(myGame.getNbAnthill()+1);
 		if (player.getPlayerTerritoryList().contains(territory)) {
 			territory.isAnthill();
 			//myGame.setMessage("---TOP SECRET---- vous avez désigné " + territory + "comme votre fourmilière. ");
 		}
-		changePlayer();
+		
+		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
+			myGame.divOn.replace("gameSetOn", false );
+			myGame.divOn.replace("gameOn", true );
+		} else {
+			changePlayer();
+		}
 	}
 
 	
