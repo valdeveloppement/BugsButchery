@@ -27,12 +27,12 @@ public class WebSocketController {
 	
 	
 	
-	@MessageMapping("/app.newPlayer")
+	@MessageMapping("/newPlayer")
     @SendTo("/bugsbutchery")
-	public void newPlayer(Player player) throws Exception {
-    	System.out.println("zded");
-        Thread.sleep(100); // simulated delay
-       
+	public Player newPlayer(Player player) throws Exception {
+		System.out.println(player.getPlayerName());
+		System.out.println(player.getPlayerAntsBreed());
+		return player;
     }
 	
 	//start
