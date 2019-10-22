@@ -1,6 +1,7 @@
 package com.bugsButchery.demo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,33 @@ public class Game {
     protected ArrayList<Family> allFamilies = new ArrayList<Family>();
     protected String message;
 
-	
+    
+    protected HashMap<String, Boolean> divOn = new HashMap<String, Boolean>(){{
+    	//put("logInOn", true);
+    	put("full", false);
+    	//put("sasOn", false);
+    	put("newGameButton", false);
+    	put("gameSetOn", false);
+    	put("gameOn", false);
+    	put("attackOn", false);
+    	put("defenseOn", false);
+    	put("moveOn", false);
+    	put("availableAntsRefill", false);  	
+    }};
+
+   // ecran1, login: 	   full:false ,  !e.playerAlive
+    //ecran2, full:			full: true, !e.playerAlive
+    //ecran3, sasOn:		e.playerAlive, gameSetOn == false
+    //ecran4, setOn: 		e.playerAlive, gameSetOn == true 
+    //ecrans5(+n), gameOn: 	e.playerAlive, gameSetOn == false, gameOn == true 
+    
+    
+	public HashMap<String, Boolean> getDivOn() {
+		return divOn;
+	}
+	public void setDivOn(HashMap<String, Boolean> divOn) {
+		this.divOn = divOn;
+	}
 	public String getMessage() {
 		return message;
 	}

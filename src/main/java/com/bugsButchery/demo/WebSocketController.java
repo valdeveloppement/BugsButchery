@@ -14,29 +14,34 @@ public class WebSocketController {
 
 	@Autowired
 	BugsButcheryService bugService;
+
+	
 	
 
+	
+	//new game
+	//
+	@MessageMapping("/newGame")
+	@SendTo("/bugsbutchery")
+	public Game newGame() {
+		bugService.createAllFamilies();
+		bugService.createAllTerritories();
+		return bugService.myGame;
+	}
+  
 
 	//new player
 		//
     @MessageMapping("/newPlayer")
     @SendTo("/bugsbutchery")
-    public Game test(Player player) {
-        System.out.println("it works");
+    public Game newPlayer(Player player) {
         bugService.createNewPlayer(player);
         System.out.println(player.getPlayerName());
         return bugService.myGame;
     }
       
 	
-	//start   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    	//
-	@MessageMapping("/startGame")
-	@SendTo("/bugsbutchery")
-	public Game startGame(Game game) {
-		return bugService.myGame;
-	}
-	
+
 	//multi turn pick territory untill all taken
 		//
 	@MessageMapping("/pickTerritory")
@@ -65,7 +70,6 @@ public class WebSocketController {
 		return bugService.myGame;
 	}
 	
-	//multi turn game on
 		//reinforcement
 	@MessageMapping("/refill")
 	@SendTo("/bugsbutchery")
@@ -89,6 +93,24 @@ public class WebSocketController {
 		return bugService.myGame;
 		
 	}
+	
+	@MessageMapping("/fight")
+	@SendTo("/bugsbutchery")
+	public Game fight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender) {
+		bugService.diceFight(current, attacker, nbrDiceAttack, defender, target, nbrDiceDefender);
+		return bugService.myGame;
+		
+	}
+	
+	
+	//skip 
+	@MessageMapping("/skip")
+	@SendTo("/bugsbutchery")
+	public Game skip() {
+		bugService.changePlayer();
+		return bugService.myGame;
+	}
+	
 	
 	//move
 	@MessageMapping("/move")

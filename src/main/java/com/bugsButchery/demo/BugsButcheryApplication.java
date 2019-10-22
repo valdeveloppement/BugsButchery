@@ -8,5 +8,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BugsButcheryApplication {	
     public static void main(String[] args) {
     	SpringApplication.run(BugsButcheryApplication.class, args);
-    }
+    	 }
 }
