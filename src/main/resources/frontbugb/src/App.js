@@ -3,23 +3,29 @@ import './App.css';
 import Button from './Button.js';
 import Territory from './Territory.js';
 import Infos from './Infos.js';
-import Input from './Input.js';
 
 class App extends React.Component{
 constructor(props) {
   super(props);
-  this.action = this.action.bind(this)
+
 this.state = {
   isAttack: false,
-  isMove: false,
-  action: action
+  isMove: false
 }
 }
+
+
+alert = () => {
+  alert(`${this.value}`)
+  }
+
 attack = () => {
 this.setState({isAttack: true});
+alert(`${this.value}`)
 }
 
 move = () => {
+this.setState({isMove: true});
 alert(`${this.value}` )
 }
 
@@ -27,40 +33,15 @@ suivant = () => {
 alert(`${this.value}`)
 }
 
-action = () => {
-  alert('Oui ?')
-}
-
-attackhere = () => {
-  info = <Infos>vous avez choisi d'attaquer {this.value}</Infos>
-  input = <Input />;
-}
-
-
   render() {
     const isAttack = this.state.isAttack;
-    
     let button;
-    let input;
-    let action;
-
-    let info;
-
 
   if (isAttack) {
-      alert("choisissez un territoire")
-      action = 
-      } else {
-
-        action = () => {
-          alert('Oui ?')
-        }
-        
-      
+      button = <Button value="send" />
     } 
 
    return (
-
 <div className="contenant"> 
 
   <div className="carte">
@@ -87,7 +68,6 @@ attackhere = () => {
     {button}
   </div>
   
-
 </div>
     )
   }
