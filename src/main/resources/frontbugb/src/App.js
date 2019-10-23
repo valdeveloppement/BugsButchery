@@ -39,7 +39,7 @@ attackhere = () => {
 
   render() {
     const isAttack = this.state.isAttack;
-    
+ /*   
     let button;
     let input;
     let action;
@@ -49,15 +49,15 @@ attackhere = () => {
 
   if (isAttack) {
       alert("choisissez un territoire")
-      action = 
+      action = () => 
       } else {
 
         action = () => {
           alert('Oui ?')
         }
-        
+
       
-    } 
+    } */
 
    return (
 
