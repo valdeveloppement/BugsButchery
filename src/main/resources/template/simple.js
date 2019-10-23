@@ -35,7 +35,7 @@ function sendMessage() {
             playerName: username,
             playerAntsBreed: antBreed,
         };
-        stompClient.send("/app/newPlayer", {}, JSON.stringify(player));
+        stompClient.send("/app/newGame", {}, JSON.stringify());
         $('#name').val('');
         $('#breed').val('');
     }

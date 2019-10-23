@@ -37,6 +37,8 @@ public class WebSocketController {
     public Game newPlayer(Player player) {
         bugService.createNewPlayer(player);
         System.out.println(player.getPlayerName());
+        bugService.createAllFamilies();
+		bugService.createAllTerritories();
         return bugService.myGame;
     }
       
