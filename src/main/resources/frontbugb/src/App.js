@@ -60,7 +60,7 @@ alert(`${this.value}`)
 }
 
 submit = (value) => {
-
+  
 }
 
 componentDidMount() {
@@ -76,8 +76,6 @@ componentDidMount() {
 
     return (
       <div className="contenant">
-        <input type="text" id="name"></input>
-        <button type="submit" onClick={}></button>
         <div className="carte">
           <Territory action={this.alert} color="epinards" value="épinards" int="" player="" family="légume"/>
           <Territory action={this.alert} color="framboise" value="framboise" int="" player="" family="fruit"/>
