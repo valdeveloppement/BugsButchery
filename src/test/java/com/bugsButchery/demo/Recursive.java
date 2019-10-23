@@ -70,6 +70,7 @@ public class Recursive {
  		//myService.changePlayer
  		myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
       
+      	
       	/////////////////AFFICHAGE///////////////
       	
 //      	for(int i=0 ;i<myService.getPlayersAlive().size(); i=i+1) {
