@@ -44,6 +44,7 @@ public class WebSocketController {
 	@MessageMapping("/pickTerritory")
 	@SendTo("/bugsbutchery")
 	public Game pickTerritory(Territory territory) {
+		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));
 		bugService.placeFirstAnts(bugService.myGame.getPlayerTurn(), territory);
 		return bugService.myGame;
 	}
