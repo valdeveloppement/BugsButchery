@@ -1,28 +1,57 @@
 import React from 'react';
-import Stomp from 'stomp-client'
+import Stomp from 'stompjs'
 import SockJS from 'sockjs-client'
 import './App.css';
 import Button from './Button.js';
 import Territory from './Territory.js';
 import Infos from './Infos.js';
-import Input from './Input.js';
+
+let stompClient = null;
+
+const connect = () => {
+  let socket = new SockJS('http://localhost:8095/game');
+  stompClient = Stomp.over(socket);
+  stompClient.connect({}, onConnected, onError);
+}
+
+const onMessageReceived = (payload) => {
+  let player = JSON.parse(payload.body)
+}
+
+const onConnected = () => {
+  // Subscribe to the Public Topic
+  stompClient.subscribe('/bugsbutchery', onMessageReceived);
+}
+
+const onError = (error) => {
+ 'Could not connect to WebSocket server. Please refresh this page to try again!';
+}
+
 
 
 class App extends React.Component{
 constructor(props) {
   super(props);
-  this.action = this.action.bind(this)
-this.state = {
-  isAttack: false,
-  isMove: false,
-  //action: action
+
+  this.state = {
+    isAttack: false,
+    isMove: false,
+    stompClient: null
+  }
 }
-}
+
+
+alert = () => {
+  alert(`${this.value}`)
+  }
+
 attack = () => {
 this.setState({isAttack: true});
+alert(`${this.value}`)
 }
 
 move = () => {
+this.setState({isMove: true});
 alert(`${this.value}` )
 }
 
@@ -30,84 +59,43 @@ suivant = () => {
 alert(`${this.value}`)
 }
 
-action = () => {
-  alert('Oui ?')
-}
-
-// attackhere = () => {
-//   info = <Infos>vous avez choisi d'attaquer {this.value}</Infos>
-//   input = <Input />;
-// }
-stompClient = null;
-onConnected() {
-    // Subscribe to the Public Topic
-  this.stompClient.subscribe('/bugsbutchery', this.onMessageReceived);
-}
-
-onError(error) {
-    'Could not connect to WebSocket server. Please refresh this page to try again!';
-}
-
-connect() {
-      
-  let socket = new SockJS('http://localhost:8095/game');
-  this.stompClient = Stomp.over(socket);
- 
-  this.stompClient.connect({}, this.onConnected, this.onError);
-}
-
-onMessageReceived(payload) {
-    let player = JSON.parse(payload.body)
-}
-
 componentDidMount() {
-  this.connect();
+  connect();
 }
-
   render() {
-  //   const isAttack = this.state.isAttack;
-    
-  //   let button;
-  //   let input;
-  //   let action;
+    const isAttack = this.state.isAttack;
+    let button;
 
-  //   let info;
+  if (isAttack) {
+      button = <Button value="send" />
+    } 
 
-
-  // if (isAttack) {
-  //     alert("choisissez un territoire")
-  //     action = 
-  //     } else {
-
-  //       action = () => {
-  //         alert('Oui ?')
-  //       }
+    return (
+      <div className="contenant"> 
+        <div className="carte">
+          <Territory action={this.alert} color="epinards" value="épinards" int="" player="" family="légume"/>
+          <Territory action={this.alert} color="framboise" value="framboise" int="" player="" family="fruit"/>
+          <Territory action={this.alert} color="kiwi" value="kiwi" int="" player="" family="fruit"/>
+          <Territory action={this.alert} color="foie_gras" value="foie gras" int="" player="" family="viande"/>
+          <Territory action={this.alert} color="aubergine" value="aubergine" int="" player="" family="légumes"/>
+          <Territory action={this.alert} color="jambon" value="jambon" int="" player="" family="viande"/>
+          <Territory action={this.alert} color="poivron" value="poivron" int="" player="" family="légume"/>
+          <Territory action={this.alert} color="saucisse" value="saucisse" int="" player="" family="viande"/>
+          <Territory action={this.alert} color="abricot" value="abricot" int="" player="" family="fruit"/>
+        </div>
+        <div className="informationJeu">
+          <Infos value="players" info="tous les players"/>
+          <Infos value="info" info="infos générales"/>
+        </div>
+        <div>
+          <Button action={this.attack} value="attack" />
+          <Button action={this.move} value="move"/>
+          <Button action={this.suivant} value="Suivant" />
+          {button}
+        </div>
         
-      
-  //   } 
-
-   return (
-<div> 
-  <Infos value="players" info="tous les players"/>
-  <Infos value="info" info="infos générales"/>
-  <div className="carte">
-  <Territory action={this.action} color="epinards" value="épinards" int="" player="" family="légume"/>
-  <Territory action={this.action} color="framboise" value="framboise" int="" player="" family="fruit"/>
-  <Territory action={() => this.action()} color="kiwi" value="kiwi" int="" player="" family="fruit"/>
-  <Territory action={() => this.action()} color="foie_gras" value="foie gras" int="" player="" family="viande"/>
-  <Territory action={() => this.action()} color="aubergine" value="aubergine" int="" player="" family="légumes"/>
-  <Territory action={() => this.action()} color="jambon" value="jambon" int="" player="" family="fruit"/>
-  <Territory action={() => this.action()} color="poivron" value="poivron" int="" player="" family="légume"/>
-  <Territory action={() => this.action()} color="saucisse" value="saucisse" int="" player="" family="viande"/>
-  <Territory action={() => this.action()} color="abricot" value="abricot" int="" player="" family="fruit"/>
-  </div>
-  <Button action={this.attack} value="attack" />
-  <Button action={this.move} value="move"/>
-  <Button action={this.suivant} value="Suivant" />
-
-</div>
-    )
-  }
-}
-
-export default App;
+      </div>
+          )
+        }
+      }
+      export default App
