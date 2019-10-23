@@ -15,10 +15,7 @@ public class WebSocketController {
 	@Autowired
 	BugsButcheryService bugService;
 
-	
-	
 
-	
 	//new game
 	//
 	@MessageMapping("/newGame")
@@ -26,19 +23,32 @@ public class WebSocketController {
 	public Game newGame() {
 		bugService.createAllFamilies();
 		bugService.createAllTerritories();
+		System.out.println("it's working");
 		return bugService.myGame;
 	}
+	
+
+	//new player
+	//
+	@MessageMapping("/newPlayer")
+	@SendTo("/bugsbutchery")
+	public Game newPlayer(Player player) {
+    bugService.createNewPlayer(player);
+    System.out.println(player.getPlayerName());
+    return bugService.myGame;
+}
+
   
 
 	//new player
-		//
-    @MessageMapping("/newPlayer")
-    @SendTo("/bugsbutchery")
-    public Game newPlayer(Player player) {
-        bugService.createNewPlayer(player);
-        System.out.println(player.getPlayerName());
-        return bugService.myGame;
-    }
+//		//
+//    @MessageMapping("/newPlayer")
+//    @SendTo("/bugsbutchery")
+//    public Game newPlayer(Player player) {
+//        bugService.createNewPlayer(player);
+//        System.out.println(player.getPlayerName());
+//        return bugService.myGame;
+//    }
       
 	
 
