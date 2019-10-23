@@ -29,6 +29,7 @@ public class Territory {
 			  name = "frontier", 
 			  joinColumns = @JoinColumn(name = "territory_id"),
 			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
+
     @JsonIgnoreProperties("territoryFrontiers")
 	private List<Territory> territoryFrontiers;
 	private int territoryFamily;
