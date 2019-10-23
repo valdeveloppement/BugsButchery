@@ -411,7 +411,7 @@ public class BugsButcheryService {
 	//---- Change player ----//
 
 	public void changePlayer() {
-		myGame.setMessage(myGame.playerTurn.getPlayerName() + " a fini son tour !");
+		myGame.setMessage(myGame.getPlayerTurn().getPlayerName() + " a fini son tour !");
 		int roundSize= myGame.getPlayersAlive().size();
 		int roundPosition= myGame.getPlayersAlive().indexOf(myGame.getPlayerTurn());
 		if(roundSize!=roundPosition+1) {
@@ -420,10 +420,12 @@ public class BugsButcheryService {
 		else {
 			myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
 		}
-		myGame.setMessage("C'est maintenant au tour de " + myGame.playerTurn.getPlayerName() + " de jouer ");
+		changePlayerMsg();
 	}
 	
-	
+	public void changePlayerMsg() {
+		myGame.setMessage("C'est maintenant au tour de " + myGame.playerTurn.getPlayerName() + " de jouer ");
+	}
 	
 	
 //	public void addPlayer(Player thisPlayer) {

@@ -67,6 +67,7 @@ componentDidMount() {
     let button;
 
   if (isAttack) {
+
       button = <Button value="send" />
     } 
 

@@ -67,6 +67,8 @@ public class Recursive {
       	myService.createNewPlayer(sylvain);
       	myService.createNewPlayer(eloise);
       	
+ 		//myService.changePlayer
+ 		myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
       
       	/////////////////AFFICHAGE///////////////
       	
@@ -128,16 +130,12 @@ public class Recursive {
  		
  		//---- combat ----//
  		
- 		//myService.changePlayer
- 		myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
+
  		
  		
       	/////////////////////AFFICHAGE////////////////////////
  		System.out.println("name of player playing"+myGame.getPlayerTurn().getPlayerName());
 
- 		
- 		
- 		
  		
  		myService.refillAvailableAnts(maurane);
  		
@@ -168,7 +166,7 @@ public class Recursive {
  		System.out.println("Nb de fourmis  apres depart"+maurane.getPlayerTerritoryList().get(0).getTerritoryAntsNb());
  		System.out.println("Nb de fourmis  apres depart"+allTerritories.get(3).getTerritoryAntsNb());
 
- 		
+ 
  		myService.changePlayer();
  		
  		
