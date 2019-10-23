@@ -12,7 +12,7 @@ constructor(props) {
 this.state = {
   isAttack: false,
   isMove: false,
-  action: action
+  //action: action
 }
 }
 attack = () => {
@@ -31,33 +31,33 @@ action = () => {
   alert('Oui ?')
 }
 
-attackhere = () => {
-  info = <Infos>vous avez choisi d'attaquer {this.value}</Infos>
-  input = <Input />;
-}
+// attackhere = () => {
+//   info = <Infos>vous avez choisi d'attaquer {this.value}</Infos>
+//   input = <Input />;
+// }
 
 
   render() {
-    const isAttack = this.state.isAttack;
+  //   const isAttack = this.state.isAttack;
     
-    let button;
-    let input;
-    let action;
+  //   let button;
+  //   let input;
+  //   let action;
 
-    let info;
+  //   let info;
 
 
-  if (isAttack) {
-      alert("choisissez un territoire")
-      action = 
-      } else {
+  // if (isAttack) {
+  //     alert("choisissez un territoire")
+  //     action = 
+  //     } else {
 
-        action = () => {
-          alert('Oui ?')
-        }
+  //       action = () => {
+  //         alert('Oui ?')
+  //       }
         
       
-    } 
+  //   } 
 
    return (
 <div> 
@@ -77,9 +77,9 @@ attackhere = () => {
 <Button action={this.attack} value="attack" />
 <Button action={this.move} value="move"/>
 <Button action={this.suivant} value="Suivant" />
-{input}
+{/* {input}
 {button}
-{info}
+{info} */}
 
 </div>
     )
