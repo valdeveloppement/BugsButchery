@@ -2,12 +2,17 @@ package com.bugsButchery.demo;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class Player {
 
 	//---- value objet ----//
 	private int playerId;
 	private String playerName;
 	private String playerAntsBreed;
+	
+	
+    @JsonIgnoreProperties("territoryOwner")
 	private ArrayList<Territory> playerTerritoryList= new ArrayList<Territory>();
 	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();
 	private int playerAvailableAnts;

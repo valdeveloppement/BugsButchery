@@ -30,13 +30,17 @@ public class Territory {
 			  joinColumns = @JoinColumn(name = "territory_id"),
 			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
 
+	
+	
     @JsonIgnoreProperties("territoryFrontiers")
 	private List<Territory> territoryFrontiers;
 	private int territoryFamily;
 	@Transient
 	private boolean isAnthill;	
 	@Transient
-	private int territoryAntsNb=0;	
+	private int territoryAntsNb=0;
+	
+    @JsonIgnoreProperties("playerTerritoryList")
 	@Transient
 	private Player territoryOwner;
 	
