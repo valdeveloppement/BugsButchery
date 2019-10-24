@@ -8,8 +8,8 @@ public class Player {
 	private int playerId;
 	private String playerName;
 	private String playerAntsBreed;
-	private ArrayList<Territory> playerTerritoryList; 
-	private ArrayList<Integer> playerTerritoryFamilyList;
+	private ArrayList<Territory> playerTerritoryList= new ArrayList<Territory>();
+	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();
 	private int playerAvailableAnts;
 	
 	//---- constructor ----//
@@ -26,8 +26,8 @@ public class Player {
 		this.playerName = playerName;
 		this.playerAntsBreed = playerAntsBreed;
 		this.playerAvailableAnts = playerAvailableAnts;
-		this.playerTerritoryList = new ArrayList<Territory>();
-		this.playerTerritoryFamilyList = new ArrayList<Integer>();
+//		this.playerTerritoryList = new ArrayList<Territory>();
+//		this.playerTerritoryFamilyList = new ArrayList<Integer>();
 	}
 
 
