@@ -3,7 +3,7 @@
  
 var stompClient = null;
 var username = null;
-  
+let game = null;
  
 function connect() {
       
@@ -26,12 +26,17 @@ function onError(error) {
     $('#content').val('Could not connect to WebSocket server. Please refresh this page to try again!');
 }
  
- 
-function sendMessage() {
-    var username = $('#name').val().trim();
-    var antBreed = $('#breed').val().trim()
+function newGame() {
     if(stompClient) {
-        var player = {
+        stompClient.send("/app/newGame")
+    }
+}
+
+function sendMessage() {
+    let username = $('#name').val().trim();
+    let antBreed = $('#breed').val().trim()
+    if(stompClient) {
+        let player = {
             playerName: username,
             playerAntsBreed: antBreed,
         };
@@ -40,8 +45,15 @@ function sendMessage() {
         $('#breed').val('');
     }
 }
- 
+
+function pickTerritory() {
+    let territoryId = $('#territory').val().trim()
+    if(stompClient){
+        stompClient.send("/app/pickTerritory", {}, JSON.stringify(game.allTerritories[territoryId]))
+        $('#territory').val('')
+    }
+}
+
 function onMessageReceived(payload) {
-    let player = JSON.parse(payload.body)
-    $('#content').append(player.playerName);
+    game = JSON.parse(payload.body)
 }

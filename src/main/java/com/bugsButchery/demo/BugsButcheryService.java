@@ -46,9 +46,9 @@ public class BugsButcheryService {
 	
 
 	public void createAllTerritories() {
-    for(Territory entry : myTerritoryRepository.findAll()) {
-    	myGame.getAllTerritories().add(entry);
-    }
+	    for(Territory entry : myTerritoryRepository.findAll()) {
+	    	myGame.getAllTerritories().add(entry);
+	    }
 	}
 
 	
@@ -56,7 +56,7 @@ public class BugsButcheryService {
 	    for(Family entry : myFamilyRepository.findAll()) {
 	    	myGame.getAllFamilies().add(entry);
 	    }
-		}
+	}
 	
 	/**
 	 * check if all territory are assigned to a player

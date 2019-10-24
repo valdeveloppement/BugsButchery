@@ -26,10 +26,9 @@ public class WebSocketController {
 		System.out.println("it's working");
 		return bugService.myGame;
 	}
-	
 
 	//new player
-	//
+
 	@MessageMapping("/newPlayer")
 	@SendTo("/bugsbutchery")
 	public Game newPlayer(Player player) {
@@ -44,8 +43,8 @@ public class WebSocketController {
 	@MessageMapping("/pickTerritory")
 	@SendTo("/bugsbutchery")
 	public Game pickTerritory(Territory territory) {
+		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));
 		bugService.placeFirstAnts(bugService.myGame.getPlayerTurn(), territory);
-		System.out.println("pickTerritory");
 		return bugService.myGame;
 		
 	}
