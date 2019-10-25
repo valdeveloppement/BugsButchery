@@ -23,6 +23,7 @@ public class WebSocketController {
 	public Game newGame() {
 		bugService.createAllFamilies();
 		bugService.createAllTerritories();
+		bugService.setOn();
 		System.out.println("it's working");
 		return bugService.myGame;
 	}

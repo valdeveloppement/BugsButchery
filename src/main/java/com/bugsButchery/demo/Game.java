@@ -28,6 +28,8 @@ public class Game {
     	put("attackOn", false);
     	put("defenseOn", false);
     	put("moveOn", false);
+    	put("placeFirstAntsOn", false);
+    	put("placeAntsOn", false);
     	put("availableAntsRefill", false);
     	put("placeAnthillOn", false);
     }};
