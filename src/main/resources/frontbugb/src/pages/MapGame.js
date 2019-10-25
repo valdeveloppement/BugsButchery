@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './organisms/molecules/atoms/Button.js';
 import Territory from './organisms/molecules/Territory.js';
 import InfosPlayer from './organisms/molecules/atoms/Infos.js';
 import InfosMessage from './organisms/molecules/atoms/InfosMessage.js'
@@ -14,34 +13,9 @@ class MapGame extends React.Component {
         };
     }
 
-    alert = () => {
-        alert(`${this.value}`);
-    }
+    button = null;
 
-    attack = () => {
-        this.setState({ isAttack: true });
-        alert(`${this.value}`);
-    }
-
-    move = () => {
-        this.setState({ isMove: true });
-        alert(`${this.value}`);
-    }
-
-    suivant = () => {
-        alert(`${this.value}`);
-    }
-
-    componentDidUpdate(prevprops) {
-        console.log(prevprops)
-    }
     render() {
-        const isAttack = this.state.isAttack;
-        let button;
-
-        if (isAttack) {
-            button = <Button value="send" />;
-        }
 
         return (
             <div className="contenant">
@@ -54,11 +28,9 @@ class MapGame extends React.Component {
                             value={i.territoryName}
                             int={i.territoryAntsNb}
                             player={i.territoryOwner ? i.territoryOwner : "libre"}
+                            family={this.props.allFamilies.find(elem => elem.familyId === i.territoryFamily)}
                          /> )
                     })}
-                
-
-
                     
                 </div>
 
@@ -67,12 +39,6 @@ class MapGame extends React.Component {
                 </div>
                 <div>
                     <InfosMessage className="infos" message={this.props.message} />
-                </div>
-                <div>
-                    <Button action={this.attack} value="attack" />
-                    <Button action={this.move} value="move" />
-                    <Button action={this.suivant} value="Suivant" />
-                    {button}
                 </div>
             </div>
         );

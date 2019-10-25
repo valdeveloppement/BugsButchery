@@ -18,7 +18,6 @@ class App extends React.Component {
       login: true,
       sas: false,
       map: false,
-      game: {},
       allTerritories: [],
       allFamilies: [],
       playerList: [],
@@ -67,13 +66,15 @@ class App extends React.Component {
   }
 
   onMessageReceived = (payload) => {
-    this.setState({ game: JSON.parse(payload.body) })
-    this.setState({ allTerritories: this.state.game.allTerritories })
-    this.setState({ allFamilies: this.state.game.allFamilies })
-    this.setState({ playerList: this.state.game.playersAlive })
-    this.setState({ playerTurn: this.state.game.playerTurn })
-    this.setState({ message: this.state.game.message })
-    this.setState({ gameStatus: this.state.game.divOn })
+    let game = JSON.parse(payload.body)
+    this.setState({ 
+      allTerritories: game.allTerritories,
+      playerList: game.playersAlive,
+      playerTurn: game.playerTurn,
+      allFamilies: game.allFamilies,
+      message: game.message,
+      gameStatus: game.divOn
+    })   
   }
 
   onConnected = () => {
@@ -99,11 +100,9 @@ class App extends React.Component {
     if (login) {
       return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed} />;
     } else if (sas) {
-      return <Sas newGame={this.newGame} playerList={this.state.playerList} />;
+      return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} />;
     } else {
-
       return <MapGame playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
-
     }
 
     /* return (
