@@ -69,10 +69,10 @@ class App extends React.Component {
   onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
-    this.setState({ allFamilies: this.state.game.allFamilies })
+   
     this.setState({ playerList: this.state.game.playersAlive })
     this.setState({ playerTurn: this.state.game.playerTurn })
-
+    this.setState({ allFamilies: this.state.game.allFamilies })
     this.setState({ message: this.state.game.message })
     this.setState({ gameStatus: this.state.game.divOn })
 
