@@ -14,34 +14,17 @@ class MapGame extends React.Component {
         };
     }
 
-    alert = () => {
-        alert(`${this.value}`);
-    }
+    button = null;
 
-    attack = () => {
-        this.setState({ isAttack: true });
-        alert(`${this.value}`);
-    }
-
-    move = () => {
-        this.setState({ isMove: true });
-        alert(`${this.value}`);
-    }
-
-    suivant = () => {
-        alert(`${this.value}`);
-    }
 
     render() {
-        const isAttack = this.state.isAttack;
-        let button;
+       
 
-        if (isAttack) {
-            button = <Button value="send" />;
-        }
         
-        
-
+     /*   
+if(this.props.gameStatus.gameSetOn){
+button =  <button onClick={this.props.pickTerritory}>Choisir un </button>
+} */
         return (
             <div className="contenant">
                 <div className="carte">
@@ -67,12 +50,6 @@ class MapGame extends React.Component {
                 </div>
                 <div>
                     <InfosMessage className="infos" message={this.props.message} />
-                </div>
-                <div>
-                    <Button action={this.attack} value="attack" />
-                    <Button action={this.move} value="move" />
-                    <Button action={this.suivant} value="Suivant" />
-                    {button}
                 </div>
             </div>
         );

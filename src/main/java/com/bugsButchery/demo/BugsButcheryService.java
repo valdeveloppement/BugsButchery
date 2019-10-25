@@ -537,6 +537,7 @@ public class BugsButcheryService {
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
 			myGame.divOn.replace("gameSetOn", false );
 			myGame.divOn.replace("gameOn", true );
+			
 		} else {
 			changePlayer();
 		}

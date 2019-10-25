@@ -99,11 +99,9 @@ class App extends React.Component {
     if (login) {
       return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed} />;
     } else if (sas) {
-      return <Sas newGame={this.newGame} playerList={this.state.playerList} />;
+      return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} />;
     } else {
-
       return <MapGame playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
-
     }
 
     /* return (
