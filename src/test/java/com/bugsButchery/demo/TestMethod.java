@@ -26,8 +26,8 @@ public class TestMethod {
 			allTerritories.add(entry);
 		}
 		
-		Player maurane = new Player(1, "Maurane", "fourmis violettes", 30);
-		Player sylvain = new Player(2, "Sylvain", "fourmis vertes", 30);
+		Player maurane = new Player("Maurane", "fourmis violettes", 30);
+		Player sylvain = new Player("Sylvain", "fourmis vertes", 30);
 		
 		myService.createNewPlayer(maurane);
 		myService.createNewPlayer(sylvain);

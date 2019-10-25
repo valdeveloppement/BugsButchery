@@ -3,6 +3,7 @@ package com.bugsButchery.demo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class BugsButcheryService {
 	Game myGame;
 
 
+	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
+	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
+
+	
 	// login
 	
 	public void checkLogIn() {
@@ -309,7 +314,7 @@ public class BugsButcheryService {
 			for (Territory entry :player.getPlayerTerritoryList()) {
 				myGame.getPlayersAlive().remove(player);
 				entry.setTerritoryOwner(null);
-				myGame.getUnownedTerritories().add(entry);
+				unownedTerritories.add(entry);
 			}
 			myGame.setMessage("FOURMILIERE TOUCHEE !! " + player + " a gagné le tour et "+ territory.getTerritoryOwner().getPlayerName() + "perd son territoire qui était en fait... sa fourmilière ! Bye Bye " + territory.getTerritoryOwner().getPlayerName() + " !"  );
 		} 
@@ -339,14 +344,14 @@ public class BugsButcheryService {
 			}
 		
 		// VALEURS INITIALES
-		myGame.getPotentialsTerritories().clear();
-		myGame.getPotentialsTerritories().addAll(player.getPlayerTerritoryList());
-		myGame.getPotentialsTerritories().addAll(myGame.getUnownedTerritories());
+		potentialsTerritories.clear();
+		potentialsTerritories.addAll(player.getPlayerTerritoryList());
+		potentialsTerritories.addAll(unownedTerritories);
 		//	crossedTerritories = new ArrayList<Territory>();          
 		myGame.setPathExist(0);
 		boolean thereIsAPath=false;
 
-		if(!myGame.getPotentialsTerritories().contains(territoryArrival)){
+		if(!potentialsTerritories.contains(territoryArrival)){
 			myGame.setMessage(territoryStart.getTerritoryOwner().getPlayerName() + " ne peut pas déplacer " + antNbr + " depuis "+ territoryStart + " sur " + territoryArrival + " : il n'existe aucun chemin d'accès! " );
 			return false;
 		}
@@ -373,13 +378,13 @@ public class BugsButcheryService {
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
 		
-		myGame.getPotentialsTerritories().remove(territory1);
-		if(myGame.getPotentialsTerritories().size()==0) {
+		potentialsTerritories.remove(territory1);
+		if(potentialsTerritories.size()==0) {
 			return false;
 		}//if 0 territory except territory1 (||& territories already crossed) = false
 		
 		List<Territory> TerritoryFrontiersMine =territory1.getTerritoryFrontiers(); 
-		TerritoryFrontiersMine.retainAll(myGame.getPotentialsTerritories()); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
+		TerritoryFrontiersMine.retainAll(potentialsTerritories); // valeurs de territoryFrontierMine se croisent avec les territoires frontaliers (also return true)
 
 
 		if(TerritoryFrontiersMine.size()==0) {
@@ -398,7 +403,7 @@ public class BugsButcheryService {
 				else {
 					//				crossedTerritories.add(thisTerritory);
 					//				potentialsTerritories.removeAll(crossedTerritories);
-					myGame.getPotentialsTerritories().remove(thisTerritory); //supprime de la liste des territoires à traiter
+					potentialsTerritories.remove(thisTerritory); //supprime de la liste des territoires à traiter
 					moveOneStep(thisTerritory, territory2); // continue à chercher le territoire de à partir de la nouvelle position 'thisterritoy'
 				}
 			}
@@ -529,8 +534,4 @@ public class BugsButcheryService {
 			changePlayer();
 		}
 	}
-
-	
-	
-	
 }

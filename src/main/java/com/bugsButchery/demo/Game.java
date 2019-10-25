@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class Game {
 
-	
 
-	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
+
 	protected ArrayList<Player> playersAlive = new ArrayList<Player>();
 	protected Player playerTurn; // = playersAlive.get(0);
-	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	protected int pathExist;
 	protected ArrayList<Territory> allTerritories = new ArrayList<Territory>();
     protected ArrayList<Family> allFamilies = new ArrayList<Family>();
@@ -70,12 +68,6 @@ public class Game {
 	public void setAllTerritories(ArrayList<Territory> allTerritories) {
 		this.allTerritories = allTerritories;
 	}
-	public ArrayList<Territory> getUnownedTerritories() {
-		return unownedTerritories;
-	}
-	public void setUnownedTerritories(ArrayList<Territory> unownedTerritories) {
-		this.unownedTerritories = unownedTerritories;
-	}
 	public ArrayList<Player> getPlayersAlive() {
 		return playersAlive;
 	}
@@ -87,12 +79,6 @@ public class Game {
 	}
 	public void setPlayerTurn(Player playerTurn) {
 		this.playerTurn = playerTurn;
-	}
-	public ArrayList<Territory> getPotentialsTerritories() {
-		return potentialsTerritories;
-	}
-	public void setPotentialsTerritories(ArrayList<Territory> potentialsTerritories) {
-		this.potentialsTerritories = potentialsTerritories;
 	}
 	public int getPathExist() {
 		return pathExist;
