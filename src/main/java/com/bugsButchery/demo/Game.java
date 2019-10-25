@@ -45,8 +45,7 @@ public class Game {
   	protected Territory territoryTarget = null;
   	protected int nbrDiceAttack;
   	protected int nbrDiceDefense;
-  	protected boolean attackInProgress=false;
-  	protected boolean defenceInProgress=false;
+
 
   	
   	//-------------------------------------------
@@ -79,18 +78,7 @@ public class Game {
 	public void setNbrDiceDefense(int nbrDiceDefense) {
 		this.nbrDiceDefense = nbrDiceDefense;
 	}
-	public boolean isAttackInProgress() {
-		return attackInProgress;
-	}
-	public void setAttackInProgress(boolean attackInProgress) {
-		this.attackInProgress = attackInProgress;
-	}
-	public boolean isDefenceInProgress() {
-		return defenceInProgress;
-	}
-	public void setDefenceInProgress(boolean defenceInProgress) {
-		this.defenceInProgress = defenceInProgress;
-	}
+	
 	public void setNbAnthill(int nbAnthill) {
 		this.nbAnthill = nbAnthill;
 	}
