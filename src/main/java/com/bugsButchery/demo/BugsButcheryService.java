@@ -31,12 +31,6 @@ public class BugsButcheryService {
 	// login
 	
 
-	public void checkLogIn() {
-		if(myGame.divOn.get("gameSetOn") ==  true || myGame.divOn.get("gameOn") ==  true) {
-			myGame.divOn.replace("full", true);	
-		}
-	}
-
 	public void checkNewGameButton() {
 		if(myGame.playersAlive.size() > 1) {
 			myGame.divOn.replace("newGameButton", true);

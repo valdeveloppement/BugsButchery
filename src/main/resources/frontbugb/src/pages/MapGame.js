@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './organisms/molecules/atoms/Button.js';
 import Territory from './organisms/molecules/Territory.js';
 import InfosPlayer from './organisms/molecules/atoms/Infos.js';
 import InfosMessage from './organisms/molecules/atoms/InfosMessage.js'
@@ -16,15 +15,8 @@ class MapGame extends React.Component {
 
     button = null;
 
-
     render() {
-       
 
-        
-     /*   
-if(this.props.gameStatus.gameSetOn){
-button =  <button onClick={this.props.pickTerritory}>Choisir un </button>
-} */
         return (
             <div className="contenant">
                 <div className="carte">
@@ -36,12 +28,9 @@ button =  <button onClick={this.props.pickTerritory}>Choisir un </button>
                             value={i.territoryName}
                             int={i.territoryAntsNb}
                             player={i.territoryOwner ? i.territoryOwner : "libre"}
-                            family={this.props.allFamilies.filter(j => j.familyId === i.territoryFamily)}
+                            family={this.props.allFamilies.find(elem => elem.familyId === i.territoryFamily)}
                          /> )
                     })}
-                
-
-
                     
                 </div>
 

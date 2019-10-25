@@ -18,7 +18,6 @@ class App extends React.Component {
       login: true,
       sas: false,
       map: false,
-      game: {},
       allTerritories: [],
       allFamilies: [],
       playerList: [],
@@ -67,13 +66,15 @@ class App extends React.Component {
   }
 
   onMessageReceived = (payload) => {
-    this.setState({ game: JSON.parse(payload.body) })
-    this.setState({ allTerritories: this.state.game.allTerritories })   
-    this.setState({ playerList: this.state.game.playersAlive })
-    this.setState({ playerTurn: this.state.game.playerTurn })
-    this.setState({ allFamilies: this.state.game.allFamilies })
-    this.setState({ message: this.state.game.message })
-    this.setState({ gameStatus: this.state.game.divOn })
+    let game = JSON.parse(payload.body)
+    this.setState({ 
+      allTerritories: game.allTerritories,
+      playerList: game.playersAlive,
+      playerTurn: game.playerTurn,
+      allFamilies: game.allFamilies,
+      message: game.message,
+      gameStatus: game.divOn
+    })   
   }
 
   onConnected = () => {

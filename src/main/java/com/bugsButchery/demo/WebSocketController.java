@@ -16,6 +16,11 @@ public class WebSocketController {
 	BugsButcheryService bugService;
 	private int playerIncr=0;
 
+
+	
+	
+	
+	
 	//new game
 	//
 	@MessageMapping("/newGame")
@@ -201,17 +206,10 @@ public class WebSocketController {
 	
 	
 	
-	
-//	@MessageMapping("/fight")
-//	@SendTo("/bugsbutchery")
-//	public Game fight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender) {
-//		bugService.diceFight(current, attacker, nbrDiceAttack, defender, target, nbrDiceDefender);
-//		return bugService.myGame;
-//		
-//	}
+
 	
 	
-	//skip 
+	//skip                     // voir si on est en move ou attack
 	@MessageMapping("/skip")
 	@SendTo("/bugsbutchery")
 	public Game skip() {
