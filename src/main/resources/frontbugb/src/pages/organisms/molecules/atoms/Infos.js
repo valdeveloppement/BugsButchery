@@ -1,13 +1,15 @@
 import React from 'react';
 
-class Infos extends React.Component{
+class InfosPlayer extends React.Component{
   render() {
     return (
 <div> 
-    <div className="infos" id={this.props.value}>{this.props.info}</div>
+    {this.props.playerList.map((i, index) => {
+      return <p key={index}>{i.playerName}</p>
+    })}
 </div>
     )
   }
 }
 
-export default Infos;
+export default InfosPlayer;

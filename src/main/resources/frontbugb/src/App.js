@@ -25,6 +25,8 @@ class App extends React.Component {
       playerName: '',
       playerAntsBreed: '',
       playerTurn: {},
+      gameStatus: {},
+      message: "",
     };
   }
 
@@ -71,6 +73,9 @@ class App extends React.Component {
     this.setState({ playerList: this.state.game.playersAlive })
     this.setState({ playerTurn: this.state.game.playerTurn })
 
+    this.setState({ message: this.state.game.message })
+    this.setState({ gameStatus: this.state.game.divOn })
+
   }
 
   onConnected = () => {
@@ -98,7 +103,9 @@ class App extends React.Component {
     } else if (sas) {
       return <Sas newGame={this.newGame} playerList={this.state.playerList} />;
     } else {
-      return <MapGame allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
+
+      return <MapGame playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
+
     }
 
     /* return (

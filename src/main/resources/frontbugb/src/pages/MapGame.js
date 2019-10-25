@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from './organisms/molecules/atoms/Button.js';
 import Territory from './organisms/molecules/Territory.js';
-import Infos from './organisms/molecules/atoms/Infos.js';
+import InfosPlayer from './organisms/molecules/atoms/Infos.js';
+import InfosMessage from './organisms/molecules/atoms/InfosMessage.js'
 
 class MapGame extends React.Component {
     constructor(props) {
@@ -62,10 +63,11 @@ class MapGame extends React.Component {
                 </div>
 
                 <div className="informationJeu">
-                    <Infos value="players" info="tous les players" />
-                    <Infos value="info" info="infos générales" />
+                    <InfosPlayer className="infos" playerList={this.props.playerList} />
                 </div>
-
+                <div>
+                    <InfosMessage className="infos" message={this.props.message} />
+                </div>
                 <div>
                     <Button action={this.attack} value="attack" />
                     <Button action={this.move} value="move" />
