@@ -32,10 +32,10 @@ public class Recursive {
         	allTerritories.add(entry);
         }
       
-        Player maurane = new Player(1, "Maurane", "fourmis violettes", 30);        
-      	Player valentin = new Player(2, "Valentin", "fourmis noires", 30);
-      	Player sylvain = new Player(3, "Sylvain", "fourmis vertes", 30);
-      	Player eloise = new Player(4, "Eloise", "fourmis rouges", 30);
+        Player maurane = new Player("Maurane", "fourmis violettes", 30);        
+      	Player valentin = new Player("Valentin", "fourmis noires", 30);
+      	Player sylvain = new Player("Sylvain", "fourmis vertes", 30);
+      	Player eloise = new Player("Eloise", "fourmis rouges", 30);
 
       	
 

@@ -5,11 +5,10 @@ import java.util.ArrayList;
 public class Player {
 
 	//---- value objet ----//
-	private int playerId;
 	private String playerName;
 	private String playerAntsBreed;
-	private ArrayList<Territory> playerTerritoryList; 
-	private ArrayList<Integer> playerTerritoryFamilyList;
+	private ArrayList<Territory> playerTerritoryList = new ArrayList<Territory>(); 
+	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();
 	private int playerAvailableAnts;
 	
 	//---- constructor ----//
@@ -18,29 +17,18 @@ public class Player {
 	}
 	
 
-	public Player(int playerId,String playerName, String playerAntsBreed, int playerAvailableAnts) {
+	public Player(String playerName, String playerAntsBreed, int playerAvailableAnts) {
 
 
 		super();
-		this.playerId = playerId;
 		this.playerName = playerName;
 		this.playerAntsBreed = playerAntsBreed;
 		this.playerAvailableAnts = playerAvailableAnts;
-		this.playerTerritoryList = new ArrayList<Territory>();
-		this.playerTerritoryFamilyList = new ArrayList<Integer>();
 	}
 
 
 	//---- get & set ----//
 
-	
-
-	public int getPlayerId() {
-		return playerId;
-	}
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
-	}
 	public String getPlayerName() {
 		return playerName;
 	}
