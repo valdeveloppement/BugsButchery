@@ -32,6 +32,9 @@ class MapGame extends React.Component {
         alert(`${this.value}`);
     }
 
+    componentDidUpdate(prevprops) {
+        console.log(prevprops)
+    }
     render() {
         const isAttack = this.state.isAttack;
         let button;
@@ -39,8 +42,6 @@ class MapGame extends React.Component {
         if (isAttack) {
             button = <Button value="send" />;
         }
-        
-        
 
         return (
             <div className="contenant">
@@ -53,7 +54,6 @@ class MapGame extends React.Component {
                             value={i.territoryName}
                             int={i.territoryAntsNb}
                             player={i.territoryOwner ? i.territoryOwner : "libre"}
-                            family={this.props.allFamilies.filter(j => j.familyId === i.territoryFamily)}
                          /> )
                     })}
                 
