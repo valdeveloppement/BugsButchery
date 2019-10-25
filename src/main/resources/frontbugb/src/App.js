@@ -45,8 +45,9 @@ class App extends React.Component {
   }
 
   submit = (value) => {
+  }
 
-<<<<<<< HEAD
+
 onMessageReceived = (payload) => {
   this.setState({game: JSON.parse(payload.body)})
 }
@@ -56,17 +57,13 @@ newGame = ()=> {
       stompClient.send("/app/newGame")
   }
 }
-componentDidMount() {
-  const connect = () => {
-    stompClient.connect({}, onConnected, onError);
-=======
->>>>>>> 534948534b0238b66553f9fbf762ac4cccd5b3be
-  }
+
 
   onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
   }
+
   onConnected = () => {
     // Subscribe to the Public Topic
     stompClient.subscribe('/bugsbutchery', this.onMessageReceived);
@@ -75,6 +72,7 @@ componentDidMount() {
   onError = (error) => {
     'Could not connect to WebSocket server. Please refresh this page to try again!';
   }
+
   newGame = () => {
     if (stompClient) {
       stompClient.send("/app/newGame")
@@ -96,43 +94,26 @@ componentDidMount() {
   handleChangeBreed = (event) => {
     this.setState({ playerAntsBreed: event.target.value })
   }
+
   componentDidMount() {
     const connect = () => {
       stompClient.connect({}, this.onConnected, this.onError);
     }
     connect();
   }
+  
   render() {
     const isAttack = this.state.isAttack;
     let button;
 
     if (isAttack) {
       button = <Button value="send" />
-<<<<<<< HEAD
     } 
 
-    return (
-      <div className="contenant">
-        <div className="carte">
-        <button onClick={this.newGame}>newgame</button>
-        <input value="newplayer"></input>
-        <button onClick={this.newPlayer}>newPlayer</button>
-          <Territory action={this.alert} color="epinards" value="épinards" int="" player="" family="légume"/>
-          <Territory action={this.alert} color="framboise" value="framboise" int="" player="" family="fruit"/>
-          <Territory action={this.alert} color="kiwi" value="kiwi" int="" player="" family="fruit"/>
-          <Territory action={this.alert} color="foie_gras" value="foie gras" int="" player="" family="viande"/>
-          <Territory action={this.alert} color="aubergine" value="aubergine" int="" player="" family="légumes"/>
-          <Territory action={this.alert} color="jambon" value="jambon" int="" player="" family="viande"/>
-          <Territory action={this.alert} color="poivron" value="poivron" int="" player="" family="légume"/>
-          <Territory action={this.alert} color="saucisse" value="saucisse" int="" player="" family="viande"/>
-          <Territory action={this.alert} color="abricot" value="abricot" int="" player="" family="fruit"/>
-=======
-    }
     if (this.state.isPlayerInit) {
       return (
         <div className="attente">
           <button onClick={this.newGame}>newgame</button>
->>>>>>> 534948534b0238b66553f9fbf762ac4cccd5b3be
         </div>
       )
     }
@@ -175,5 +156,7 @@ componentDidMount() {
     }
   }
 }
-export default App
+
+
+export default App;
 
