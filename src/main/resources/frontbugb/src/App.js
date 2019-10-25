@@ -72,10 +72,8 @@ class App extends React.Component {
     this.setState({ allFamilies: this.state.game.allFamilies })
     this.setState({ playerList: this.state.game.playersAlive })
     this.setState({ playerTurn: this.state.game.playerTurn })
-
     this.setState({ message: this.state.game.message })
     this.setState({ gameStatus: this.state.game.divOn })
-
   }
 
   onConnected = () => {
