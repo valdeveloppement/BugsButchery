@@ -20,6 +20,7 @@ class App extends React.Component {
       map: false,
       game: {},
       allTerritories: [],
+      allFamilies: [],
       playerList: [],
       playerName: '',
       playerAntsBreed: '',
@@ -66,7 +67,7 @@ class App extends React.Component {
   onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
-
+    this.setState({ allFamilies: this.state.game.allFamilies })
     this.setState({ playerList: this.state.game.playersAlive })
     this.setState({ playerTurn: this.state.game.playerTurn })
 
@@ -97,7 +98,7 @@ class App extends React.Component {
     } else if (sas) {
       return <Sas newGame={this.newGame} playerList={this.state.playerList} />;
     } else {
-      return <MapGame />;
+      return <MapGame allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
     }
 
     /* return (
