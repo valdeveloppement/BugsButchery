@@ -10,17 +10,8 @@ class Loging extends React.Component {
         super(props);
 
         this.state = {
-            isAttack: false,
-            isMove: false,
+
         };
-    }
-
-    handleChangePlayer = (event) => {
-        this.setState({ playerName: event.target.value })
-    }
-
-    handleChangeBreed = (event) => {
-        this.setState({ playerAntsBreed: event.target.value })
     }
 
     newPlayer = () => {

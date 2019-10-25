@@ -39,6 +39,16 @@ class App extends React.Component {
   onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
+
+  }
+
+
+  handleChangePlayer = (event) => {
+    this.setState({ playerName: event.target.value })
+  }
+
+  handleChangeBreed = (event) => {
+    this.setState({ playerAntsBreed: event.target.value })
   }
 
   onConnected = () => {
@@ -68,16 +78,16 @@ class App extends React.Component {
     } else if (sas) {
       button = <PlayButton onClick={this.playClick} />;
       return <Sas />;
-    }  else {
+    } else {
       return <MapGame />;
     }
 
-   /* return (
-      <div>
-        <View login={login} />
-        {button}
-      </div>
-    );*/
+    /* return (
+       <div>
+         <View login={login} />
+         {button}
+       </div>
+     );*/
 
   }
 
