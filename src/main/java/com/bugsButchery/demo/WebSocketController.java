@@ -43,7 +43,6 @@ public class WebSocketController {
         return bugService.myGame;
     }
       
-	
 
 	//multi turn pick territory untill all taken
 		//
