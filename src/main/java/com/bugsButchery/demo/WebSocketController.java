@@ -126,39 +126,88 @@ public class WebSocketController {
 	
 
 		
-//	//attack
-//	@MessageMapping("/requestAttack")
-//	@SendTo("/bugsbutchery")
-//	public Game requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
-//		bugService.requestAttack(attacker, target, nbrDiceAttack);
-//		return bugService.myGame;
-//	}
+
 	
 	//attack
 	@MessageMapping("/requestAttack")
 	@SendTo("/bugsbutchery")
-	public Game requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
-		bugService.requestAttack(attacker, target, nbrDiceAttack);
+	public Game requestAttack(MessageReceived message) {
+		String territoryNameAttacker= message.getTerritory1();
+		String territoryNameTarget= message.getTerritory2();
+		int nbrDiceAttack = message.getNbrDiceAttack();
+		
+		
+		for(Territory territoryAttacker:bugService.myGame.getAllTerritories()) {
+			System.out.println("entry=  "+ territoryAttacker.getTerritoryName());
+			if(territoryAttacker.getTerritoryName().equals(territoryNameAttacker) ){
+				System.out.println("il y a un match");
+				
+				for(Territory territoryTarget:bugService.myGame.getAllTerritories()) {
+					System.out.println("entry=  "+ territoryTarget.getTerritoryName());
+					if(territoryTarget.getTerritoryName().equals(territoryNameTarget) ){
+						System.out.println("il y a un double match");
+						
+						bugService.myGame.setTerritoryAttacker(territoryAttacker);
+						bugService.myGame.setTerritoryTarget(territoryTarget);
+						bugService.myGame.setNbrDiceAttack(nbrDiceAttack);
+					
+						bugService.requestAttack(territoryAttacker, territoryTarget, nbrDiceAttack);
+						
+					}
+				}
+			}
+			
+		}
+		
+		
 		return bugService.myGame;
+		
 	}
+	
+	
+	
+//	@MessageMapping("/requestDefense")
+//	@SendTo("/bugsbutchery")
+//	public Game requestDefense(Territory defender, int nbrDiceDefense) {
+//		bugService.requestDefense(defender, nbrDiceDefense);
+//		return bugService.myGame;
+//		
+//	}
 	
 	
 	
 	@MessageMapping("/requestDefense")
 	@SendTo("/bugsbutchery")
-	public Game requestDefense(Territory defender, int nbrDiceDefense) {
-		bugService.requestDefense(defender, nbrDiceDefense);
+	public Game requestDefense(MessageReceived message) {
+		
+		String territoryNameTarget= message.getTerritory2();
+		int nbrDiceDefense = message.getNbrDiceDefense();
+		
+		for(Territory territoryTarget : bugService.myGame.getAllTerritories()) {
+			System.out.println("entry=  "+ territoryTarget.getTerritoryName());
+			if(territoryTarget.getTerritoryName().equals(territoryNameTarget) ){
+				System.out.println("il y a un match");
+				bugService.myGame.setNbrDiceAttack(nbrDiceDefense);
+				bugService.requestDefense(territoryTarget, nbrDiceDefense);
+			}
+			
+		}
+		
+
 		return bugService.myGame;
 		
 	}
 	
-	@MessageMapping("/fight")
-	@SendTo("/bugsbutchery")
-	public Game fight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender) {
-		bugService.diceFight(current, attacker, nbrDiceAttack, defender, target, nbrDiceDefender);
-		return bugService.myGame;
-		
-	}
+	
+	
+	
+//	@MessageMapping("/fight")
+//	@SendTo("/bugsbutchery")
+//	public Game fight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender) {
+//		bugService.diceFight(current, attacker, nbrDiceAttack, defender, target, nbrDiceDefender);
+//		return bugService.myGame;
+//		
+//	}
 	
 	
 	//skip 

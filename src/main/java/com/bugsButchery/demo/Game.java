@@ -28,7 +28,8 @@ public class Game {
     	put("attackOn", false);
     	put("defenseOn", false);
     	put("moveOn", false);
-    	put("availableAntsRefill", false);  	
+    	put("availableAntsRefill", false);
+    	put("placeAnthillOn", false);
     }};
 
    // ecran1, login: 	   full:false ,  !e.playerAlive
@@ -38,8 +39,57 @@ public class Game {
     //ecrans5(+n), gameOn: 	e.playerAlive, gameSetOn == false, gameOn == true 
     
     
+  //---------------- ARENA--------------------
+	
+  	protected Territory territoryAttacker = null ;
+  	protected Territory territoryTarget = null;
+  	protected int nbrDiceAttack;
+  	protected int nbrDiceDefense;
+  	protected boolean attackInProgress=false;
+  	protected boolean defenceInProgress=false;
+
+  	
+  	//-------------------------------------------
+    
+    
     public int getNbAnthill() {
 		return nbAnthill;
+	}
+	public Territory getTerritoryAttacker() {
+		return territoryAttacker;
+	}
+	public void setTerritoryAttacker(Territory territoryAttacker) {
+		this.territoryAttacker = territoryAttacker;
+	}
+	public Territory getTerritoryTarget() {
+		return territoryTarget;
+	}
+	public void setTerritoryTarget(Territory territoryTarget) {
+		this.territoryTarget = territoryTarget;
+	}
+	public int getNbrDiceAttack() {
+		return nbrDiceAttack;
+	}
+	public void setNbrDiceAttack(int nbrDiceAttack) {
+		this.nbrDiceAttack = nbrDiceAttack;
+	}
+	public int getNbrDiceDefense() {
+		return nbrDiceDefense;
+	}
+	public void setNbrDiceDefense(int nbrDiceDefense) {
+		this.nbrDiceDefense = nbrDiceDefense;
+	}
+	public boolean isAttackInProgress() {
+		return attackInProgress;
+	}
+	public void setAttackInProgress(boolean attackInProgress) {
+		this.attackInProgress = attackInProgress;
+	}
+	public boolean isDefenceInProgress() {
+		return defenceInProgress;
+	}
+	public void setDefenceInProgress(boolean defenceInProgress) {
+		this.defenceInProgress = defenceInProgress;
 	}
 	public void setNbAnthill(int nbAnthill) {
 		this.nbAnthill = nbAnthill;
