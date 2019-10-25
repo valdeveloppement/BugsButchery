@@ -436,7 +436,8 @@ public class BugsButcheryService {
 //	}
 
 
-	public boolean createNewPlayer(Player thisPlayer) {		
+	public boolean createNewPlayer(Player thisPlayer) {	
+		
 		if(myGame.playersAlive.size() < 3) {
 			thisPlayer.setPlayerAvailableAnts(15);			
 			myGame.getPlayersAlive().add(thisPlayer);
@@ -494,7 +495,7 @@ public class BugsButcheryService {
 	 * @return
 	 */
 	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
-		
+		System.out.println("PlacefirstAnt s'execute");
 		if (territory.getTerritoryOwner() == null) {
 		//si le territoire séléctionner est égal a vide
 			player.getPlayerTerritoryList().add(territory);
