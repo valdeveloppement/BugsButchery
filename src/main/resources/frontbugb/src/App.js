@@ -102,7 +102,7 @@ class App extends React.Component {
     } else if (sas) {
       return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} />;
     } else {
-      return <MapGame playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
+      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
     }
 
     /* return (

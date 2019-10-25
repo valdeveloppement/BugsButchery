@@ -15,6 +15,35 @@ class MapGame extends React.Component {
 
     button = null;
 
+    booleanFactory = () => {
+        if(this.props.playerName === this.props.currentPlayer.playerName) {
+            if(this.props.gameStatus.attackOn) {
+
+            }
+            else if (this.props.gameStatus.availableAntsRefill) {
+
+            }
+            else if (this.props.gameStatus.defenseOn) {
+
+            }
+            else if (this.props.gameStatus.full) {
+
+            }
+            else if (this.props.gameStatus.gameOn) {
+
+            }
+            else if (this.props.gameStatus.gameSetOn) {
+
+            }
+            else if (this.props.gameStatus.moveOn) {
+
+            }
+            else if (this.props.gameStatus.placeAnthillOn) {
+                
+            }
+        }           
+    }
+
     render() {
 
         return (
@@ -23,7 +52,6 @@ class MapGame extends React.Component {
                     {this.props.allTerritories.map((i, index) => {
                          return ( <Territory 
                             key={index}
-                            action={this.alert}
                             color={i.territoryName}
                             value={i.territoryName}
                             int={i.territoryAntsNb}
@@ -39,6 +67,10 @@ class MapGame extends React.Component {
                 </div>
                 <div>
                     <InfosMessage className="infos" message={this.props.message} />
+                </div>
+
+                <div className="playingGround">
+                    
                 </div>
             </div>
         );
