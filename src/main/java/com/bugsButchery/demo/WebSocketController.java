@@ -63,38 +63,77 @@ public class WebSocketController {
 		
 	}
 		
-		
 		return bugService.myGame;
 		
 	}
+	
+	
+
+	
 	
 	
 	//multi turn reinforcement untill all spent
 		//
 	@MessageMapping("/addAnt")
 	@SendTo("/bugsbutchery")
-	public Game addAnt(Player player, Territory territory, int ants) {
-		bugService.placeAnts(player, territory, ants);
+	public Game addAnt(MessageReceived message) {
+		
+		String territoryName= message.getTerritory1();
+		System.out.println("territoryName=  "+territoryName);
+	
+		for(Territory entry : bugService.myGame.getPlayerTurn().getPlayerTerritoryList()) {
+			System.out.println("entry=  "+ entry.getTerritoryName());
+			if(entry.getTerritoryName().equals(territoryName) ){
+				System.out.println("il y a un match");
+				System.out.println(bugService.myGame.getPlayerTurn().getPlayerName());
+				bugService.placeAnts(bugService.myGame.getPlayerTurn(), entry,message.getNbAnts());
+				
+			}
+			
+		}
+		
+		
 		return bugService.myGame;
 	}
 	
-	//multi turn pick anthill
-		//
+	
+	
+	// multi turn pick anthill
+		
 	@MessageMapping("/addAnthill")
 	@SendTo("/bugsbutchery")
-	public Game addAnthill(Player player, Territory territory, int ants) {
-		bugService.addAntsHill(player, territory);
+	public Game addAnthill(MessageReceived message) {
+		
+		String territoryName= message.getTerritory1();
+		System.out.println("territoryName=  "+territoryName);
+		
+
+		for(Territory entry : bugService.myGame.getPlayerTurn().getPlayerTerritoryList()) {
+			System.out.println("entry=  "+ entry.getTerritoryName());
+			if(entry.getTerritoryName().equals(territoryName) ){
+				System.out.println("il y a un match");
+				System.out.println(bugService.myGame.getPlayerTurn().getPlayerName());
+				bugService.addAntsHill(bugService.myGame.getPlayerTurn(), entry);
+				
+			}
+			
+		}
+		
 		return bugService.myGame;
 	}
 	
-		//reinforcement
-	@MessageMapping("/refill")
-	@SendTo("/bugsbutchery")
-	public Game refill(Player player) {
-		bugService.refillAvailableAnts(player);
-		return bugService.myGame;
-	}
+	
+	
+
 		
+//	//attack
+//	@MessageMapping("/requestAttack")
+//	@SendTo("/bugsbutchery")
+//	public Game requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
+//		bugService.requestAttack(attacker, target, nbrDiceAttack);
+//		return bugService.myGame;
+//	}
+	
 	//attack
 	@MessageMapping("/requestAttack")
 	@SendTo("/bugsbutchery")
@@ -102,6 +141,8 @@ public class WebSocketController {
 		bugService.requestAttack(attacker, target, nbrDiceAttack);
 		return bugService.myGame;
 	}
+	
+	
 	
 	@MessageMapping("/requestDefense")
 	@SendTo("/bugsbutchery")

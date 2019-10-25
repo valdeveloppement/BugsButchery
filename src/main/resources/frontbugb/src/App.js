@@ -36,6 +36,24 @@ class App extends React.Component {
     this.setState({ map: true });
   }
 
+  handleChangePlayer = (event) => {
+    this.setState({ playerName: event.target.value })
+  }
+
+  handleChangeBreed = (event) => {
+    this.setState({ playerAntsBreed: event.target.value })
+  }
+
+  newPlayer = () => {
+    if (stompClient) {
+      let player = {
+        playerName: this.state.playerName,
+        playerAntsBreed: this.state.playerAntsBreed
+      }
+      stompClient.send("/app/newPlayer", {}, JSON.stringify(player))
+    }
+  }
+
   onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
@@ -74,7 +92,7 @@ class App extends React.Component {
 
     if (login) {
       button = <LoginButton onClick={this.waitClick} />;
-      return <Loging />;
+      return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed}/>;
     } else if (sas) {
       button = <PlayButton onClick={this.playClick} />;
       return <Sas />;

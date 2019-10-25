@@ -7,10 +7,9 @@ public class MessageReceived {
 	private String territory2;
 	private String player1;
 	private String player2;
-	private String nbAnts;
-	private String nbrDiceAttack;
-	private String nbrDiceDefense;
-	
+	private int nbAnts;
+	private int nbrDiceAttack;
+	private int nbrDiceDefense;
 	public String getTerritory1() {
 		return territory1;
 	}
@@ -35,22 +34,22 @@ public class MessageReceived {
 	public void setPlayer2(String player2) {
 		this.player2 = player2;
 	}
-	public String getNbAnts() {
+	public int getNbAnts() {
 		return nbAnts;
 	}
-	public void setNbAnts(String nbAnts) {
+	public void setNbAnts(int nbAnts) {
 		this.nbAnts = nbAnts;
 	}
-	public String getNbrDiceAttack() {
+	public int getNbrDiceAttack() {
 		return nbrDiceAttack;
 	}
-	public void setNbrDiceAttack(String nbrDiceAttack) {
+	public void setNbrDiceAttack(int nbrDiceAttack) {
 		this.nbrDiceAttack = nbrDiceAttack;
 	}
-	public String getNbrDiceDefense() {
+	public int getNbrDiceDefense() {
 		return nbrDiceDefense;
 	}
-	public void setNbrDiceDefense(String nbrDiceDefense) {
+	public void setNbrDiceDefense(int nbrDiceDefense) {
 		this.nbrDiceDefense = nbrDiceDefense;
 	}
 
