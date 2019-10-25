@@ -1,7 +1,7 @@
 
 import React from 'react';
-import Stomp from 'stompjs'
-import SockJS from 'sockjs-client'
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 import './App.css';
 import Button from './Button.js';
 import Territory from './Territory.js';
@@ -46,6 +46,7 @@ submit = (value) => {
 onMessageReceived = (payload) => {
   this.setState({game: JSON.parse(payload.body)})
 }
+
 newGame = ()=> {
   if(stompClient) {
       stompClient.send("/app/newGame")
@@ -78,6 +79,8 @@ componentDidMount() {
       <div className="contenant">
         <div className="carte">
         <button onClick={this.newGame}>newgame</button>
+        <input value="newplayer"></input>
+        <button onClick={this.newPlayer}>newPlayer</button>
           <Territory action={this.alert} color="epinards" value="épinards" int="" player="" family="légume"/>
           <Territory action={this.alert} color="framboise" value="framboise" int="" player="" family="fruit"/>
           <Territory action={this.alert} color="kiwi" value="kiwi" int="" player="" family="fruit"/>

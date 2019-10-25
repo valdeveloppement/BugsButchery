@@ -33,8 +33,7 @@ public class WebSocketController {
     public Game newPlayer(Player player) {
         bugService.createNewPlayer(player);
         System.out.println(player.getPlayerName());
-        
-    	playerIncr=playerIncr+1;
+        playerIncr=playerIncr+1;
     	if(playerIncr ==1) {
     		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));	
     	}
@@ -50,8 +49,6 @@ public class WebSocketController {
 		
 	String territoryName= message.getTerritory1();
 	System.out.println("territoryName=  "+territoryName);
-	
-	
 	
 	
 	for(Territory entry : bugService.myGame.getAllTerritories()) {
