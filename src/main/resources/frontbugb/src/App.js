@@ -64,17 +64,21 @@ class App extends React.Component {
 
     if (login) {
       button = <LoginButton onClick={this.waitClick} />;
+      return <Loging />;
     } else if (sas) {
       button = <PlayButton onClick={this.playClick} />;
+      return <Sas />;
+    }  else {
+      return <MapGame />;
     }
 
-    return (
+   /* return (
       <div>
-        
+        <View login={login} />
         {button}
       </div>
-    );
-//<View login={login} />
+    );*/
+
   }
 
 
@@ -87,8 +91,10 @@ function View(props) {
   const sas = this.state.sas;
 
   if (login) {
+    button = <LoginButton onClick={this.waitClick} />;
     return <Loging />;
   } else if (sas) {
+    button = <PlayButton onClick={this.playClick} />;
     return <Sas />;
   } else {
     return <MapGame />;
