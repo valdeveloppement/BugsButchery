@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: darkgreen;
+  
 }
 
 code {
@@ -25,6 +25,10 @@ code {
 /*.territory{
  border : solid;
 }*/
+
+.test {
+  background-color: darkgreen;
+}
 
 .button{
   padding-right: 0px;

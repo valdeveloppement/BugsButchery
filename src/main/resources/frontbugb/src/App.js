@@ -1,65 +1,52 @@
-
 import React from 'react';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import './App.css';
-import Button from './Button.js';
-import Territory from './Territory.js';
-import Infos from './Infos.js';
-
-let socket = new SockJS('http://localhost:8095/game');
-let stompClient = Stomp.over(socket);
+import MapGame from './pages/MapGame';
+import Loging from './pages/Loging';
+import Sas from './pages/Sas';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAttack: false,
-      isMove: false,
-      isGameInit: false,
-      isPlayerInit: false,
-      game: {},
-      allTerritories: [],
-      playerName: '',
-      playerAntsBreed: '',
+    constructor(props) {
+        super(props);
+        this.waitClick = this.waitClick.bind(this);
+        this.playClick = this.playClick.bind(this);
+        this.state = {
+            login: true,
+            sas: false,
+            map: false,
+        };
     }
+
+    waitClick() {
+        this.setState({ sas: true });
+        this.setState({ login: false });
+    }
+
+    playClick() {
+        this.setState({ sas: true });
+        this.setState({ login: false });
+        this.setState({ map: true });
+    }
+
+    render() {
+        const login = this.state.login;
+        const sas = this.state.sas;
+        let button;
+
+        if (login) {
+            button = <LoginButton onClick={this.waitClick} />;
+        } else if (sas) {
+            button = <PlayButton onClick={this.playClick} />;
+        }
+
+<<<<<<< HEAD
+ /* submit = (value) => {
   }
 
 
-  alert = () => {
-    alert(`${this.value}`)
-  }
 
-  attack = () => {
-    this.setState({ isAttack: true });
-    alert(`${this.value}`)
-  }
-
-  move = () => {
-    this.setState({ isMove: true });
-    alert(`${this.value}`)
-  }
-
-  suivant = () => {
-    alert(`${this.value}`)
-  }
-
-  submit = (value) => {
-  }
-
-
-onMessageReceived = (payload) => {
-  this.setState({game: JSON.parse(payload.body)})
-}
-
-newGame = ()=> {
-  if(stompClient) {
-      stompClient.send("/app/newGame")
-  }
-}
-
-
-  onMessageReceived = (payload) => {
+ onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
   }
@@ -150,13 +137,40 @@ newGame = ()=> {
           <input type="text" onChange={this.handleChangePlayer} value={this.state.playerName}></input>
           <input type="text" onChange={this.handleChangeBreed} value={this.state.playerAntsBreed}></input>
           <button onClick={this.newPlayer}>newPlayer</button>
-        </div>
+        </div>*/
 
-      )
+        return (
+
+           if (login) {
+            return <Loging />;
+        } else if (sas) {
+            return <Sas />;
+        } else {
+            return <MapGame />;
+        }
     }
-  }
 }
 
+function View(props) {
+    const login = this.state.login;
+    const sas = this.state.sas;
+
+    if (login) {
+        return <Loging />;
+    } else if (sas) {
+        return <Sas />;
+    } else {
+        return <MapGame />;
+    }
+}
+
+/*function LoginButton(props) {
+    return <button onClick={props.onClick}>suivant</button>;
+}*/
+
+
+function PlayButton(props) {
+    return <button onClick={props.onClick}>play</button>;
+}
 
 export default App;
-
