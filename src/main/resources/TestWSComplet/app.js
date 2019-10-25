@@ -1,4 +1,5 @@
 var stompClient = null;
+let game = null;
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -12,8 +13,6 @@ function setConnected(connected) {
     $("#greetings").html("");
 }
 
-
-
 function connect() {
     var socket = new SockJS('http://localhost:8095/game');
     stompClient = Stomp.over(socket);
@@ -21,7 +20,8 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/bugsbutchery', function (greeting) {
-            showGreeting(JSON.parse(greeting.body));
+            game = JSON.parse(greeting.body)
+        showGreeting(game);
         });
     });
 }
@@ -34,14 +34,26 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
-    stompClient.send("/app/newPlayer", {}, JSON.stringify({'playerName': $("#name").val()}));
+function newGame() {
+    stompClient.send("/app/newGame");
+}
+function newPlayer() {
+    stompClient.send("/app/newPlayer", {}, JSON.stringify({'playerName' : $('#name').val()}));
 }
 
+function newTerritory() {
+    //let playerId= $('#name').val();
+    let territoryId = $('#territory').val()
+    stompClient.send("/app/pickTerritory", {}, JSON.stringify(/* game.playersAlive[playerId]*/game.allTerritories[territoryId]));
+}
+
+/*
 function showGreeting(message) {
     console.log("it works");
     $("#greetings").append("<tr><td>" + message.playerName + "</td></tr>");
 }
+*/
+
 
 /*function onMessageReceived(bloublou) {
     var message = JSON.parse(bloublou).playerName
@@ -54,5 +66,8 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#newGame" ).click(function() { newGame(); });
+    $( "#newPlayer" ).click(function() { newPlayer(); });
+    $( "#newTerritory" ).click(function() { newTerritory(); });
+
 });

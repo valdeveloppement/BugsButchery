@@ -1,106 +1,113 @@
-
 import React from 'react';
-import Stomp from 'stompjs'
-import SockJS from 'sockjs-client'
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 import './App.css';
-import Button from './Button.js';
-import Territory from './Territory.js';
-import Infos from './Infos.js';
+import MapGame from './pages/MapGame';
+import Loging from './pages/Loging';
+import Sas from './pages/Sas';
 
 let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
 
-class App extends React.Component{
-constructor(props) {
-  super(props);
-  this.state = {
-    isAttack: false,
-    isMove: false,
-    game: {},
-  }
-}
-
-
-alert = () => {
-  alert(`${this.value}`)
-  }
-
-attack = () => {
-this.setState({isAttack: true});
-alert(`${this.value}`)
-}
-
-move = () => {
-this.setState({isMove: true});
-alert(`${this.value}` )
-}
-
-suivant = () => {
-alert(`${this.value}`)
-}
-
-submit = (value) => {
-  
-}
-
-onMessageReceived = (payload) => {
-  this.setState({game: JSON.parse(payload.body)})
-}
-newGame = ()=> {
-  if(stompClient) {
-      stompClient.send("/app/newGame")
-  }
-}
-componentDidMount() {
-  const connect = () => {
-    stompClient.connect({}, onConnected, onError);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.waitClick = this.waitClick.bind(this);
+    this.playClick = this.playClick.bind(this);
+    this.state = {
+      login: true,
+      sas: false,
+      map: false,
+      game: {},
+      allTerritories: [],
+      playerName: '',
+      playerAntsBreed: '',
+    };
   }
 
-  const onConnected = () => {
+  waitClick() {
+    this.setState({ sas: true });
+    this.setState({ login: false });
+  }
+
+  playClick() {
+    this.setState({ sas: true });
+    this.setState({ login: false });
+    this.setState({ map: true });
+  }
+
+  onMessageReceived = (payload) => {
+    this.setState({ game: JSON.parse(payload.body) })
+    this.setState({ allTerritories: this.state.game.allTerritories })
+  }
+
+  onConnected = () => {
     // Subscribe to the Public Topic
     stompClient.subscribe('/bugsbutchery', this.onMessageReceived);
   }
 
-  const onError = (error) => {
+  onError = (error) => {
     'Could not connect to WebSocket server. Please refresh this page to try again!';
-   }
-   connect();
-}
+  }
+
+  componentDidMount() {
+    const connect = () => {
+      stompClient.connect({}, this.onConnected, this.onError);
+    }
+    connect();
+  }
+
   render() {
-    const isAttack = this.state.isAttack;
+    const login = this.state.login;
+    const sas = this.state.sas;
     let button;
 
-  if (isAttack) {
-      button = <Button value="send" />
-    } 
+    if (login) {
+      button = <LoginButton onClick={this.waitClick} />;
+      return <Loging />;
+    } else if (sas) {
+      button = <PlayButton onClick={this.playClick} />;
+      return <Sas />;
+    }  else {
+      return <MapGame />;
+    }
 
-    return (
-      <div className="contenant">
-        <div className="carte">
-        <button onClick={this.newGame}>newgame</button>
-          <Territory action={this.alert} color="epinards" value="épinards" int="" player="" family="légume"/>
-          <Territory action={this.alert} color="framboise" value="framboise" int="" player="" family="fruit"/>
-          <Territory action={this.alert} color="kiwi" value="kiwi" int="" player="" family="fruit"/>
-          <Territory action={this.alert} color="foie_gras" value="foie gras" int="" player="" family="viande"/>
-          <Territory action={this.alert} color="aubergine" value="aubergine" int="" player="" family="légumes"/>
-          <Territory action={this.alert} color="jambon" value="jambon" int="" player="" family="viande"/>
-          <Territory action={this.alert} color="poivron" value="poivron" int="" player="" family="légume"/>
-          <Territory action={this.alert} color="saucisse" value="saucisse" int="" player="" family="viande"/>
-          <Territory action={this.alert} color="abricot" value="abricot" int="" player="" family="fruit"/>
-        </div>
-        <div className="informationJeu">
-          <Infos value="players" info="tous les players"/>
-          <Infos value="info" info="infos générales"/>
-        </div>
-        <div>
-          <Button action={this.attack} value="attack" />
-          <Button action={this.move} value="move"/>
-          <Button action={this.suivant} value="Suivant" />
-          {button}
-        </div>
-        
+   /* return (
+      <div>
+        <View login={login} />
+        {button}
       </div>
-          )
-        }
-      }
-      export default App
+    );*/
+
+  }
+
+
+
+}
+/*
+
+function View(props) {
+  const login = this.state.login;
+  const sas = this.state.sas;
+
+  if (login) {
+    button = <LoginButton onClick={this.waitClick} />;
+    return <Loging />;
+  } else if (sas) {
+    button = <PlayButton onClick={this.playClick} />;
+    return <Sas />;
+  } else {
+    return <MapGame />;
+  }
+}
+*/
+function LoginButton(props) {
+  return <button onClick={props.onClick}>suivant</button>;
+}
+
+
+function PlayButton(props) {
+  return <button onClick={props.onClick}>play</button>;
+}
+
+export default App;

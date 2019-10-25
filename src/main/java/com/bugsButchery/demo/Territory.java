@@ -24,6 +24,7 @@ public class Territory {
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			  name = "frontier", 
