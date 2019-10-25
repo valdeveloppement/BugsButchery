@@ -20,8 +20,10 @@ class App extends React.Component {
       map: false,
       game: {},
       allTerritories: [],
+      playerList: [],
       playerName: '',
       playerAntsBreed: '',
+      playerTurn: {},
     };
   }
 
@@ -31,8 +33,7 @@ class App extends React.Component {
   }
 
   playClick() {
-    this.setState({ sas: true });
-    this.setState({ login: false });
+    this.setState({ sas: false });
     this.setState({ map: true });
   }
 
@@ -51,22 +52,24 @@ class App extends React.Component {
         playerAntsBreed: this.state.playerAntsBreed
       }
       stompClient.send("/app/newPlayer", {}, JSON.stringify(player))
+      this.waitClick()
     }
+  }
+
+  newGame = () => {
+    if (stompClient) {
+      stompClient.send("/app/newGame")
+    }
+    this.playClick()
   }
 
   onMessageReceived = (payload) => {
     this.setState({ game: JSON.parse(payload.body) })
     this.setState({ allTerritories: this.state.game.allTerritories })
 
-  }
+    this.setState({ playerList: this.state.game.playersAlive })
+    this.setState({ playerTurn: this.state.game.playerTurn })
 
-
-  handleChangePlayer = (event) => {
-    this.setState({ playerName: event.target.value })
-  }
-
-  handleChangeBreed = (event) => {
-    this.setState({ playerAntsBreed: event.target.value })
   }
 
   onConnected = () => {
@@ -88,14 +91,11 @@ class App extends React.Component {
   render() {
     const login = this.state.login;
     const sas = this.state.sas;
-    let button;
 
     if (login) {
-      button = <LoginButton onClick={this.waitClick} />;
-      return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed}/>;
+      return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed} />;
     } else if (sas) {
-      button = <PlayButton onClick={this.playClick} />;
-      return <Sas />;
+      return <Sas newGame={this.newGame} playerList={this.state.playerList} />;
     } else {
       return <MapGame />;
     }
@@ -129,13 +129,6 @@ function View(props) {
   }
 }
 */
-function LoginButton(props) {
-  return <button onClick={props.onClick}>suivant</button>;
-}
 
-
-function PlayButton(props) {
-  return <button onClick={props.onClick}>play</button>;
-}
 
 export default App;

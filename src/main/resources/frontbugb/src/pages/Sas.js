@@ -1,9 +1,4 @@
 import React from 'react';
-import Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
-
-let socket = new SockJS('http://localhost:8095/game');
-let stompClient = Stomp.over(socket);
 
 class Sas extends React.Component {
     constructor(props) {
@@ -15,17 +10,13 @@ class Sas extends React.Component {
         };
     }
 
-    newGame = () => {
-        if (stompClient) {
-            stompClient.send("/app/newGame")
-        }
-        this.setState({ isGameInit: true })
-    }
-
     render() {
         return (
             <div className="attente">
-                <button onClick={this.newGame}>newgame</button>
+                <button onClick={this.props.newGame}>newgame</button>
+                {this.props.playerList.map((i, index) => {
+                    return <p key={index}>{i.playerName}</p>
+                })}
             </div>
 
         );
