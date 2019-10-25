@@ -421,6 +421,12 @@ public class BugsButcheryService {
 			myGame.setPlayerTurn(myGame.getPlayersAlive().get(0));
 		}
 		changePlayerMsg();
+		
+		if(myGame.getDivOn().get("gameOn") == true) {
+			refillAvailableAnts(myGame.getPlayerTurn()); 
+		}
+		
+		
 	}
 	
 	public void changePlayerMsg() {
@@ -497,6 +503,7 @@ public class BugsButcheryService {
 	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
 		System.out.println("PlacefirstAnt s'execute");
 		if (territory.getTerritoryOwner() == null) {
+			System.out.println("Entre dans le if");
 		//si le territoire séléctionner est égal a vide
 			player.getPlayerTerritoryList().add(territory);
 			territory.setTerritoryOwner(player);
