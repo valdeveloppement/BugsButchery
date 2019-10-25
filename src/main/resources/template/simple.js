@@ -47,9 +47,12 @@ function sendMessage() {
 }
 
 function pickTerritory() {
-    let territoryId = $('#territory').val().trim()
+    let territoryId = $('#territory').val()
     if(stompClient){
-        stompClient.send("/app/pickTerritory", {}, JSON.stringify(game.allTerritories[territoryId]))
+        let message = {
+            territory1: territoryId,
+        }
+        stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
         $('#territory').val('')
     }
 }

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Stomp from 'stompjs'
 import SockJS from 'sockjs-client'
@@ -134,8 +135,10 @@ class App extends React.Component {
           <input type="text" onChange={this.handleChangeBreed} value={this.state.playerAntsBreed}></input>
           <button onClick={this.newPlayer}>newPlayer</button>
         </div>
+
       )
     }
   }
 }
 export default App
+

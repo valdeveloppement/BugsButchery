@@ -14,7 +14,7 @@ public class WebSocketController {
 
 	@Autowired
 	BugsButcheryService bugService;
-
+	private int playerIncr=0;
 
 	//new game
 	//
@@ -34,6 +34,12 @@ public class WebSocketController {
     public Game newPlayer(Player player) {
         bugService.createNewPlayer(player);
         System.out.println(player.getPlayerName());
+        
+    	playerIncr=playerIncr+1;
+    	if(playerIncr ==1) {
+    		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));	
+    	}
+    	
         return bugService.myGame;
     }
       
@@ -42,9 +48,26 @@ public class WebSocketController {
 		//
 	@MessageMapping("/pickTerritory")
 	@SendTo("/bugsbutchery")
-	public Game pickTerritory(Territory territory) {
-		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));
-		bugService.placeFirstAnts(bugService.myGame.getPlayerTurn(), territory);
+	public Game pickTerritory(MessageReceived message) {
+		
+	String territoryName= message.getTerritory1();
+	System.out.println("territoryName=  "+territoryName);
+	
+	
+	
+	
+	for(Territory entry : bugService.myGame.getAllTerritories()) {
+		System.out.println("entry=  "+ entry.getTerritoryName());
+		if(entry.getTerritoryName().equals(territoryName) ){
+			System.out.println("il y a un match");
+			System.out.println(bugService.myGame.getPlayerTurn().getPlayerName());
+			bugService.placeFirstAnts(bugService.myGame.getPlayerTurn(), entry);
+			
+		}
+		
+	}
+		
+		
 		return bugService.myGame;
 	}
 	

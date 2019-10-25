@@ -2,12 +2,17 @@ package com.bugsButchery.demo;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class Player {
 
 	//---- value objet ----//
 	private String playerName;
 	private String playerAntsBreed;
-	private ArrayList<Territory> playerTerritoryList = new ArrayList<Territory>(); 
+	
+    @JsonIgnoreProperties("territoryOwner")
+	private ArrayList<Territory> playerTerritoryList= new ArrayList<Territory>();
+
 	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();
 	private int playerAvailableAnts;
 	
@@ -24,6 +29,11 @@ public class Player {
 		this.playerName = playerName;
 		this.playerAntsBreed = playerAntsBreed;
 		this.playerAvailableAnts = playerAvailableAnts;
+
+
+//		this.playerTerritoryList = new ArrayList<Territory>();
+//		this.playerTerritoryFamilyList = new ArrayList<Integer>();
+
 	}
 
 
