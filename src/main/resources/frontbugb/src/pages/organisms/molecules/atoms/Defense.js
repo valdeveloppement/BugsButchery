@@ -8,8 +8,8 @@ class Defense extends React.Component {
       <div>
         
         <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez vous défendre :</p>
-        <input type="text" onChange={this.props.handleChangeNbDicesDefense} value={this.state.changeNbDicesDefense}></input>
-        <button onClick={this.props.defense}></button>
+        <input type="text" onChange={this.props.handleChangeNbrDiceDefense} value={this.state.nbrDiceDefense}></input>
+        <button onClick={this.props.requestDefense}></button>
       </div>
     )
   }

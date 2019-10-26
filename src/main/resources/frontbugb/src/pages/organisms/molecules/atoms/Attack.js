@@ -7,12 +7,14 @@ class Attack extends React.Component {
     return (
       <div>
         <p>Entrez le territoire attaquant :</p>
-        <input type="text" onChange={this.props.handleChangeTerritory1} value={this.state.Territory1}></input>
+        <input type="text" onChange={this.props.handleChangeTerritory1} value={this.state.territory1}></input>
         <p>Entrez le territoire que vous souhaitez attaquer :</p>
-        <input type="text" onChange={this.props.handlechangeTerritory2} value={this.state.Territory2}></input>
+        <input type="text" onChange={this.props.handlechangeTerritory2} value={this.state.territory2}></input>
         <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez attaquer :</p>
-        <input type="text" onChange={this.props.handleChangeNbDicesAttack} value={this.state.changeNbDicesAttack}></input>
-        <button onClick={this.props.attack}></button>
+        <input type="text" onChange={this.props.handleChangeNbrDiceAttack} value={this.state.nbrDiceAttack}></input>
+        <button onClick={this.props.requestAttack}></button>
+        <p>SKIP</p>
+        <button onClick={this.props.skip}></button>
       </div>
     )
   }

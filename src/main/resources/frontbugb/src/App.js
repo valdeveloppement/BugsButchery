@@ -67,17 +67,18 @@ class App extends React.Component {
     this.setState({ territory2: event.target.value })
   }
 
-  handleChangeNbDicesAttack = (event)=> {
-    this.setState({ nbDicesAttack: event.target.value })
+  handleChangeNbrDiceAttack = (event)=> {
+    this.setState({ nbrDiceAttack: event.target.value })
   }
 
-  handleChangeNbDicesDefense = (event)=> {
-    this.setState({ nbDicesDefense: event.target.value })
+  handleChangeNbrDicesDefense = (event)=> {
+    this.setState({ nbrDiceDefense: event.target.value })
   }
 
-  handleChangeNbAntsMoving = (event)=> {
-    this.setState({nbAntsMoving: event.target.value})
+  handleChangeNbAnts = (event)=> {
+    this.setState({nbAnts: event.target.value})
   }
+
 
   newPlayer = () => {
     if (stompClient) {
