@@ -76,6 +76,12 @@ class App extends React.Component {
     this.playClick()
   }
 
+  echo = () => {
+    if (stompClient) {
+      stompClient.send("/app/echo")
+    }
+  }
+
 
   placeFirstAnts = () => {
     if (stompClient) {
