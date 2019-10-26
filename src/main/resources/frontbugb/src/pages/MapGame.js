@@ -1,7 +1,14 @@
 import React from 'react';
 import Territory from './organisms/molecules/Territory.js';
 import InfosPlayer from './organisms/molecules/atoms/Infos.js';
-import InfosMessage from './organisms/molecules/atoms/InfosMessage.js'
+import InfosMessage from './organisms/molecules/atoms/InfosMessage.js';
+// import Attack from './organisms/molecules/atoms/Attack.js';
+// import Defense from './organisms/molecules/atoms/Defense.js';
+// import Move from './organisms/molecules/atoms/Move.js/';
+// import Anthill from './organisms/molecules/atoms/Anthill.js';
+// import placetAnts from './organisms/molecules/atoms/PlaceAnts.js';
+// import placeFirstAnt from './organisms/molecules/atoms/PlaceFirstAnt.js';
+
 
 class MapGame extends React.Component {
     constructor(props) {
