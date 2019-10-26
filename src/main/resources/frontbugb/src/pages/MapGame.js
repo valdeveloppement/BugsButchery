@@ -88,15 +88,12 @@ class MapGame extends React.Component {
                 </div>
 
                 <div className="playingGround">
-                    {/* {isAttackOn ? <Attack /> : }
-                    {isDefenseOn ? </> : }
-                    {isAvailableAntsRefill ? </> : }
-                    {isGameOn ? </> : }
-                    {ifGameSetOn ? </> : }
-                    {isMoveOn ? </> : }
-                    {isPlaceAnthillOn ? </> : }
-                    {isPlaceAntsOn </> : }
-                    {isPlaceFirstAntsOn </> : } */}
+                    {this.state.isAttackOn ? <Attack skip={this.props.skip} requestAttack={this.props.requestAttack}/> : <p></p>  }
+                    {this.state.isDefenseOn ? <Defense requestDefense={this.props.requestDefense}/> : <p></p> }
+                    {this.state.isMoveOn ? <Move skip={this.props.skip} moveAvailable={this.props.moveAvailable}/> : <p></p>  }
+                    {this.state.isPlaceAnthillOn ? <Anthill addAnthill={this.props.addAnthill} /> : <p></p> }
+                    {this.state.isPlaceAntsOn ? <PlaceAnts placeAnts={this.props.placeAnts}/> : <p></p> }
+                    {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts placeFirstAnts={this.props.placeFirstAnts}/> :<p></p> } 
                 </div>
             </div>
         );

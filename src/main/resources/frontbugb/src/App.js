@@ -120,7 +120,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
     }
-    console.log("placeFirstAnts")
+    console.log("placeFirstAnts");
   }
 
   placeAnts = () => {
@@ -131,7 +131,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnt", {}, JSON.stringify(message))
     }
-    console.log("placeAnts")
+    console.log("placeAnts");
   }
 
   addAntsHill = () => {
@@ -141,7 +141,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
     }
-    console.log("addAntsHill")
+    console.log("addAntsHill");
   }
 
   requestAttack = () => {
@@ -152,8 +152,9 @@ class App extends React.Component {
         nbrDiceAttack:this.state.nbrDiceAttack,
       }
       stompClient.send("/app/requestAttack", {}, JSON.stringify(message))
+      
     }
-    console.log("addAntsHill")
+    console.log("attack");
   }
 
   requestDefense = () => {
@@ -163,6 +164,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/requestDefense", {}, JSON.stringify(message))
     }
+    console.log("requestDefense");
   }
 
   skip = () => {
@@ -171,6 +173,7 @@ class App extends React.Component {
       // }
       stompClient.send("/app/skip")
     }
+    console.log("skip");
   }
 
   moveAvailable = () => {
@@ -182,6 +185,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/move", {}, JSON.stringify(message))
     }
+    console.log("moveAvailable")
   }
 
   onMessageReceived = (payload) => {
@@ -229,7 +233,7 @@ class App extends React.Component {
     } else if (sas) {
       return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} />;
     } else {
-      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} territoryTarget={this.state.territoryTarget}/>;
+      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntsHill={this.addAntsHill}/>;
     }
   }
 }

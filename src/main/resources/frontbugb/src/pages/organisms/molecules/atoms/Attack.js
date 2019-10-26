@@ -21,8 +21,7 @@ class Attack extends React.Component {
         <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez attaquer :</p>
         <input type="text" onChange={this.props.handleChangeNbrDiceAttack} value={this.state.nbrDiceAttack}></input>
         <button onClick={this.props.requestAttack}>Envoyer</button>
-        <p>SKIP</p>
-        <button onClick={this.props.skip}></button>
+        <button onClick={this.props.skip}>Non merci</button>
       </div>
     )
   }

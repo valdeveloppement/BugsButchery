@@ -17,7 +17,7 @@ class Defense extends React.Component {
         
         <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez vous défendre :</p>
         <input type="text" onChange={this.props.handleChangeNbrDiceDefense} value={this.state.nbrDiceDefense}></input>
-        <button onClick={this.props.requestDefense}></button>
+        <button onClick={this.props.requestDefense}>Envoyer</button>
       </div>
     )
   }
