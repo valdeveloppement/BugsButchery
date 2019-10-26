@@ -27,6 +27,17 @@ class App extends React.Component {
       playerTurn: {},
       gameStatus: {},
       message: "",
+
+      // MessageReceived Attributes 
+      territory1:"",
+      territory2:"",
+      player1:"",
+      player2:"",
+      nbAnts:0,
+      nbrDiceAttack:0,
+      nbrDiceDefense:0,
+
+
     };
   }
 
@@ -85,6 +96,79 @@ class App extends React.Component {
     }
     this.playClick()
   }
+
+
+  placeFirstAnts = () => {
+    if (stompClient) {
+      let message = {
+        territory1: this.state.territory1,
+      }
+      stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
+    }
+  }
+
+  placeAnts = () => {
+    if (stompClient) {
+      let message = {
+        territory1: this.state.territory1,
+        nbAnts:this.state.nbAnts,
+      }
+      stompClient.send("/app/addAnt", {}, JSON.stringify(message))
+    }
+  }
+
+
+  addAntsHill = () => {
+    if (stompClient) {
+      let message = {
+        territory1: this.state.territory1,
+      }
+      stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
+    }
+  }
+
+  requestAttack = () => {
+    if (stompClient) {
+      let message = {
+        territory1: this.state.territory1,
+        territory2: this.state.territory2,
+        nbrDiceAttack:this.state.nbrDiceAttack,
+      }
+      stompClient.send("/app/requestAttack", {}, JSON.stringify(message))
+    }
+  }
+
+  requestDefense = () => {
+    if (stompClient) {
+      let message = {
+        nbrDiceDefense:this.state.nbrDiceDefense,
+      }
+      stompClient.send("/app/requestDefense", {}, JSON.stringify(message))
+    }
+  }
+
+  skip = () => {
+    if (stompClient) {
+      // let message = {
+      // }
+      stompClient.send("/app/skip")
+    }
+  }
+
+  moveAvailable = () => {
+    if (stompClient) {
+      let message = {
+        territory1: this.state.territory1,
+        territory2: this.state.territory2,
+        nbAnts:this.state.nbAnts,
+      }
+      stompClient.send("/app/move", {}, JSON.stringify(message))
+    }
+  }
+
+
+
+
 
   onMessageReceived = (payload) => {
     let game = JSON.parse(payload.body)
