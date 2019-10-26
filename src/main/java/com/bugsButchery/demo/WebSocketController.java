@@ -213,16 +213,52 @@ public class WebSocketController {
 	@MessageMapping("/skip")
 	@SendTo("/bugsbutchery")
 	public Game skip() {
-		bugService.changePlayer();
+		bugService.skip();
+
 		return bugService.myGame;
 	}
+	
+
 	
 	
 	//move
-	@MessageMapping("/move")
-	@SendTo("/bugsbutchery")
-	public Game move(Player player, Territory territoryStart, Territory territoryArrival, int antNbr) {
-		bugService.moveAvailable(player, territoryStart, territoryArrival, antNbr);
-		return bugService.myGame;
-	}
+		@MessageMapping("/move")
+		@SendTo("/bugsbutchery")
+		public Game move(MessageReceived message) {
+			
+			
+			
+			String territoryNameStart= message.getTerritory1();
+			String territoryNameArrival= message.getTerritory2();
+			int antNbr = message.getNbAnts();
+			
+			
+
+			
+			
+			for(Territory territoryStart:bugService.myGame.getAllTerritories()) {
+				System.out.println("entry=  "+ territoryStart.getTerritoryName());
+				if(territoryStart.getTerritoryName().equals(territoryNameStart) ){
+					System.out.println("il y a un match");
+					
+					for(Territory territoryArrival:bugService.myGame.getAllTerritories()) {
+						System.out.println("entry=  "+ territoryArrival.getTerritoryName());
+						if(territoryArrival.getTerritoryName().equals(territoryNameArrival) ){
+							System.out.println("il y a un double match");
+							
+	
+							bugService.moveAvailable(territoryStart.getTerritoryOwner(), territoryStart, territoryArrival, antNbr);
+							
+						}
+					}
+				}
+				
+			}
+			
+			
+			
+			return bugService.myGame;
+		}
+		
+	
 }
