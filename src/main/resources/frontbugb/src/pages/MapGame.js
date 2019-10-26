@@ -8,12 +8,51 @@ class MapGame extends React.Component {
         super(props);
 
         this.state = {
-            isAttack: false,
-            isMove: false,
+            isAttackOn: false,
+            isDefenseOn: false,
+            isAvailableAntsRefill: false,
+            isGameOn: false,
+            ifGameSetOn: false,
+            isMoveOn: false,
+            isPlaceAnthillOn: false,
+            isPlaceAntsOn: false,
+            isPlaceFirstAntsOn: false,
         };
     }
 
     button = null;
+
+    booleanFactory = () => {
+        if(this.props.playerName === this.props.currentPlayer.playerName) {
+            if(this.props.gameStatus.attackOn) {
+                this.setState({isAttackOn: true})
+            }
+            else if (this.props.gameStatus.defenseOn) {
+                this.setState({isDefenseOn: true})
+            }
+            else if (this.props.gameStatus.availableAntsRefill) {
+                this.setState({isAvailableAntsRefill: true})
+            }
+            else if (this.props.gameStatus.gameOn) {
+                this.setState({isGameOn: true})
+            }
+            else if (this.props.gameStatus.gameSetOn) {
+                this.setState({ifGameSetOn: true})
+            }
+            else if (this.props.gameStatus.moveOn) {
+                this.setState({isMoveOn: true})
+            }
+            else if (this.props.gameStatus.placeAnthillOn) {
+                this.setState({isPlaceAnthillOn: true})
+            }
+            else if (this.props.gameStatus.placeAntsOn) {
+                this.setState({isPlaceAntsOn: true})
+            }
+            else if (this.props.gameStatus.placeFirstAntsOn) {
+                this.setState({isPlaceFirstAntsOn: true})
+            }
+        }           
+    }
 
     render() {
 
@@ -23,7 +62,6 @@ class MapGame extends React.Component {
                     {this.props.allTerritories.map((i, index) => {
                          return ( <Territory 
                             key={index}
-                            action={this.alert}
                             color={i.territoryName}
                             value={i.territoryName}
                             int={i.territoryAntsNb}
@@ -40,8 +78,36 @@ class MapGame extends React.Component {
                 <div>
                     <InfosMessage className="infos" message={this.props.message} />
                 </div>
+
+                <div className="playingGround">
+                    {/* {isAttackOn ? </> : }
+                    {isDefenseOn ? </> : }
+                    {isAvailableAntsRefill ? </> : }
+                    {isGameOn ? </> : }
+                    {ifGameSetOn ? </> : }
+                    {isMoveOn ? </> : }
+                    {isPlaceAnthillOn ? </> : }
+                    {isPlaceAntsOn </> : }
+                    {isPlaceFirstAntsOn </> : } */}
+                </div>
             </div>
         );
+    }
+}
+
+class Attack extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return (
+            <div>
+                <input type="text" onChange={this.props.} value={this.state.}></input>
+                <input type="text" onChange={this.props.} value={this.state.}></input>
+                <input type="text" onChange={this.props.} value={this.state.}></input>
+                <button onClick={this.props.attack}></button>
+            </div>
+        )
     }
 }
 
