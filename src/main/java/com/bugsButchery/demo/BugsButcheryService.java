@@ -34,13 +34,14 @@ public class BugsButcheryService {
 	public void checkNewGameButton() {
 		if(myGame.playersAlive.size() > 1) {
 			myGame.divOn.replace("newGameButton", true);
+			
 		}
 	}
 	
 	public void setOn() {
 			myGame.divOn.replace("gameSetOn", true);
 			myGame.divOn.replace("placeFirstAntsOn", true);
-		
+		System.out.println(myGame.divOn.get("placeFirstAntsOn"));
 	}
 	
 	//New Game

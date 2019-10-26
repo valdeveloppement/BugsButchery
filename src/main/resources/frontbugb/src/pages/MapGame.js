@@ -30,35 +30,39 @@ class MapGame extends React.Component {
     button = null;
 
     booleanFactory = () => {
-        if(this.props.playerName === this.props.currentPlayer.playerName) {
-            if(this.props.gameStatus.attackOn) {
-                this.setState({isAttackOn: true})
+        if (this.props.playerName === this.props.currentPlayer.playerName) {
+            if (this.props.gameStatus.attackOn) {
+                this.setState({ isAttackOn: true })
             }
             else if (this.props.gameStatus.defenseOn) {
-                this.setState({isDefenseOn: true})
+                this.setState({ isDefenseOn: true })
             }
             else if (this.props.gameStatus.availableAntsRefill) {
-                this.setState({isAvailableAntsRefill: true})
+                this.setState({ isAvailableAntsRefill: true })
             }
             else if (this.props.gameStatus.gameOn) {
-                this.setState({isGameOn: true})
+                this.setState({ isGameOn: true })
             }
             else if (this.props.gameStatus.gameSetOn) {
-                this.setState({ifGameSetOn: true})
+                this.setState({ ifGameSetOn: true })
             }
             else if (this.props.gameStatus.moveOn) {
-                this.setState({isMoveOn: true})
+                this.setState({ isMoveOn: true })
             }
             else if (this.props.gameStatus.placeAnthillOn) {
-                this.setState({isPlaceAnthillOn: true})
+                this.setState({ isPlaceAnthillOn: true })
             }
             else if (this.props.gameStatus.placeAntsOn) {
-                this.setState({isPlaceAntsOn: true})
+                this.setState({ isPlaceAntsOn: true })
             }
             else if (this.props.gameStatus.placeFirstAntsOn) {
-                this.setState({isPlaceFirstAntsOn: true})
+                this.setState({ isPlaceFirstAntsOn: true })
             }
-        }           
+        }
+    }
+
+    componentDidMount() {
+        this.booleanFactory()
     }
 
     render() {
@@ -67,16 +71,16 @@ class MapGame extends React.Component {
             <div className="contenant">
                 <div className="carte">
                     {this.props.allTerritories.map((i, index) => {
-                         return ( <Territory 
+                        return (<Territory
                             key={index}
                             color={i.territoryName}
                             value={i.territoryName}
                             int={i.territoryAntsNb}
                             player={i.territoryOwner ? i.territoryOwner : "libre"}
                             family={this.props.allFamilies.find(elem => elem.familyId === i.territoryFamily)}
-                         /> )
+                        />)
                     })}
-                    
+
                 </div>
 
                 <div className="informationJeu">
@@ -87,12 +91,12 @@ class MapGame extends React.Component {
                 </div>
 
                 <div className="playingGround">
-                    {this.state.isAttackOn ? <Attack skip={this.props.skip} requestAttack={this.props.requestAttack}/> : <p></p>  }
-                    {this.state.isDefenseOn ? <Defense requestDefense={this.props.requestDefense}/> : <p></p> }
-                    {this.state.isMoveOn ? <Move skip={this.props.skip} moveAvailable={this.props.moveAvailable}/> : <p></p>  }
-                    {this.state.isPlaceAnthillOn ? <Anthill addAnthill={this.props.addAnthill} /> : <p></p> }
-                    {this.state.isPlaceAntsOn ? <PlaceAnts placeAnts={this.props.placeAnts}/> : <p></p> }
-                    {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts placeFirstAnts={this.props.placeFirstAnts}/> :<p></p> } 
+                    {this.state.isAttackOn ? <Attack skip={this.props.skip} requestAttack={this.props.requestAttack} /> : <p></p>}
+                    {this.state.isDefenseOn ? <Defense requestDefense={this.props.requestDefense} /> : <p></p>}
+                    {this.state.isMoveOn ? <Move skip={this.props.skip} moveAvailable={this.props.moveAvailable} /> : <p></p>}
+                    {this.state.isPlaceAnthillOn ? <Anthill addAnthill={this.props.addAnthill} /> : <p></p>}
+                    {this.state.isPlaceAntsOn ? <PlaceAnts placeAnts={this.props.placeAnts} /> : <p></p>}
+                    {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts placeFirstAnts={this.props.placeFirstAnts} /> : <p></p>}
                 </div>
 
             </div>
