@@ -8,8 +8,15 @@ class MapGame extends React.Component {
         super(props);
 
         this.state = {
-            isAttack: false,
-            isMove: false,
+            isAttackOn: false,
+            isDefenseOn: false,
+            isAvailableAntsRefill: false,
+            isGameOn: false,
+            ifGameSetOn: false,
+            isMoveOn: false,
+            isPlaceAnthillOn: false,
+            isPlaceAntsOn: false,
+            isPlaceFirstAntsOn: false,
         };
     }
 
@@ -18,28 +25,31 @@ class MapGame extends React.Component {
     booleanFactory = () => {
         if(this.props.playerName === this.props.currentPlayer.playerName) {
             if(this.props.gameStatus.attackOn) {
-
-            }
-            else if (this.props.gameStatus.availableAntsRefill) {
-
+                this.setState({isAttackOn: true})
             }
             else if (this.props.gameStatus.defenseOn) {
-
+                this.setState({isDefenseOn: true})
             }
-            else if (this.props.gameStatus.full) {
-
+            else if (this.props.gameStatus.availableAntsRefill) {
+                this.setState({isAvailableAntsRefill: true})
             }
             else if (this.props.gameStatus.gameOn) {
-
+                this.setState({isGameOn: true})
             }
             else if (this.props.gameStatus.gameSetOn) {
-
+                this.setState({ifGameSetOn: true})
             }
             else if (this.props.gameStatus.moveOn) {
-
+                this.setState({isMoveOn: true})
             }
             else if (this.props.gameStatus.placeAnthillOn) {
-                
+                this.setState({isPlaceAnthillOn: true})
+            }
+            else if (this.props.gameStatus.placeAntsOn) {
+                this.setState({isPlaceAntsOn: true})
+            }
+            else if (this.props.gameStatus.placeFirstAntsOn) {
+                this.setState({isPlaceFirstAntsOn: true})
             }
         }           
     }
@@ -70,10 +80,34 @@ class MapGame extends React.Component {
                 </div>
 
                 <div className="playingGround">
-                    
+                    {/* {isAttackOn ? </> : }
+                    {isDefenseOn ? </> : }
+                    {isAvailableAntsRefill ? </> : }
+                    {isGameOn ? </> : }
+                    {ifGameSetOn ? </> : }
+                    {isMoveOn ? </> : }
+                    {isPlaceAnthillOn ? </> : }
+                    {isPlaceAntsOn </> : }
+                    {isPlaceFirstAntsOn </> : } */}
                 </div>
             </div>
         );
+    }
+}
+
+class Attack extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return (
+            <div>
+                <input type="text" onChange={this.props.} value={this.state.}></input>
+                <input type="text" onChange={this.props.} value={this.state.}></input>
+                <input type="text" onChange={this.props.} value={this.state.}></input>
+                <button onClick={this.props.attack}></button>
+            </div>
+        )
     }
 }
 
