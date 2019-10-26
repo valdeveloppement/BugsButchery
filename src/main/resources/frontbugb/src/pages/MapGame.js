@@ -13,56 +13,9 @@ import PlaceFirstAnts from './organisms/molecules/atoms/PlaceFirstAnts.js';
 class MapGame extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            isAttackOn: false,
-            isDefenseOn: false,
-            isAvailableAntsRefill: false,
-            isGameOn: false,
-            ifGameSetOn: false,
-            isMoveOn: false,
-            isPlaceAnthillOn: false,
-            isPlaceAntsOn: false,
-            isPlaceFirstAntsOn: false,
+
         };
-    }
-
-    button = null;
-
-    booleanFactory = () => {
-        if(this.props.playerName === this.props.currentPlayer.playerName || this.props.playerName === this.props.territoryTarget.territoryOwner) {
-            console.log(this.props.playerName)
-            console.log(this.props.currentPlayer.playerName)
-            console.log(this.props.gameStatus.gameSetOn)
-            console.log(this.props.gameStatus.placeFirstAntsOn)
-            console.log(this.props.gameStatus.availableAntsRefill)
-            if(this.props.gameStatus.gameSetOn) {
-                if(this.props.gameStatus.placeFirstAntsOn && this.props.gameStatus.availableAntsRefill) {
-                    this.setState({isPlaceFirstAntsOn: true})
-                }
-                else if (this.props.gameStatus.placeAntsOn && this.props.gameStatus.availableAntsRefill) {
-                    this.setState({isPlaceAntsOn: true})
-                }
-                else if (this.props.gameStatus.placeAnthillOn && !this.props.gameStatus.availableAntsRefill) {
-                    this.setState({isPlaceAnthillOn: true})
-                }
-            }
-            else if (this.props.gameStatus.gameOn) {
-                this.setState({isGameOn: true})
-                if(this.props.gameStatus.availableAntsRefill && this.props.gameStatus.placeAntsOn) {
-                    this.setState({isPlaceAntsOn: true})
-                }
-                else if(this.props.gameStatus.attackOn) {
-                    this.setState({isAttackOn: true})
-                }
-                else if (this.props.gameStatus.moveOn) {
-                    this.setState({isMoveOn: true})
-                }
-                else if (this.props.gameStatus.defenseOn) {
-                    this.setState({isDefenseOn: true})
-                }
-            }
-        }
     }
 
     render() {
@@ -75,7 +28,7 @@ class MapGame extends React.Component {
                             color={i.territoryName}
                             value={i.territoryName}
                             int={i.territoryAntsNb}
-                            player={i.territoryOwner ? i.territoryOwner : "libre"}
+                            player={i.territoryOwner ? i.territoryOwner.playerName : "libre"}
                             family={this.props.allFamilies.find(elem => elem.familyId === i.territoryFamily)}
                         />)
                     })}
@@ -90,12 +43,12 @@ class MapGame extends React.Component {
                 </div>
 
                 <div className="playingGround">
-                    {this.state.isAttackOn ? <Attack skip={this.props.skip} requestAttack={this.props.requestAttack} /> : <p></p>}
-                    {this.state.isDefenseOn ? <Defense requestDefense={this.props.requestDefense} /> : <p></p>}
-                    {this.state.isMoveOn ? <Move skip={this.props.skip} moveAvailable={this.props.moveAvailable} /> : <p></p>}
-                    {this.state.isPlaceAnthillOn ? <Anthill addAnthill={this.props.addAnthill} /> : <p></p>}
-                    {this.state.isPlaceAntsOn ? <PlaceAnts placeAnts={this.props.placeAnts} /> : <p></p>}
-                    {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts placeFirstAnts={this.props.placeFirstAnts} /> : <p></p>}
+                    <Attack changeTerritory1={this.props.changeTerritory1} changeTerritory2={this.props.changeTerritory2} changeNbrDiceAttack={this.props.changeNbrDiceAttack} skip={this.props.skip} requestAttack={this.props.requestAttack} rendering={this.props.gameStatus.attackOn} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName} />
+                    {this.props.territoryTarget ? <Defense changeNbrDiceDefense={this.props.changeNbrDiceDefense} requestDefense={this.props.requestDefense} rendering={this.props.gameStatus.defenseOn} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName} defender={this.props.territoryTarget.territoryOwner}/> : <Defense changeNbrDiceDefense={this.props.changeNbrDiceDefense} requestDefense={this.props.requestDefense} rendering={this.props.gameStatus.defenseOn} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName} />}
+                    <Move changeTerritory1={this.props.changeTerritory1} changeTerritory2={this.props.changeTerritory2} changeNnbAnts={this.props.changeNnbAnts} skip={this.props.skip} moveAvailable={this.props.moveAvailable} rendering={this.props.gameStatus.moveOn} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName}/>
+                    <Anthill changeTerritory1={this.props.changeTerritory1} addAnthill={this.props.addAnthill} rendering={this.props.gameStatus.placeAnthillOn} available={this.props.gameStatus.availableAntsRefill} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName}/>
+                    <PlaceAnts changeTerritory1={this.props.changeTerritory1} changeNnbAnts={this.props.changeNnbAnts} placeAnts={this.props.placeAnts} rendering={this.props.gameStatus.placeAntsOn} available={this.props.gameStatus.availableAntsRefill} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName}/>
+                    <PlaceFirstAnts changeTerritory1={this.props.changeTerritory1} placeFirstAnts={this.props.placeFirstAnts} rendering={this.props.gameStatus.placeFirstAntsOn} available={this.props.gameStatus.availableAntsRefill} identity={this.props.playerName} playerTurn={this.props.currentPlayer.playerName}/>
                 </div>
             </div>
         );

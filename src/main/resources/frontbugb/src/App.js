@@ -81,7 +81,6 @@ class App extends React.Component {
     this.setState({nbAnts: event.target.value})
   }
 
-
   newPlayer = () => {
     if (stompClient) {
       let player = {
@@ -233,7 +232,7 @@ class App extends React.Component {
     } else if (sas) {
       return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} />;
     } else {
-      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntsHill={this.addAntsHill}/>;
+      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntsHill={this.addAntsHill} changeTerritory1={this.handleChangeTerritory1} changeTerritory2={this.handleChangeTerritory2} changeNbAnts={this.handleChangeNbAnts} changeNbrDiceAttack={this.handleChangeNbrDiceAttack} changeNbrDicesDefense={this.handleChangeNbrDicesDefense} territoryTarget={this.state.territoryTarget}/>;
     }
   }
 }
