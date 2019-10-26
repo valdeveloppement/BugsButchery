@@ -25,7 +25,7 @@ class App extends React.Component {
       playerAntsBreed: '',
       playerTurn: {},
       gameStatus: {},
-      message: "",
+      message: [],
 
       // MessageReceived Attributes 
       territory1:"",
