@@ -30,33 +30,32 @@ class MapGame extends React.Component {
     button = null;
 
     booleanFactory = () => {
-        if (this.props.playerName === this.props.currentPlayer.playerName) {
-            if (this.props.gameStatus.attackOn) {
-                this.setState({ isAttackOn: true })
-            }
-            else if (this.props.gameStatus.defenseOn) {
-                this.setState({ isDefenseOn: true })
-            }
-            else if (this.props.gameStatus.availableAntsRefill) {
-                this.setState({ isAvailableAntsRefill: true })
+        if(this.props.playerName === this.props.currentPlayer.playerName || this.props.playerName === this.props.territoryTarget.territoryOwner) {
+            if(this.props.gameStatus.gameSetOn) {
+                if(this.props.gameStatus.placeFirstAntsOn && this.props.gameStatus.availableAntsRefill) {
+                    this.setState({isPlaceFirstAntsOn: true})
+                }
+                else if (this.props.gameStatus.placeAntsOn && this.props.gameStatus.availableAntsRefill) {
+                    this.setState({isPlaceAntsOn: true})
+                }
+                else if (this.props.gameStatus.placeAnthillOn && !this.props.gameStatus.availableAntsRefill) {
+                    this.setState({isPlaceAnthillOn: true})
+                }
             }
             else if (this.props.gameStatus.gameOn) {
-                this.setState({ isGameOn: true })
-            }
-            else if (this.props.gameStatus.gameSetOn) {
-                this.setState({ ifGameSetOn: true })
-            }
-            else if (this.props.gameStatus.moveOn) {
-                this.setState({ isMoveOn: true })
-            }
-            else if (this.props.gameStatus.placeAnthillOn) {
-                this.setState({ isPlaceAnthillOn: true })
-            }
-            else if (this.props.gameStatus.placeAntsOn) {
-                this.setState({ isPlaceAntsOn: true })
-            }
-            else if (this.props.gameStatus.placeFirstAntsOn) {
-                this.setState({ isPlaceFirstAntsOn: true })
+                this.setState({isGameOn: true})
+                if(this.props.gameStatus.availableAntsRefill && this.props.gameStatus.placeAntsOn) {
+                    this.setState({isPlaceAntsOn: true})
+                }
+                else if(this.props.gameStatus.attackOn) {
+                    this.setState({isAttackOn: true})
+                }
+                else if (this.props.gameStatus.moveOn) {
+                    this.setState({isMoveOn: true})
+                }
+                else if (this.props.gameStatus.defenseOn) {
+                    this.setState({isDefenseOn: true})
+                }
             }
         }
     }
@@ -64,6 +63,8 @@ class MapGame extends React.Component {
     componentDidMount() {
         this.booleanFactory()
     }
+
+    compo
 
     render() {
 
@@ -98,11 +99,9 @@ class MapGame extends React.Component {
                     {this.state.isPlaceAntsOn ? <PlaceAnts placeAnts={this.props.placeAnts} /> : <p></p>}
                     {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts placeFirstAnts={this.props.placeFirstAnts} /> : <p></p>}
                 </div>
-
             </div>
         );
     }
 }
-
 
 export default MapGame;
