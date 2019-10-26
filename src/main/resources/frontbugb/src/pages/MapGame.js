@@ -2,12 +2,12 @@ import React from 'react';
 import Territory from './organisms/molecules/Territory.js';
 import InfosPlayer from './organisms/molecules/atoms/Infos.js';
 import InfosMessage from './organisms/molecules/atoms/InfosMessage.js';
-import Attack from './organisms/molecules/atoms/Attack.js';
-import Defense from './organisms/molecules/atoms/Defense.js';
-import Move from './organisms/molecules/atoms/Move.js';
-import Anthill from './organisms/molecules/atoms/Anthill.js';
-import PlaceAnts from './organisms/molecules/atoms/PlaceAnts.js';
-import PlaceFirstAnts from './organisms/molecules/atoms/PlaceFirstAnts.js';
+// import Attack from './organisms/molecules/atoms/Attack.js';
+// import Defense from './organisms/molecules/atoms/Defense.js';
+// import Move from './organisms/molecules/atoms/Move.js/';
+// import Anthill from './organisms/molecules/atoms/Anthill.js';
+// import placetAnts from './organisms/molecules/atoms/PlaceAnts.js';
+// import placeFirstAnt from './organisms/molecules/atoms/PlaceFirstAnt.js';
 
 
 class MapGame extends React.Component {
@@ -30,36 +30,37 @@ class MapGame extends React.Component {
     button = null;
 
     booleanFactory = () => {
-        if(this.props.playerName === this.props.currentPlayer.playerName) {
-            if(this.props.gameStatus.attackOn) {
-                this.setState({isAttackOn: true})
-            }
-            else if (this.props.gameStatus.defenseOn) {
-                this.setState({isDefenseOn: true})
-            }
-            else if (this.props.gameStatus.availableAntsRefill) {
-                this.setState({isAvailableAntsRefill: true})
+        if(this.props.playerName === this.props.currentPlayer.playerName || this.props.playerName === this.props.territoryTarget.territoryOwner) {
+            if(this.props.gameStatus.gameSetOn) {
+                if(this.props.gameStatus.placeFirstAntsOn && this.props.gameStatus.availableAntsRefill) {
+                    this.setState({isPlaceFirstAntsOn: true})
+                }
+                else if (this.props.gameStatus.placeAntsOn && this.props.gameStatus.availableAntsRefill) {
+                    this.setState({isPlaceAntsOn: true})
+                }
+                else if (this.props.gameStatus.placeAnthillOn && !this.props.gameStatus.availableAntsRefill) {
+                    this.setState({isPlaceAnthillOn: true})
+                }
             }
             else if (this.props.gameStatus.gameOn) {
                 this.setState({isGameOn: true})
-            }
-            else if (this.props.gameStatus.gameSetOn) {
-                this.setState({ifGameSetOn: true})
-            }
-            else if (this.props.gameStatus.moveOn) {
-                this.setState({isMoveOn: true})
-            }
-            else if (this.props.gameStatus.placeAnthillOn) {
-                this.setState({isPlaceAnthillOn: true})
-            }
-            else if (this.props.gameStatus.placeAntsOn) {
-                this.setState({isPlaceAntsOn: true})
-            }
-            else if (this.props.gameStatus.placeFirstAntsOn) {
-                this.setState({isPlaceFirstAntsOn: true})
+                if(this.props.gameStatus.availableAntsRefill && this.props.gameStatus.placeAntsOn) {
+                    this.setState({isPlaceAntsOn: true})
+                }
+                else if(this.props.gameStatus.attackOn) {
+                    this.setState({isAttackOn: true})
+                }
+                else if (this.props.gameStatus.moveOn) {
+                    this.setState({isMoveOn: true})
+                }
+                else if (this.props.gameStatus.defenseOn) {
+                    this.setState({isDefenseOn: true})
+                }
             }
         }           
     }
+
+    compo
 
     render() {
 
@@ -94,11 +95,9 @@ class MapGame extends React.Component {
                     {this.state.isPlaceAntsOn ? <PlaceAnts placeAnts={this.props.placeAnts}/> : <p></p> }
                     {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts placeFirstAnts={this.props.placeFirstAnts}/> :<p></p> } 
                 </div>
-
             </div>
         );
     }
 }
-
 
 export default MapGame;
