@@ -5,6 +5,7 @@ import './App.css';
 import MapGame from './pages/MapGame';
 import Loging from './pages/Loging';
 import Sas from './pages/Sas';
+import Fu from './pages/Fu'
 
 let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
@@ -18,6 +19,7 @@ class App extends React.Component {
       login: true,
       sas: false,
       map: false,
+      full: false,
       allTerritories: [],
       allFamilies: [],
       playerList: [],
@@ -26,6 +28,8 @@ class App extends React.Component {
       playerTurn: {},
       gameStatus: {},
       message: "",
+      territoryTarget: {},
+      playersAlive: [],
     };
   }
 
@@ -58,6 +62,12 @@ class App extends React.Component {
     }
   }
 
+  fullgame = () => {
+    if(this.state.gameStatus.gameSetOn || this.state.gameStatus.gameOn){
+      this.setState({full: true})
+    }
+  }
+
   newGame = () => {
     if (stompClient) {
       stompClient.send("/app/newGame")
@@ -73,7 +83,9 @@ class App extends React.Component {
       playerTurn: game.playerTurn,
       allFamilies: game.allFamilies,
       message: game.message,
-      gameStatus: game.divOn
+      gameStatus: game.divOn,
+      territoryTarget: game.territoryTarget,
+      playersAlive: game.playersAlive,
     })   
   }
 
@@ -91,49 +103,25 @@ class App extends React.Component {
       stompClient.connect({}, this.onConnected, this.onError);
     }
     connect();
+    this.fullgame();
   }
 
   render() {
     const login = this.state.login;
     const sas = this.state.sas;
+    const full = this.state.full;
 
-    if (login) {
+    if (full) {
+      return <Fu />
+    } else if (login) {
       return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed} />;
     } else if (sas) {
       return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} />;
     } else {
-      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies}/>;
+      return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} territoryTarget={this.state.territoryTarget}/>;
     }
-
-    /* return (
-       <div>
-         <View login={login} />
-         {button}
-       </div>
-     );*/
-
-  }
-
-
-
-}
-/*
-
-function View(props) {
-  const login = this.state.login;
-  const sas = this.state.sas;
-
-  if (login) {
-    button = <LoginButton onClick={this.waitClick} />;
-    return <Loging />;
-  } else if (sas) {
-    button = <PlayButton onClick={this.playClick} />;
-    return <Sas />;
-  } else {
-    return <MapGame />;
   }
 }
-*/
 
 
 export default App;
