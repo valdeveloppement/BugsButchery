@@ -26,7 +26,7 @@ class App extends React.Component {
       playerAntsBreed: '',
       playerTurn: {},
       gameStatus: {},
-      message: "",
+      message: [],
 
       // MessageReceived Attributes 
       territory1:"",
@@ -98,6 +98,12 @@ class App extends React.Component {
     this.playClick()
   }
 
+  echo = () => {
+    if (stompClient) {
+      stompClient.send("/app/echo")
+    }
+  }
+
 
   placeFirstAnts = () => {
     if (stompClient) {
@@ -106,6 +112,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
     }
+    console.log("placeFirstAnts")
   }
 
   placeAnts = () => {
@@ -116,6 +123,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnt", {}, JSON.stringify(message))
     }
+    console.log("placeAnts")
   }
 
 
@@ -126,6 +134,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
     }
+    console.log("addAntsHill")
   }
 
   requestAttack = () => {
@@ -137,6 +146,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/requestAttack", {}, JSON.stringify(message))
     }
+    console.log("addAntsHill")
   }
 
   requestDefense = () => {

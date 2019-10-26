@@ -4,10 +4,10 @@ import InfosPlayer from './organisms/molecules/atoms/Infos.js';
 import InfosMessage from './organisms/molecules/atoms/InfosMessage.js';
 import Attack from './organisms/molecules/atoms/Attack.js';
 import Defense from './organisms/molecules/atoms/Defense.js';
-import Move from './organisms/molecules/atoms/Move.js/';
+import Move from './organisms/molecules/atoms/Move.js';
 import Anthill from './organisms/molecules/atoms/Anthill.js';
-import placetAnts from './organisms/molecules/atoms/PlaceAnts.js';
-import placeFirstAnt from './organisms/molecules/atoms/PlaceFirstAnt.js';
+import PlaceAnts from './organisms/molecules/atoms/PlaceAnts.js';
+import PlaceFirstAnts from './organisms/molecules/atoms/PlaceFirstAnts.js';
 
 
 class MapGame extends React.Component {
@@ -15,7 +15,7 @@ class MapGame extends React.Component {
         super(props);
 
         this.state = {
-            isAttackOn: false,
+            isAttackOn: true,
             isDefenseOn: false,
             isAvailableAntsRefill: false,
             isGameOn: false,
@@ -87,16 +87,14 @@ class MapGame extends React.Component {
                 </div>
 
                 <div className="playingGround">
-                    {/* {isAttackOn ? </> : }
-                    {isDefenseOn ? </> : }
-                    {isAvailableAntsRefill ? </> : }
-                    {isGameOn ? </> : }
-                    {ifGameSetOn ? </> : }
-                    {isMoveOn ? </> : }
-                    {isPlaceAnthillOn ? </> : }
-                    {isPlaceAntsOn </> : }
-                    {isPlaceFirstAntsOn </> : } */}
+                    {this.state.isAttackOn ? <Attack /> : <p>blabla</p>  }
+                    {this.state.isDefenseOn ? <Defense /> : <p>blabla</p> }
+                    {this.state.isMoveOn ? <Move /> : <p>blabla</p>  }
+                    {this.state.isPlaceAnthillOn ? <Anthill /> : <p>blabla</p> }
+                    {this.state.isPlaceAntsOn ? <PlaceAnts/> : <p>blabla</p> }
+                    {this.state.isPlaceFirstAntsOn ? <PlaceFirstAnts /> :<p>blabla</p> } 
                 </div>
+
             </div>
         );
     }
