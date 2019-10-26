@@ -15,7 +15,8 @@ public class Game {
 	protected int pathExist;
 	protected ArrayList<Territory> allTerritories = new ArrayList<Territory>();
     protected ArrayList<Family> allFamilies = new ArrayList<Family>();
-    protected String message;
+//    protected String message;
+    protected ArrayList<String> message = new ArrayList<String>();
 	protected int nbAnthill=0;
 
 	protected HashMap<String, Boolean> divOn = new HashMap<String, Boolean>(){{
@@ -90,10 +91,11 @@ public class Game {
 	public void setDivOn(HashMap<String, Boolean> divOn) {
 		this.divOn = divOn;
 	}
-	public String getMessage() {
+
+	public ArrayList<String> getMessage() {
 		return message;
 	}
-	public void setMessage(String message) {
+	public void setMessage(ArrayList<String> message) {
 		this.message = message;
 	}
 	public ArrayList<Family> getAllFamilies() {

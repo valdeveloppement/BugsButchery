@@ -26,7 +26,7 @@ class App extends React.Component {
       playerAntsBreed: '',
       playerTurn: {},
       gameStatus: {},
-      message: "",
+      message: [],
 
       // MessageReceived Attributes 
       territory1:"",
@@ -96,6 +96,12 @@ class App extends React.Component {
       stompClient.send("/app/newGame")
     }
     this.playClick()
+  }
+
+  echo = () => {
+    if (stompClient) {
+      stompClient.send("/app/echo")
+    }
   }
 
 
