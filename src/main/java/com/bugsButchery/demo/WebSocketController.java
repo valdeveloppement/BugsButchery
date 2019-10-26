@@ -186,18 +186,11 @@ public class WebSocketController {
 	@SendTo("/bugsbutchery")
 	public Game requestDefense(MessageReceived message) {
 		
-		String territoryNameTarget= message.getTerritory2();
 		int nbrDiceDefense = message.getNbrDiceDefense();
-		
-		for(Territory territoryTarget : bugService.myGame.getAllTerritories()) {
-			System.out.println("entry=  "+ territoryTarget.getTerritoryName());
-			if(territoryTarget.getTerritoryName().equals(territoryNameTarget) ){
-				System.out.println("il y a un match");
-				bugService.myGame.setNbrDiceAttack(nbrDiceDefense);
-				bugService.requestDefense(territoryTarget, nbrDiceDefense);
-			}
-			
-		}
+
+				bugService.myGame.setNbrDiceDefense(nbrDiceDefense);
+				bugService.requestDefense(bugService.myGame.getTerritoryTarget(), nbrDiceDefense);
+	
 		
 
 		return bugService.myGame;
