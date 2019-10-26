@@ -16,6 +16,11 @@ public class WebSocketController {
 	BugsButcheryService bugService;
 	private int playerIncr=0;
 
+
+	
+	
+	
+	
 	//new game
 	//
 	@MessageMapping("/newGame")
@@ -23,6 +28,7 @@ public class WebSocketController {
 	public Game newGame() {
 		bugService.createAllFamilies();
 		bugService.createAllTerritories();
+		bugService.setOn();
 		System.out.println("it's working");
 		return bugService.myGame;
 	}
@@ -200,30 +206,59 @@ public class WebSocketController {
 	
 	
 	
-	
-//	@MessageMapping("/fight")
-//	@SendTo("/bugsbutchery")
-//	public Game fight(Player current, Territory attacker, int nbrDiceAttack, Player defender, Territory target, int nbrDiceDefender) {
-//		bugService.diceFight(current, attacker, nbrDiceAttack, defender, target, nbrDiceDefender);
-//		return bugService.myGame;
-//		
-//	}
+
 	
 	
-	//skip 
+	//skip                     // voir si on est en move ou attack
 	@MessageMapping("/skip")
 	@SendTo("/bugsbutchery")
 	public Game skip() {
-		bugService.changePlayer();
+		bugService.skip();
+
 		return bugService.myGame;
 	}
+	
+
 	
 	
 	//move
-	@MessageMapping("/move")
-	@SendTo("/bugsbutchery")
-	public Game move(Player player, Territory territoryStart, Territory territoryArrival, int antNbr) {
-		bugService.moveAvailable(player, territoryStart, territoryArrival, antNbr);
-		return bugService.myGame;
-	}
+		@MessageMapping("/move")
+		@SendTo("/bugsbutchery")
+		public Game move(MessageReceived message) {
+			
+			
+			
+			String territoryNameStart= message.getTerritory1();
+			String territoryNameArrival= message.getTerritory2();
+			int antNbr = message.getNbAnts();
+			
+			
+
+			
+			
+			for(Territory territoryStart:bugService.myGame.getAllTerritories()) {
+				System.out.println("entry=  "+ territoryStart.getTerritoryName());
+				if(territoryStart.getTerritoryName().equals(territoryNameStart) ){
+					System.out.println("il y a un match");
+					
+					for(Territory territoryArrival:bugService.myGame.getAllTerritories()) {
+						System.out.println("entry=  "+ territoryArrival.getTerritoryName());
+						if(territoryArrival.getTerritoryName().equals(territoryNameArrival) ){
+							System.out.println("il y a un double match");
+							
+	
+							bugService.moveAvailable(territoryStart.getTerritoryOwner(), territoryStart, territoryArrival, antNbr);
+							
+						}
+					}
+				}
+				
+			}
+			
+			
+			
+			return bugService.myGame;
+		}
+		
+	
 }

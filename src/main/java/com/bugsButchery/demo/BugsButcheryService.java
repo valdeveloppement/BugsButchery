@@ -27,19 +27,9 @@ public class BugsButcheryService {
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
 	
-	
-	
-
-	
+		
 	// login
 	
-	
-
-	public void checkLogIn() {
-		if(myGame.divOn.get("gameSetOn") ==  true || myGame.divOn.get("gameSetOn") ==  true) {
-			myGame.divOn.replace("full", true);	
-		}
-	}
 
 	public void checkNewGameButton() {
 		if(myGame.playersAlive.size() > 1) {
@@ -49,6 +39,7 @@ public class BugsButcheryService {
 	
 	public void setOn() {
 			myGame.divOn.replace("gameSetOn", true);
+			myGame.divOn.replace("placeFirstAntsOn", true);
 		
 	}
 	
@@ -90,7 +81,6 @@ public class BugsButcheryService {
 	 * Check if a player owns an entire family
 	 * @param player
 	 * @return void
-	 * @author Eloise
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
 		
@@ -217,6 +207,7 @@ public class BugsButcheryService {
 		}
 		else {
 			myGame.setMessage(defender.getTerritoryOwner().getPlayerName() + "ne peut pas répliquer avec ce nombre de fourmis ! Elles doivent être inférieures à 2 et supérieures au nombre total de fourmis sur le territoire. Arrêtez de déranger le serveur avec vos bêtises");
+			
 			return false;
 		}
 	}
@@ -371,7 +362,9 @@ public class BugsButcheryService {
 				defender.getPlayerTerritoryList().remove(target);
 				target.setTerritoryOwner(current);
 				current.getPlayerTerritoryList().add(target);
+				myGame.divOn.replace("moveOn", true);
 				moveAvailable(current, attacker, target, 1);
+				
 				myGame.setMessage(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé ses dés et il a fait : " + resultTarget+ " ." + defender + " a perdu un des deux tours ! Il perd" + nbrDiceDefender + "de ses fourmis...  et perd donc son territoire..."  )
 				;
 			}
@@ -390,8 +383,10 @@ public class BugsButcheryService {
 				myGame.getPlayersAlive().remove(player);
 				entry.setTerritoryOwner(null);
 				unownedTerritories.add(entry);
+				
 			}
 			myGame.setMessage("FOURMILIERE TOUCHEE !! " + player + " a gagné le tour et "+ territory.getTerritoryOwner().getPlayerName() + "perd son territoire qui était en fait... sa fourmilière ! Bye Bye " + territory.getTerritoryOwner().getPlayerName() + " !"  );
+	
 		} 
 	}
 	
@@ -581,19 +576,15 @@ public class BugsButcheryService {
 				changePlayer();	
 			}
 			else {
-				myGame.divOn.replace("attackOn", true);
+				myGame.divOn.replace("placeAntsOn", false);
+				myGame.divOn.replace("placeAnthillOn", true);
 			}
 			
-		}
-		
-		
-		
-		// en Phase game On
-
-		
-		if(myGame.getDivOn().get("gameOn") == true && player.getPlayerAvailableAnts() ==0) {
-			myGame.divOn.replace("placeAnthillOn", true);			
+		} else 
 			
+		if(myGame.getDivOn().get("gameOn") == true && player.getPlayerAvailableAnts() ==0) {
+			myGame.divOn.replace("availableAntsRefill", false);
+			myGame.divOn.replace("attackOn", true);						
 		}
 
 		return check;
@@ -611,21 +602,41 @@ public class BugsButcheryService {
 	 */
 	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
 		System.out.println("PlacefirstAnt s'execute");
+		
+		
+		
+		
 		if (territory.getTerritoryOwner() == null) {
-			System.out.println("Entre dans le if");
-		//si le territoire séléctionner est égal a vide
-			player.getPlayerTerritoryList().add(territory);
-			territory.setTerritoryOwner(player);
-			//ajoute territoire a la liste de territoire du player
-			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
-			//enlever une fourmi au compte total de fourmi du player
-			myGame.setMessage(player.getPlayerName() + " a pris possession de " + territory + ". ");
+					System.out.println("Entre dans le if");
+				//si le territoire séléctionner est égal a vide
+					player.getPlayerTerritoryList().add(territory);
+					territory.setTerritoryOwner(player);
+					//ajoute territoire a la liste de territoire du player
+					player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
+					//enlever une fourmi au compte total de fourmi du player
+					myGame.setMessage(player.getPlayerName() + " a pris possession de " + territory + ". ");
+				} 
+				upDatePlayerTerritoryFamilyList(player);
+				changePlayer();
+				//retourn la liste des territoires qui on changé dans la methode
+	
+		boolean plein = true;
+		
+		for(Territory t : myGame.getAllTerritories()) {
+			if(t.getTerritoryOwner() == null) {
+				plein = false;
+			} else {
+				
+			}
 		}
-		upDatePlayerTerritoryFamilyList(player);
-		changePlayer();
-		return player.getPlayerTerritoryList();
-		//retourn la liste des territoires qui on changé dans la methode
+		
+		if(plein = true) {
+			myGame.divOn.replace("placeFirstAntsOn", false);
+			myGame.divOn.replace("placeAntsOn", true);
+			changePlayer(); 
 	}
+		return player.getPlayerTerritoryList();
+}
 	
 	/**
 	 * @param player
@@ -641,9 +652,31 @@ public class BugsButcheryService {
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
 			myGame.divOn.replace("gameSetOn", false );
 			myGame.divOn.replace("gameOn", true );
-			
+			changePlayer();
 		} else {
 			changePlayer();
 		}
 	}
+	
+	
+	public void skip() {
+		
+		if(myGame.divOn.get("moveOn")) {
+			myGame.divOn.replace("moveOn", false );
+			changePlayer();
+
+		}
+		
+		
+		else if(myGame.divOn.get("attackOn")) {
+			myGame.divOn.replace("attackOn", false );
+			myGame.divOn.replace("moveOn", true );
+
+		}
+		
+	
+		
+	}
+	
+	
 }

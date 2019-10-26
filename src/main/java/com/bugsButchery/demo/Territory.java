@@ -43,7 +43,7 @@ public class Territory {
 	
     @JsonIgnoreProperties("playerTerritoryList")
 	@Transient
-	private Player territoryOwner;
+	private Player territoryOwner = null;
 	
 	public Territory() {
 		super();
