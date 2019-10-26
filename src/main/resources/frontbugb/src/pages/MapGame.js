@@ -1,7 +1,11 @@
 import React from 'react';
 import Territory from './organisms/molecules/Territory.js';
 import InfosPlayer from './organisms/molecules/atoms/Infos.js';
-import InfosMessage from './organisms/molecules/atoms/InfosMessage.js'
+import InfosMessage from './organisms/molecules/atoms/InfosMessage.js';
+import Attack from './organisms/molecules/atoms/Attack.js';
+import Defense from './organisms/molecules/atoms/Defense.js';
+import Move from './organisms/molecules/atoms/move.js';
+import Anthill from './organisms/molecules/atoms/Anthill.js';
 
 class MapGame extends React.Component {
     constructor(props) {
@@ -95,20 +99,5 @@ class MapGame extends React.Component {
     }
 }
 
-class Attack extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    render(){
-        return (
-            <div>
-                <input type="text" onChange={this.props.} value={this.state.}></input>
-                <input type="text" onChange={this.props.} value={this.state.}></input>
-                <input type="text" onChange={this.props.} value={this.state.}></input>
-                <button onClick={this.props.attack}></button>
-            </div>
-        )
-    }
-}
 
 export default MapGame;

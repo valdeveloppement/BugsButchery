@@ -6,6 +6,7 @@ import MapGame from './pages/MapGame';
 import Loging from './pages/Loging';
 import Sas from './pages/Sas';
 
+
 let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
 
@@ -45,6 +46,26 @@ class App extends React.Component {
 
   handleChangeBreed = (event) => {
     this.setState({ playerAntsBreed: event.target.value })
+  }
+
+  handleChangeTerritory1 = (event)=> {
+    this.setState({ territory1: event.target.value })
+  }
+
+  handleChangeTerritory2 = (event)=> {
+    this.setState({ territory2: event.target.value })
+  }
+
+  handleChangeNbDicesAttack = (event)=> {
+    this.setState({ nbDicesAttack: event.target.value })
+  }
+
+  handleChangeNbDicesDefense = (event)=> {
+    this.setState({ nbDicesDefense: event.target.value })
+  }
+
+  handleChangeNbAntsMoving = (event)=> {
+    this.setState({nbAntsMoving: event.target.value})
   }
 
   newPlayer = () => {
