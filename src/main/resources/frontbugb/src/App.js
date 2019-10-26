@@ -39,8 +39,6 @@ class App extends React.Component {
       nbAnts:0,
       nbrDiceAttack:0,
       nbrDiceDefense:0,
-
-
     };
   }
 
@@ -127,7 +125,6 @@ class App extends React.Component {
     }
   }
 
-
   addAntsHill = () => {
     if (stompClient) {
       let message = {
@@ -176,10 +173,6 @@ class App extends React.Component {
     }
   }
 
-
-
-
-
   onMessageReceived = (payload) => {
     let game = JSON.parse(payload.body)
     this.setState({ 
@@ -227,6 +220,5 @@ class App extends React.Component {
     }
   }
 }
-
 
 export default App;
