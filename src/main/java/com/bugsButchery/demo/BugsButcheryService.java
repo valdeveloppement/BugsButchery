@@ -657,4 +657,26 @@ public class BugsButcheryService {
 			changePlayer();
 		}
 	}
+	
+	
+	public void skip() {
+		
+		if(myGame.divOn.get("moveOn")) {
+			myGame.divOn.replace("moveOn", false );
+			changePlayer();
+
+		}
+		
+		
+		else if(myGame.divOn.get("attackOn")) {
+			myGame.divOn.replace("attackOn", false );
+			myGame.divOn.replace("moveOn", true );
+
+		}
+		
+	
+		
+	}
+	
+	
 }
