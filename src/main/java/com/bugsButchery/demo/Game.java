@@ -20,7 +20,7 @@ public class Game {
 
 	protected HashMap<String, Boolean> divOn = new HashMap<String, Boolean>(){{
     	//put("logInOn", true);
-    	put("full", false);
+    	//put("full", false);
     	//put("sasOn", false);
     	put("newGameButton", false);
     	put("gameSetOn", false);
@@ -35,7 +35,7 @@ public class Game {
     }};
 
    // ecran1, login: 	   full:false ,  !e.playerAlive
-    //ecran2, full:			full: true, !e.playerAlive
+    //ecran2, full:			full: true, !e.playerAlive 
     //ecran3, sasOn:		e.playerAlive, gameSetOn == false
     //ecran4, setOn: 		e.playerAlive, gameSetOn == true 
     //ecrans5(+n), gameOn: 	e.playerAlive, gameSetOn == false, gameOn == true 
@@ -43,10 +43,10 @@ public class Game {
     
   //---------------- ARENA--------------------
 	
-  	protected Territory territoryAttacker = null ;
-  	protected Territory territoryTarget = null;
-  	protected int nbrDiceAttack;
-  	protected int nbrDiceDefense;
+  	protected Territory territoryAttacker;
+  	protected Territory territoryTarget;
+  	protected int nbrDiceAttack = 2;
+  	protected int nbrDiceDefense = 2;
 
 
   	
