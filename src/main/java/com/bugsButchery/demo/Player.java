@@ -2,25 +2,43 @@ package com.bugsButchery.demo;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class Player {
 
-	private int playerId;
+	//---- value objet ----//
 	private String playerName;
 	private String playerAntsBreed;
-	private ArrayList<Territory> playerTerritoryList; 
-	private ArrayList<Family> playerTerritoryFamilyList;
+	
+    @JsonIgnoreProperties("territoryOwner")
+	private ArrayList<Territory> playerTerritoryList= new ArrayList<Territory>();
+
+	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();
 	private int playerAvailableAnts;
 	
+	//---- constructor ----//
 	public Player() {
 		super();
 	}
 	
-	public int getPlayerId() {
-		return playerId;
+
+	public Player(String playerName, String playerAntsBreed, int playerAvailableAnts) {
+
+
+		super();
+		this.playerName = playerName;
+		this.playerAntsBreed = playerAntsBreed;
+		this.playerAvailableAnts = playerAvailableAnts;
+
+
+//		this.playerTerritoryList = new ArrayList<Territory>();
+//		this.playerTerritoryFamilyList = new ArrayList<Integer>();
+
 	}
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
-	}
+
+
+	//---- get & set ----//
+
 	public String getPlayerName() {
 		return playerName;
 	}
@@ -34,24 +52,21 @@ public class Player {
 		this.playerAntsBreed = playerAntsBreed;
 	}
 	public ArrayList<Territory> getPlayerTerritoryList() {
-		return playerTerritoryList;
-	}
-	public void setPlayerTerritoryList(ArrayList<Territory> playerTerritoryList) {
-		this.playerTerritoryList = playerTerritoryList;
-	}
-	public ArrayList<Family> getPlayerTerritoryFamilyList() {
-		return playerTerritoryFamilyList;
-	}
-	public void setPlayerTerritoryFamilyList(ArrayList<Family> playerTerritoryFamilyList) {
-		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
-	}
-	public int getPlayerAvailableAnts() {
-		return playerAvailableAnts;
+		return playerTerritoryList; 
 	}
 	public void setPlayerAvailableAnts(int playerAvailableAnts) {
 		this.playerAvailableAnts = playerAvailableAnts;
 	}
-	
+	public ArrayList<Integer> getPlayerTerritoryFamilyList() {
+		return playerTerritoryFamilyList;
+	}
+	public int getPlayerAvailableAnts() {
+		return playerAvailableAnts;
+	}
+	public void setPlayerTerritoryFamilyList(ArrayList<Integer> playerTerritoryFamilyList) {
+		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
+	}
+		
 	/**
 	 * roll a Dice
 	 * @return
@@ -59,10 +74,5 @@ public class Player {
 	public int rollDice() {
 		return (int)Math.ceil(Math.random()*6);
 	}
-	
-//	public int refillAvailableAnts(Player player) {
-//		
-//	}
-	
-	
+
 }

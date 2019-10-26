@@ -1,20 +1,49 @@
 package com.bugsButchery.demo;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
+@Entity
 public class Territory {
 
+	@Id
+	@GeneratedValue
 	private int territoryId;
 	private String territoryName;
 	private int territoryValue;
-	private ArrayList<Territory> territoryFrontiers;
-	@Column(name="territory_owner_id")
-	private Player territoryOwner;
-	private boolean isAnthill;
-	private Family territoryFamily;
-	private int territoryAntsNb;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			  name = "frontier", 
+			  joinColumns = @JoinColumn(name = "territory_id"),
+			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
+
+	
+	
+    @JsonIgnoreProperties("territoryFrontiers")
+	private List<Territory> territoryFrontiers;
+	private int territoryFamily;
+	@Transient
+	private boolean isAnthill;	
+	@Transient
+	private int territoryAntsNb=0;
+	
+    @JsonIgnoreProperties("playerTerritoryList")
+	@Transient
+	private Player territoryOwner = null;
 	
 	public Territory() {
 		super();
@@ -38,16 +67,18 @@ public class Territory {
 	public void setTerritoryValue(int territoryValue) {
 		this.territoryValue = territoryValue;
 	}
-	public ArrayList<Territory> getTerritoryFrontiers() {
+	public List<Territory> getTerritoryFrontiers() {
 		return territoryFrontiers;
 	}
-	public void setTerritoryFrontiers(ArrayList<Territory> territoryFrontiers) {
+	public void setTerritoryFrontiers(List<Territory> territoryFrontiers) {
 		this.territoryFrontiers = territoryFrontiers;
 	}
 	public Player getTerritoryOwner() {
 		return territoryOwner;
 	}
 	public void setTerritoryOwner(Player territoryOwner) {
+		System.out.println("Le set terrirtory owner se fait");
+		System.out.println(territoryOwner.getPlayerName());
 		this.territoryOwner = territoryOwner;
 	}
 	public boolean isAnthill() {
@@ -56,10 +87,10 @@ public class Territory {
 	public void setAnthill(boolean isAnthill) {
 		this.isAnthill = isAnthill;
 	}
-	public Family getTerritoryFamily() {
+	public int getTerritoryFamily() {
 		return territoryFamily;
 	}
-	public void setTerritoryFamily(Family territoryFamily) {
+	public void setTerritoryFamily(int territoryFamily) {
 		this.territoryFamily = territoryFamily;
 	}
 	public int getTerritoryAntsNb() {

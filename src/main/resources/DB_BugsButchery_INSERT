@@ -6,15 +6,6 @@ INSERT INTO family (family_name, family_value) VALUES ('legume', 3);
 INSERT INTO family (family_name, family_value) VALUES ('viande', 2);
 
 
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('maurane', 'violet', 30);
-
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('eloise', 'rouge', 30);
-
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('sylvain', 'vert', 30);
-
-INSERT INTO player (player_name, player_ants_breed, player_available_ants) VALUES ('valentin', 'noir', 30);
-
-
 INSERT INTO territory (territory_name, territory_value, territory_family) VALUES ('kiwi', 2, 1);
 
 INSERT INTO territory (territory_name, territory_value, territory_family) VALUES ('abricot', 3, 1);
@@ -42,24 +33,52 @@ INSERT INTO frontier (territory_id, frontier_id) VALUES (1, 4);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (1, 6);
 
-INSERT INTO frontier (territory_id, frontier_id) VALUES (2, 4);
+INSERT INTO frontier (territory_id, frontier_id) VALUES (2, 1);
 
-INSERT INTO frontier (territory_id, frontier_id) VALUES (2, 9);
+INSERT INTO frontier (territory_id, frontier_id) VALUES (2, 4);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (2, 8);
 
-INSERT INTO frontier (territory_id, frontier_id) VALUES (3, 7);
+INSERT INTO frontier (territory_id, frontier_id) VALUES (2, 9);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (3, 4);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (3, 5);
 
+INSERT INTO frontier (territory_id, frontier_id) VALUES (3, 7);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (4, 1);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (4, 2);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (4, 3);
+
 INSERT INTO frontier (territory_id, frontier_id) VALUES (4, 6);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (4, 7);
 
+INSERT INTO frontier (territory_id, frontier_id) VALUES (5, 3);
+
 INSERT INTO frontier (territory_id, frontier_id) VALUES (5, 9);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (6, 1);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (6, 4);
 
 INSERT INTO frontier (territory_id, frontier_id) VALUES (6, 7);
 
+INSERT INTO frontier (territory_id, frontier_id) VALUES (7, 3);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (7, 4);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (7, 6);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (8, 2);
+
 INSERT INTO frontier (territory_id, frontier_id) VALUES (8, 9);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (9, 2);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (9, 5);
+
+INSERT INTO frontier (territory_id, frontier_id) VALUES (9, 8);
