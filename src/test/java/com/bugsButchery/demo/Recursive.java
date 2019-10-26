@@ -157,7 +157,7 @@ public class Recursive {
  		//FAUT IL LES METTRE ?
  		myService.requestAttack(maurane.getPlayerTerritoryList().get(1), eloise.getPlayerTerritoryList().get(0), 3);
  		myService.requestDefense(eloise.getPlayerTerritoryList().get(0), 2);
- 		myService.diceFight(maurane, maurane.getPlayerTerritoryList().get(1), 3, eloise, eloise.getPlayerTerritoryList().get(0), 2);
+ 		//myService.diceFight(maurane, maurane.getPlayerTerritoryList().get(1), 3, eloise, eloise.getPlayerTerritoryList().get(0), 2);
  		
  		//Vise la fourmiliere
  		//myService.diceFight(maurane, territoryMaurane.get(0), 3, eloise, territoryEloise.get(1), 2);
@@ -168,7 +168,7 @@ public class Recursive {
  		System.out.println("Nb de fourmis  apres depart"+allTerritories.get(3).getTerritoryAntsNb());
 
  
- 		myService.changePlayer();
+ 		//myService.changePlayer();
  		
  		
  		
@@ -195,7 +195,7 @@ public class Recursive {
  		
  		myService.requestDefense(maurane.getPlayerTerritoryList().get(2), 2);
  		
- 		myService.diceFight(valentin, valentin.getPlayerTerritoryList().get(1), 3, maurane, maurane.getPlayerTerritoryList().get(0), 2);
+ 		//myService.diceFight(valentin, valentin.getPlayerTerritoryList().get(1), 3, maurane, maurane.getPlayerTerritoryList().get(0), 2);
  		
  		
  		/////////////////////// Affichage//////////////////////////
@@ -209,8 +209,9 @@ public class Recursive {
 //      		System.out.println(allTerritories.get(i).getTerritoryName()+"  Proprio:  "+allTerritories.get(i).getTerritoryOwner().getPlayerName());
 //      	}
  		
- 		System.out.println("player avant changement :    "+myGame.getPlayerTurn().getPlayerName());
- 		myService.changePlayer();
+ 		System.out.println("player avant changement :    "+myGame.getPlayerTurn().getPlayerName() +"Activation de la méthode skip");
+ 		//myService.changePlayer();
+ 		myService.skip();
  		System.out.println("player apres changement :    "+myGame.getPlayerTurn().getPlayerName());
     }
 

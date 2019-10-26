@@ -182,6 +182,8 @@ public class BugsButcheryService {
 	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
 		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
 			myGame.getMessage().add(attacker.getTerritoryOwner().getPlayerName() + " attaque " + target.getTerritoryOwner().getPlayerName() + " sur "+ target + " depuis " + target +" avec " + nbrDiceAttack + " fourmis !");
+			System.out.println(nbrDiceAttack);
+
 			myGame.divOn.replace("attackOn", false);
 			myGame.divOn.replace("defenseOn", true);
 			return true;
@@ -201,6 +203,14 @@ public class BugsButcheryService {
 		if (defender.getTerritoryAntsNb() >= nbDiceDefense && nbDiceDefense <= 2) {
 			myGame.getMessage().add(defender.getTerritoryOwner().getPlayerName() + "réplique avec " + nbDiceDefense + " fourmis !");
 			myGame.divOn.replace("defenseOn", false);
+			System.out.println("c'est maintenant ! ----------------------------------");
+			System.out.println(myGame.getNbrDiceAttack());
+			System.out.println(myGame.getTerritoryAttacker().getTerritoryName());
+			
+			System.out.println(myGame.getTerritoryTarget().getTerritoryOwner().getPlayerName());
+			System.out.println(myGame.getTerritoryTarget().getTerritoryName());
+			System.out.println(myGame.getNbrDiceDefense());
+			System.out.println(myGame.getPlayerTurn().getPlayerName());
 			diceFight(myGame.getPlayerTurn(), myGame.getTerritoryAttacker(), myGame.getNbrDiceAttack(), myGame.getTerritoryTarget().getTerritoryOwner(), myGame.getTerritoryTarget(), myGame.getNbrDiceDefense());
 			
 			return true;
@@ -584,6 +594,7 @@ public class BugsButcheryService {
 			
 		if(myGame.getDivOn().get("gameOn") == true && player.getPlayerAvailableAnts() ==0) {
 			myGame.divOn.replace("availableAntsRefill", false);
+			myGame.divOn.replace("placeAntsOn", false);
 			myGame.divOn.replace("attackOn", true);						
 		}
 
@@ -625,9 +636,7 @@ public class BugsButcheryService {
 		for(Territory t : myGame.getAllTerritories()) {
 			if(t.getTerritoryOwner() == null) {
 				plein = false;
-			} else {
-				
-			}
+			} 
 		}
 		
 		if(plein = true) {
@@ -664,9 +673,9 @@ public class BugsButcheryService {
 		if(myGame.divOn.get("moveOn")) {
 			myGame.divOn.replace("moveOn", false );
 			changePlayer();
+			myGame.divOn.replace("placAntsOn", true);
 
 		}
-		
 		
 		else if(myGame.divOn.get("attackOn")) {
 			myGame.divOn.replace("attackOn", false );

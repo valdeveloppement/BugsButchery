@@ -1,72 +1,33 @@
 import React from 'react';
 
 
-class Attack extends React.Component{
-    constructor(props) {
-        super(props);
-        this.buttonGoAttack = this.buttonGoAttack.bind(this);
-        this.buttonSendInfoAttack = this.buttonSendInfoAttack.bind(this);
-        this.state = {pageAttack: false};
-      }
-    
-    
-      buttonGoAttack() {
-        this.setState({pageAttack: true});
-      }
-    
-      buttonSendInfoAttack() {
-        this.setState({pageAttack: false});
-      }
-    
-      render() {
-        const pageAttack = this.state.pageAttack;
-        let button;
-    
-        if (pageAttack) {
-          button = <LogoutButton onClick={this.buttonSendInfoAttack} />;
-        } else {
-          button = <LoginButton onClick={this.buttonGoAttack} />;
+class Attack extends React.Component {
+  constructor(props) {
+    super(props) 
+        this.state = {
+
         }
     
-        return (
-          <div className="center">
-            <Greeting pageAttack={pageAttack} />
-            {button}
-          </div>
-        );
-      }
-    }
+}
+
+
+  render() {
+    return (
+      <div>
+        <p>Entrez le territoire attaquant :</p>
+        <input type="text" onChange={this.props.handleChangeTerritory1} value={this.state.territory1}></input>
+        <p>Entrez le territoire que vous souhaitez attaquer :</p>
+        <input type="text" onChange={this.props.handlechangeTerritory2} value={this.state.territory2}></input>
+        <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez attaquer :</p>
+        <input type="text" onChange={this.props.handleChangeNbrDiceAttack} value={this.state.nbrDiceAttack}></input>
+        <button onClick={this.props.requestAttack}>Envoyer</button>
+        <p>SKIP</p>
+        <button onClick={this.props.skip}></button>
+      </div>
+    )
+  }
+}
+  
     
-    function UserGreeting(props) {
-      return <Atta />;
-    }
-    
-    function GuestGreeting(props) {
-      return <Start />;
-    }
-    
-    function Greeting(props) {
-      const pageAttack = props.pageAttack;
-      if (pageAttack) {
-        return <UserGreeting />;
-      }
-      return <GuestGreeting />;
-    }
-    
-    function LoginButton(props) {
-      return (
-        <button onClick={props.onClick}>
-          suivant
-        </button>
-      );
-    }
-    
-    function LogoutButton(props) {
-      return (
-        <button onClick={props.onClick}>
-          retour
-        </button>
-      );
-    }
 
 export default Attack;

@@ -6,6 +6,7 @@ import MapGame from './pages/MapGame';
 import Loging from './pages/Loging';
 import Sas from './pages/Sas';
 
+
 let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
 
@@ -58,6 +59,27 @@ class App extends React.Component {
     this.setState({ playerAntsBreed: event.target.value })
   }
 
+  handleChangeTerritory1 = (event)=> {
+    this.setState({ territory1: event.target.value })
+  }
+
+  handleChangeTerritory2 = (event)=> {
+    this.setState({ territory2: event.target.value })
+  }
+
+  handleChangeNbrDiceAttack = (event)=> {
+    this.setState({ nbrDiceAttack: event.target.value })
+  }
+
+  handleChangeNbrDicesDefense = (event)=> {
+    this.setState({ nbrDiceDefense: event.target.value })
+  }
+
+  handleChangeNbAnts = (event)=> {
+    this.setState({nbAnts: event.target.value})
+  }
+
+
   newPlayer = () => {
     if (stompClient) {
       let player = {
@@ -90,6 +112,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
     }
+    console.log("placeFirstAnts")
   }
 
   placeAnts = () => {
@@ -100,6 +123,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnt", {}, JSON.stringify(message))
     }
+    console.log("placeAnts")
   }
 
 
@@ -110,6 +134,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
     }
+    console.log("addAntsHill")
   }
 
   requestAttack = () => {
@@ -121,6 +146,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/requestAttack", {}, JSON.stringify(message))
     }
+    console.log("addAntsHill")
   }
 
   requestDefense = () => {

@@ -1,12 +1,13 @@
 import React from 'react';
 
 class Loging extends React.Component {
+
     constructor(props) {
-        super(props);
+        super(props) 
+            this.state = {
 
-        this.state = {
-
-        };
+            }
+        
     }
 
     render() {

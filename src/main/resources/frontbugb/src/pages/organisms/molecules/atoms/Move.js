@@ -1,0 +1,31 @@
+import React from 'react';
+
+
+class Move extends React.Component{
+  constructor(props) {
+    super(props) 
+        this.state = {
+
+        }
+    
+}
+
+  render() {
+    return (
+      <div>
+        
+        <p>Entrez le nom du territoire auquel vous voulez enlever des fourmis : </p>
+        <input type="text" onChange={this.props.handleChangeTerritory1} value={this.state.territory1}></input>
+        <p>Entrez le nom du territoire sur lequel vous voulez placer ces fourmis : </p>
+        <input type="text" onChange={this.props.handleChangeTerritory2} value={this.state.territory2}></input>
+        <p>Entrez le nombre de fourmis que vous voulez déplacer : </p>
+        <input type="text" onChange={this.props.handleChangeNnbAnts} value={this.state.nbAnts}></input>
+        <button onClick={this.props.moveAvailable}></button>
+        <p>SKIP</p>
+        <button onClick={this.props.skip}></button>
+      </div>
+    )
+  }
+}
+
+export default Move;
