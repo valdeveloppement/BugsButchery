@@ -31,7 +31,7 @@ public class Game {
     	put("moveOn", false);
     	put("placeFirstAntsOn", false);
     	put("placeAntsOn", false);
-    	put("availableAntsRefill", false);
+    	put("availableAntsRefill", true);
     	put("placeAnthillOn", false);
     }};
 

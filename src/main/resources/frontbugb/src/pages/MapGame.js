@@ -31,6 +31,11 @@ class MapGame extends React.Component {
 
     booleanFactory = () => {
         if(this.props.playerName === this.props.currentPlayer.playerName || this.props.playerName === this.props.territoryTarget.territoryOwner) {
+            console.log(this.props.playerName)
+            console.log(this.props.currentPlayer.playerName)
+            console.log(this.props.gameStatus.gameSetOn)
+            console.log(this.props.gameStatus.placeFirstAntsOn)
+            console.log(this.props.gameStatus.availableAntsRefill)
             if(this.props.gameStatus.gameSetOn) {
                 if(this.props.gameStatus.placeFirstAntsOn && this.props.gameStatus.availableAntsRefill) {
                     this.setState({isPlaceFirstAntsOn: true})
@@ -60,14 +65,7 @@ class MapGame extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.booleanFactory()
-    }
-
-    compo
-
     render() {
-
         return (
             <div className="contenant">
                 <div className="carte">
