@@ -32,7 +32,6 @@ class MapGame extends React.Component {
     booleanFactory = () => {
         if(this.props.playerName === this.props.currentPlayer.playerName || this.props.playerName === this.props.territoryTarget.territoryOwner) {
             if(this.props.gameStatus.gameSetOn) {
-                this.setState({ifGameSetOn: true})
                 if(this.props.gameStatus.placeFirstAntsOn && this.props.gameStatus.availableAntsRefill) {
                     this.setState({isPlaceFirstAntsOn: true})
                 }
@@ -58,15 +57,10 @@ class MapGame extends React.Component {
                     this.setState({isDefenseOn: true})
                 }
             }
-           
-            
-           
-            
-            
-            
-            
         }           
     }
+
+    compo
 
     render() {
 

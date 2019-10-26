@@ -28,9 +28,10 @@ class App extends React.Component {
       playerAntsBreed: '',
       playerTurn: {},
       gameStatus: {},
-      message: "",
       territoryTarget: {},
       playersAlive: [],
+      message: [],
+      connected: false,
       // MessageReceived Attributes 
       territory1:"",
       territory2:"",
@@ -105,6 +106,12 @@ class App extends React.Component {
     this.playClick()
   }
 
+  echo = () => {
+    if (stompClient) {
+      stompClient.send("/app/echo")
+    }
+  }
+
 
   placeFirstAnts = () => {
     if (stompClient) {
@@ -113,6 +120,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
     }
+    console.log("placeFirstAnts")
   }
 
   placeAnts = () => {
@@ -123,6 +131,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnt", {}, JSON.stringify(message))
     }
+    console.log("placeAnts")
   }
 
   addAntsHill = () => {
@@ -132,6 +141,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
     }
+    console.log("addAntsHill")
   }
 
   requestAttack = () => {
@@ -143,6 +153,7 @@ class App extends React.Component {
       }
       stompClient.send("/app/requestAttack", {}, JSON.stringify(message))
     }
+    console.log("addAntsHill")
   }
 
   requestDefense = () => {
@@ -201,7 +212,9 @@ class App extends React.Component {
       stompClient.connect({}, this.onConnected, this.onError);
     }
     connect();
-    this.fullgame();
+    this.setState({connected: true})
+    setTimeout(this.echo, 500);
+    setTimeout(this.fullgame, 800);
   }
 
   render() {

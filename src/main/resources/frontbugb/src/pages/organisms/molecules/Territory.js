@@ -2,6 +2,7 @@ import React from 'react';
 
 
 class Territory extends React.Component {
+    
 
     render() {
         return (

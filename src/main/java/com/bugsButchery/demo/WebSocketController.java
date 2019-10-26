@@ -18,7 +18,11 @@ public class WebSocketController {
 
 
 	
-	
+	@MessageMapping("/echo")
+	@SendTo("/bugsbutchery")
+	public Game echo() {
+		return bugService.myGame;
+	}
 	
 	
 	//new game
