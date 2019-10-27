@@ -12,14 +12,18 @@ class Defense extends React.Component {
 
 
   render() {
-    return (
-      <div>
-        
-        <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez vous défendre :</p>
-        <input type="text" onChange={this.props.handleChangeNbrDiceDefense} value={this.state.nbrDiceDefense}></input>
-        <button onClick={this.props.requestDefense}>Envoyer</button>
-      </div>
-    )
+    if(this.props.rendering && this.props.identity === this.props.defender) {
+      return (
+        <div>
+          <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez vous défendre :</p>
+          <input type="text" onChange={this.props.changeNbrDiceDefense} value={this.state.nbrDiceDefense}></input>
+          <button onClick={this.props.requestDefense}>Envoyer</button>
+        </div>
+      )
+    }
+    else {
+      return <div></div>
+    }
   }
 }
   
