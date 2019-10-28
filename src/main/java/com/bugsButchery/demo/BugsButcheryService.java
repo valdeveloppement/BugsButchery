@@ -631,7 +631,7 @@ public class BugsButcheryService {
 			changePlayer();
 		} 
 		
-		} 
+	
 
 			
 		 else {
