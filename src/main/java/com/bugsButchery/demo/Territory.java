@@ -99,6 +99,7 @@ public class Territory {
 	public void setTerritoryAntsNb(int territoryAntsNb) {
 		this.territoryAntsNb = territoryAntsNb;
 	}
+
 	
 	
 }
