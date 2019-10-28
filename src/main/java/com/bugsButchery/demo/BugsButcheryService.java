@@ -617,10 +617,8 @@ public class BugsButcheryService {
 			territory.setTerritoryOwner(player);
 			//ajoute territoire a la liste de territoire du player
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
-			territory.setTerritoryAntsNb(1);
 			//enlever une fourmi au compte total de fourmi du player
 			myGame.getMessage().add(player.getPlayerName() + " a pris possession de " + territory.getTerritoryName() + ". ");
-			
 		} 
 		upDatePlayerTerritoryFamilyList(player);
 		changePlayer();
@@ -635,10 +633,10 @@ public class BugsButcheryService {
 			} 
 		}
 
-		if(plein = true) {
+		if(plein == true) {
 			myGame.divOn.replace("placeFirstAntsOn", false);
 			myGame.divOn.replace("placeAntsOn", true);
-//			changePlayer(); 
+			changePlayer(); 
 		}
 		return player.getPlayerTerritoryList();
 	}

@@ -131,14 +131,14 @@ class App extends React.Component {
 		console.log("placeAnts");
 	}
 
-	addAntsHill = () => {
+	addAntHill = () => {
 		if (stompClient) {
 			let message = {
 				territory1: this.state.territory1,
 			}
 			stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
 		}
-		console.log("addAntsHill");
+		console.log("addAntHill");
 	}
 
 	requestAttack = () => {
@@ -231,7 +231,7 @@ class App extends React.Component {
 		} else if (sas) {
 			return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} currentPlayer={this.state.playerTurn} playerName={this.state.playerName} gameStatus={this.state.gameStatus} joinGame={this.playClick} />;
 		} else {
-			return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntsHill={this.addAntsHill} changeTerritory1={this.handleChangeTerritory1} changeTerritory2={this.handleChangeTerritory2} changeNbAnts={this.handleChangeNbAnts} changeNbrDiceAttack={this.handleChangeNbrDiceAttack} changeNbrDicesDefense={this.handleChangeNbrDicesDefense} territoryTarget={this.state.territoryTarget} />;
+			return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntHill={this.addAntHill} changeTerritory1={this.handleChangeTerritory1} changeTerritory2={this.handleChangeTerritory2} changeNbAnts={this.handleChangeNbAnts} changeNbrDiceAttack={this.handleChangeNbrDiceAttack} changeNbrDicesDefense={this.handleChangeNbrDicesDefense} territoryTarget={this.state.territoryTarget} />;
 		}
 	}
 }
