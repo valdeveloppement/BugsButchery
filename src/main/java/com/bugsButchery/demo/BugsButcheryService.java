@@ -628,9 +628,6 @@ public class BugsButcheryService {
 			myGame.getMessage().add(player.getPlayerName() + " a pris possession de " + territory.getTerritoryName() + ". ");
 	  	upDatePlayerTerritoryFamilyList(player);
 			changePlayer();
-		} 
-
-			
 		} else {
 			myGame.getMessage().add(player.getPlayerName() + " ne peux pas prendre possession de " + territory.getTerritoryName() + " : ce territoire est déjà occupé ! ");
 		}
