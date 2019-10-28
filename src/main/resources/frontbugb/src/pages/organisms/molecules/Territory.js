@@ -6,7 +6,7 @@ class Territory extends React.Component {
 
     render() {
         return (
-            <div onClick={() => { this.props.action() }} className="territory" id={this.props.color}>
+            <div className="territory" id={this.props.color}>
                 <p>{this.props.value}</p>
                 <p>{"Famille : " + this.props.family.familyName}</p>
                 <p>{"Propriétaire : " + this.props.player}</p>

@@ -12,10 +12,19 @@ import PlaceFirstAnts from './organisms/molecules/atoms/PlaceFirstAnts.js';
 class MapGame extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            playerAlive: true,
+        };
     }
 
+    componentDidMount() {
+        for (let player of this.props.playerList)
+            if (player.playerName === this.props.playerName) {
+                this.setState({ playerAlive: true })
+            }
+    }
     render() {
+        if (this.state.playerAlive) {
         return (
             <div className="contenantMap">
                 <div className="carte">
@@ -90,7 +99,7 @@ class MapGame extends React.Component {
                         <Move
                             changeTerritory1={this.props.changeTerritory1}
                             changeTerritory2={this.props.changeTerritory2}
-                            changeNnbAnts={this.props.changeNnbAnts}
+                            changeNbAnts={this.props.changeNbAnts}
                             skip={this.props.skip}
                             moveAvailable={this.props.moveAvailable}
                             rendering={this.props.gameStatus.moveOn}
@@ -109,7 +118,7 @@ class MapGame extends React.Component {
                         />
                         <PlaceAnts
                             changeTerritory1={this.props.changeTerritory1}
-                            changeNnbAnts={this.props.changeNnbAnts}
+                            changeNbAnts={this.props.changeNbAnts}
                             placeAnts={this.props.placeAnts}
                             rendering={this.props.gameStatus.placeAntsOn}
                             available={
@@ -130,9 +139,10 @@ class MapGame extends React.Component {
                         />
                     </div>
                 </div>
-            </div>
-        );
+            )
+        } else {
+            return <div>PERDU</div>
+        }
     }
 }
-
 export default MapGame;

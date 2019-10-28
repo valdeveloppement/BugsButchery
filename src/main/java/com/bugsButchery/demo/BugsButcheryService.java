@@ -2,6 +2,7 @@ package com.bugsButchery.demo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,6 @@ public class BugsButcheryService {
 
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
-
 
 	// login
 
@@ -90,9 +90,12 @@ public class BugsButcheryService {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			
 			System.out.println(allTerritoryInAFamily.get(0).getTerritoryName());
+			System.out.println(allTerritoryInAFamily.get(1).getTerritoryName());
+			System.out.println(allTerritoryInAFamily.get(2).getTerritoryName());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)) {System.out.println("true, une famille");} else {System.out.println("false, une famille");}
 			
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
+				System.out.println(player.getPlayerTerritoryList().get(0).getTerritoryName());
 				String newFamily = null;
 		
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
