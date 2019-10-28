@@ -140,8 +140,7 @@ class MapGame extends React.Component {
                         </div>
                     </div>
                 </div>
-            
-            )
+                        )
         } else {
             return <div>PERDU</div>
         }
