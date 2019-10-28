@@ -19,7 +19,7 @@ class Move extends React.Component{
           <p>Entrez le nom du territoire sur lequel vous voulez placer ces fourmis : </p>
           <input type="text" onChange={this.props.changeTerritory2} value={this.state.territory2}></input>
           <p>Entrez le nombre de fourmis que vous voulez déplacer : </p>
-          <input type="number" onChange={this.props.changeNnbAnts} value={this.state.nbAnts}></input>
+          <input type="number" onChange={this.props.changeNnbAnts} value={this.state.nbAnts} min="0"></input>
           <button onClick={this.props.moveAvailable}>Envoyer</button> 
           <button onClick={this.props.skip}>Non merci</button>
         </div>
