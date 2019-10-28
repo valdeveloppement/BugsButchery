@@ -30,8 +30,6 @@ public class Territory {
 			  name = "frontier", 
 			  joinColumns = @JoinColumn(name = "territory_id"),
 			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
-
-	
 	
     @JsonIgnoreProperties("territoryFrontiers")
 	private List<Territory> territoryFrontiers;
@@ -98,6 +96,28 @@ public class Territory {
 	}
 	public void setTerritoryAntsNb(int territoryAntsNb) {
 		this.territoryAntsNb = territoryAntsNb;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + territoryId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Territory other = (Territory) obj;
+		if (territoryId != other.territoryId)
+			return false;
+		return true;
 	}
 
 	
