@@ -122,8 +122,9 @@ public class BugsButcheryService {
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
 
+		myGame.getMessage().add(player.getPlayerName() +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Clique sur un de tes territoires pour les placer !");
+		myGame.divOn.replace("placeAntsOn", true);
 		myGame.getMessage().add(player.getPlayerName() +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Il peut les placer sur ses terrains !");
-
 		myGame.divOn.replace("availableAntsRefill", true);
 
 	}
@@ -373,14 +374,13 @@ public class BugsButcheryService {
 			defender.getPlayerTerritoryList().remove(target);
 			target.setTerritoryOwner(current);
 			current.getPlayerTerritoryList().add(target);
-			myGame.divOn.replace("moveOn", true);
+			
 			moveAvailable(current, attacker, target, 1);
 
 			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + defender.getPlayerName() + " a perdu un des deux tours ! Il perd" + nbrDiceDefender + "de ses fourmis...  et perd donc son territoire..."  )
 			;
 		}
-
-
+		myGame.divOn.replace("moveOn", true);
 	}
 
 
@@ -614,7 +614,7 @@ public class BugsButcheryService {
 	 * @param territory
 	 * @return
 	 */
-	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
+	public void placeFirstAnts(Player player, Territory territory) {
 		System.out.println("PlacefirstAnt s'execute");
 		if (territory.getTerritoryOwner() == null) {
 			System.out.println("Entre dans le if");
@@ -623,11 +623,13 @@ public class BugsButcheryService {
 			territory.setTerritoryOwner(player);
 			//ajoute territoire a la liste de territoire du player
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
-			territory.setTerritoryAntsNb(1);
 			//enlever une fourmi au compte total de fourmi du player
 			myGame.getMessage().add(player.getPlayerName() + " a pris possession de " + territory.getTerritoryName() + ". ");
-	  	upDatePlayerTerritoryFamilyList(player);
+
+			upDatePlayerTerritoryFamilyList(player);
 			changePlayer();
+		} 
+		
 		} 
 
 			
@@ -635,7 +637,7 @@ public class BugsButcheryService {
 			myGame.getMessage().add(player.getPlayerName() + " ne peux pas prendre possession de " + territory.getTerritoryName() + " : ce territoire est déjà occupé ! ");
 		}
 
-	
+
 		//retourn la liste des territoires qui on changé dans la methode
 
 		boolean plein = true;
@@ -650,9 +652,8 @@ public class BugsButcheryService {
 		if(plein == true) {
 			myGame.divOn.replace("placeFirstAntsOn", false);
 			myGame.divOn.replace("placeAntsOn", true);
-//			changePlayer(); 
+			changePlayer(); 
 		}
-		return player.getPlayerTerritoryList();
 	}
 
 	/**
@@ -669,6 +670,7 @@ public class BugsButcheryService {
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
 			myGame.getMessage().add("Prêt-e-s pour commencer la partie ? ");
 			myGame.divOn.replace("gameSetOn", false );
+			myGame.divOn.replace("placeAnthillOn", false);
 			myGame.divOn.replace("gameOn", true );
 		} 
 		changePlayer();
