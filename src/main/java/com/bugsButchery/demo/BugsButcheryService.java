@@ -122,7 +122,7 @@ public class BugsButcheryService {
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
 
-		myGame.getMessage().add(player.getPlayerName() +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Clique sur un de tes territoires pour les placer !");
+		
 		myGame.divOn.replace("placeAntsOn", true);
 		myGame.getMessage().add(player.getPlayerName() +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Il peut les placer sur ses terrains !");
 		myGame.divOn.replace("availableAntsRefill", true);
@@ -361,7 +361,7 @@ public class BugsButcheryService {
 			System.out.println("attacker -1 target -1");
 			attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 			target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc deux fourmi..." );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi..." );
 		}
 		else {
 			System.out.println("attacker -2");
@@ -448,13 +448,13 @@ public class BugsButcheryService {
 			System.out.println(territoryArrival.getTerritoryAntsNb());
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
-		}
-		myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " a déplacé " + antNbr + " depuis "+ territoryStart.getTerritoryName() + " sur " + territoryArrival.getTerritoryName() );
+			myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " a déplacé " + antNbr + " depuis "+ territoryStart.getTerritoryName() + " sur " + territoryArrival.getTerritoryName() );
+		}		
 		upDatePlayerTerritoryFamilyList(player);
 		changePlayer();
 		myGame.divOn.replace("moveOn", false);
 		return thereIsAPath;
-	}
+	} 
 
 
 	public boolean moveOneStep(Territory territory1, Territory territory2) {
@@ -516,7 +516,7 @@ public class BugsButcheryService {
 	}
 
 	public void changePlayerMsg() {
-		myGame.getMessage().add("C'est maintenant au tour de " + myGame.playerTurn.getPlayerName() + " de jouer ");
+		myGame.getMessage().add("C'est maintenant au tour de " + myGame.playerTurn.getPlayerName() + " de jouer !");
 	}
 
 
@@ -571,9 +571,9 @@ public class BugsButcheryService {
 			check=true;
 
 		} else if (player.getPlayerTerritoryList().contains(territory) && ants > player.getPlayerAvailableAnts() ) {
-			myGame.getMessage().add(player.getPlayerName() + " ne peut pas déplacer " + ants + " sur "+ territory.getTerritoryName() + " : il n'a pas assez de fourmis !" );
+			myGame.getMessage().add(player.getPlayerName() + " ne peut pas placer " + ants + " sur "+ territory.getTerritoryName() + " : il n'a pas assez de fourmis !" );
 		} else {
-			myGame.getMessage().add(player.getPlayerName() + " ne peut pas déplacer " + ants + " sur "+ territory.getTerritoryName() + " : ce n'est même pas son territoire !  " );
+			myGame.getMessage().add(player.getPlayerName() + " ne peut pas placer " + ants + " sur "+ territory.getTerritoryName() + " : ce n'est même pas son territoire !  " );
 		}
 
 		// en Phase set On
@@ -661,6 +661,8 @@ public class BugsButcheryService {
 		if (player.getPlayerTerritoryList().contains(territory)) {
 			territory.setAnthill(true);
 			//myGame.setMessage("---TOP SECRET---- vous avez désigné " + territory + "comme votre fourmilière. ");
+		} else {
+			myGame.getMessage().add(player.getPlayerName() + " : ce n'est pas votre territoire ! ");
 		}
 
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
