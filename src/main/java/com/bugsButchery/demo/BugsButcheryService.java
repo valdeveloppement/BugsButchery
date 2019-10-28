@@ -566,9 +566,10 @@ public class BugsButcheryService {
 			//le territoire possédé ...
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - ants);
 			myGame.getMessage().add(player.getPlayerName() + " a placé " + ants + " fourmis sur " + territory + ". ");
+			System.out.println(ants);
 			check=true;
 
-		}
+		} 
 
 		// en Phase set On
 
