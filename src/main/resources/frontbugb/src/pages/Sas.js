@@ -9,13 +9,14 @@ class Sas extends React.Component {
 
     render() {
         if (!this.props.currentPlayer) {
-            return <p>Loading...</p>
+            return <h1>Loading...</h1>
         } else if (
             this.props.currentPlayer.playerName === this.props.playerName
         ) {
             return (
                 <div className="contenant">
-                    <div className="infos">
+                    <h1>PLAYER:</h1>
+                    <div className="infosPlayer">
                         {this.props.playerList.map((i, index) => {
                             return <p key={index}>{i.playerName}</p>
                         })}
@@ -38,8 +39,8 @@ class Sas extends React.Component {
         ) {
             return (
                 <div className="contenant">
-                    <button onClick={this.props.joinGame}>Join Game</button>
-                    <div className="infos">
+                    <h1>PLAYER:</h1>
+                    <div className="infosPlayer">
                         {this.props.playerList.map((i, index) => {
                             return <p key={index}>{i.playerName}</p>
                         })}
@@ -50,16 +51,21 @@ class Sas extends React.Component {
                             className="infos"
                             message={this.props.message}
                         />
+                    </div>
+                    <div className="button" onClick={this.props.joinGame}>
+                        Join Game
                     </div>
                 </div>
             )
         } else {
             return (
                 <div className="contenant">
-                    <div className="infos">
+                    <h1>PLAYER:</h1>
+                    <div className="infosPlayer">
+                        {' '}
                         {this.props.playerList.map((i, index) => {
                             return <p key={index}>{i.playerName}</p>
-                        })}
+                        })}{' '}
                     </div>
 
                     <div>
@@ -68,6 +74,7 @@ class Sas extends React.Component {
                             message={this.props.message}
                         />
                     </div>
+                    <h6>On atta tout le monde d'abord...</h6>
                 </div>
             )
         }
