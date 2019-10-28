@@ -90,9 +90,12 @@ public class BugsButcheryService {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			
 			System.out.println(allTerritoryInAFamily.get(0).getTerritoryName());
+			System.out.println(allTerritoryInAFamily.get(1).getTerritoryName());
+			System.out.println(allTerritoryInAFamily.get(2).getTerritoryName());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)) {System.out.println("true, une famille");} else {System.out.println("false, une famille");}
 			
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
+				System.out.println(player.getPlayerTerritoryList().get(0).getTerritoryName());
 				String newFamily = null;
 		
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
