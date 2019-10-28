@@ -113,4 +113,5 @@ code {
   height: 9rem;
   margin: 1rem;
   background-color: azure;
+  overflow: auto;
 }

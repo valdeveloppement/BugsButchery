@@ -14,7 +14,7 @@ class InfosPlayer extends React.Component{
     return (
 <div className={this.props.className}> 
     {this.props.playerList.map((i, index) => {
-      return <p key={index}>{i.playerName}</p>
+      return <p key={index}>Joueur: {i.playerName} Fourmi Renfort: {i.playerAvailableAnts}</p>
     })}
 </div>
     )
