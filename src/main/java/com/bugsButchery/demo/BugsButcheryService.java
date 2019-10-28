@@ -84,15 +84,25 @@ public class BugsButcheryService {
 	 * @return void
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
+		System.out.println("upDatePlayerTerritoryFamilyList  s'execute");
 
 		for (Territory t : player.getPlayerTerritoryList()) {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
+			
+			System.out.println(allTerritoryInAFamily.get(0).getTerritoryName());
+			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)) {System.out.println("true, une famille");} else {System.out.println("false, une famille");}
+			
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
 				String newFamily = null;
+		
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
+				
+				
 				for(Family f : myGame.getAllFamilies()) {
+					System.out.println(f.getFamilyId()+ "  est comparé à  "+t.getTerritoryFamily());
 					if(f.getFamilyId() == t.getTerritoryFamily()) { 
 						newFamily = f.getFamilyName();
+						System.out.println(newFamily);
 					} 
 				}
 
@@ -629,7 +639,9 @@ public class BugsButcheryService {
 			upDatePlayerTerritoryFamilyList(player);
 			changePlayer();
 
+
 		} else {
+
 			myGame.getMessage().add(player.getPlayerName() + " ne peux pas prendre possession de " + territory.getTerritoryName() + " : ce territoire est déjà occupé ! ");
 		}
 
