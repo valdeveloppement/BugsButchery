@@ -84,6 +84,8 @@ public class BugsButcheryService {
 	 * @return void
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
+		System.out.println("upDatePlayerTerritoryFamilyList  s'execute");
+
 		for (Territory t : player.getPlayerTerritoryList()) {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
@@ -630,7 +632,7 @@ public class BugsButcheryService {
 		} 
 
 			
-		} else {
+		 else {
 			myGame.getMessage().add(player.getPlayerName() + " ne peux pas prendre possession de " + territory.getTerritoryName() + " : ce territoire est déjà occupé ! ");
 		}
 
