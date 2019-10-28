@@ -354,13 +354,13 @@ public class BugsButcheryService {
 			System.out.println("attacker -1 target -1");
 			attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 			target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmis..." );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi..." );
 		}
 		else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
 			System.out.println("attacker -1 target -1");
 			attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 			target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc deux fourmis..." );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc deux fourmi..." );
 		}
 		else {
 			System.out.println("attacker -2");
