@@ -84,7 +84,6 @@ public class BugsButcheryService {
 	 * @return void
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
-
 		for (Territory t : player.getPlayerTerritoryList()) {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
