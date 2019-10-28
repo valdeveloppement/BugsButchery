@@ -663,7 +663,7 @@ public class BugsButcheryService {
 		}
 
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
-			myGame.getMessage().add("Prêt-e-s pour commencer la partie ? ")
+			myGame.getMessage().add("Prêt-e-s pour commencer la partie ? ");
 			myGame.divOn.replace("gameSetOn", false );
 			myGame.divOn.replace("gameOn", true );
 		} 
