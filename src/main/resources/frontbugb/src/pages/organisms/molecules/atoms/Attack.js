@@ -20,7 +20,7 @@ class Attack extends React.Component {
           <p>Entrez le territoire que vous souhaitez attaquer :</p>
           <input type="text" onChange={this.props.changeTerritory2} value={this.state.territory2}></input>
           <p>Entrez le nombre de fourmis avec lesquelles vous souhaitez attaquer :</p>
-          <input type="number" onChange={this.props.changeNbrDiceAttack} value={this.state.nbrDiceAttack}></input>
+          <input type="number" onChange={this.props.changeNbrDiceAttack} value={this.state.nbrDiceAttack} min="0"></input>
           <button onClick={this.props.requestAttack}>Envoyer</button>
           <button onClick={this.props.skip}>Non merci</button>
         </div>

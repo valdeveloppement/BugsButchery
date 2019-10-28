@@ -15,7 +15,7 @@ class PlaceAnts extends React.Component{
       return (
         <div>  
           <p> Entrez le nombre de fourmis que vous souhaitez placer : </p>
-          <input type="number" onChange={this.props.changeNbAnts} value={this.state.nbAnts}></input>
+          <input type="number" onChange={this.props.changeNbAnts} value={this.state.nbAnts} min="0"></input>
           <p> Entrez le nom du territoire sur lequel vous souhaitez les placer</p>
           <input type="text" onChange={this.props.changeTerritory1} value={this.state.territory1}></input>
           <button onClick={this.props.placeAnts}>Envoyer</button>
