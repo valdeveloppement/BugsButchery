@@ -122,7 +122,7 @@ public class BugsButcheryService {
 		int refillAvailableAnts = refillByTerritory + refillByFamily;
 		player.setPlayerAvailableAnts(refillAvailableAnts);
 
-		myGame.getMessage().add(player +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Clique sur un de tes territoires pour les placer !");
+		myGame.getMessage().add(player.getPlayerName() +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Clique sur un de tes territoires pour les placer !");
 
 		myGame.divOn.replace("availableAntsRefill", true);
 
@@ -182,7 +182,7 @@ public class BugsButcheryService {
 	 */
 	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
 		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
-			myGame.getMessage().add(attacker.getTerritoryOwner().getPlayerName() + " attaque " + target.getTerritoryOwner().getPlayerName() + " sur "+ target + " depuis " + target +" avec " + nbrDiceAttack + " fourmis !");
+			myGame.getMessage().add(attacker.getTerritoryOwner().getPlayerName() + " attaque " + target.getTerritoryOwner().getPlayerName() + " sur "+ target.getTerritoryName() + " depuis " + target.getTerritoryName() +" avec " + nbrDiceAttack + " fourmis !");
 			System.out.println(nbrDiceAttack);
 
 			myGame.divOn.replace("attackOn", false);
@@ -336,36 +336,36 @@ public class BugsButcheryService {
 			if (resultCurrent.get(0) > resultTarget.get(0)) {
 				System.out.println("target -1");
 				target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-				myGame.getMessage().add(current + " a lancé son dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé son dés et il a fait : " + resultTarget+ " ." + current + " a gagné le combat ! " + defender + " perd donc une fourmi..." ); 
+				myGame.getMessage().add(current.getPlayerName() + " a lancé son dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé son dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a gagné le combat ! " + defender.getPlayerName() + " perd donc une fourmi..." ); 
 
 			}
 			else {
 				System.out.println("attacker -1");
 				attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
-				myGame.getMessage().add(current + " a lancé son dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé son dés et il a fait : " + resultTarget+ " ." + defender + " a gagné le combat ! " + current + " perd donc une fourmi..." );
+				myGame.getMessage().add(current.getPlayerName() + " a lancé son dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé son dés et il a fait : " + resultTarget+ " ." + defender.getPlayerName() + " a gagné le combat ! " + current.getPlayerName() + " perd donc une fourmi..." );
 			}
 		}
 		else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
 			System.out.println("target -2");
 			target.setTerritoryAntsNb(target.getTerritoryAntsNb()-2);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current + " a gagné les deux tours ! " + defender + " perd donc deux fourmis..." );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a gagné les deux tours ! " + defender.getPlayerName() + " perd donc deux fourmis..." );
 		}
 		else if (resultCurrent.get(0) > resultTarget.get(0) && resultCurrent.get(1) <= resultTarget.get(1)) {
 			System.out.println("attacker -1 target -1");
 			attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 			target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender + " a perdu un des deux tours ! Il perd donc deux fourmis..." );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc deux fourmis..." );
 		}
 		else if (resultCurrent.get(0) <= resultTarget.get(0) && resultCurrent.get(1) > resultTarget.get(1)) {
 			System.out.println("attacker -1 target -1");
 			attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-1);
 			target.setTerritoryAntsNb(target.getTerritoryAntsNb()-1);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender + " a perdu un des deux tours ! Il perd donc deux fourmis..." );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu un des deux tours ! Il perd donc une fourmi... " + defender.getPlayerName() + " a perdu un des deux tours ! Il perd donc deux fourmis..." );
 		}
 		else {
 			System.out.println("attacker -2");
 			attacker.setTerritoryAntsNb(attacker.getTerritoryAntsNb()-2);
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current + " a perdu les deux tours ! Il perd donc deux fourmis... " );
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + current.getPlayerName() + " a perdu les deux tours ! Il perd donc deux fourmis... " );
 		}
 		if(checkConquest(target)) {
 			//move()
@@ -376,7 +376,7 @@ public class BugsButcheryService {
 			myGame.divOn.replace("moveOn", true);
 			moveAvailable(current, attacker, target, 1);
 
-			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender + "a lancé ses dés et il a fait : " + resultTarget+ " ." + defender + " a perdu un des deux tours ! Il perd" + nbrDiceDefender + "de ses fourmis...  et perd donc son territoire..."  )
+			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + defender.getPlayerName() + " a perdu un des deux tours ! Il perd" + nbrDiceDefender + "de ses fourmis...  et perd donc son territoire..."  )
 			;
 		}
 
@@ -396,7 +396,7 @@ public class BugsButcheryService {
 				unownedTerritories.add(entry);
 
 			}
-			myGame.getMessage().add("FOURMILIERE TOUCHEE !! " + player + " a gagné le tour et "+ territory.getTerritoryOwner().getPlayerName() + "perd son territoire qui était en fait... sa fourmilière ! Bye Bye " + territory.getTerritoryOwner().getPlayerName() + " !"  );
+			myGame.getMessage().add("FOURMILIERE TOUCHEE !! " + player.getPlayerName() + " a gagné le tour et "+ territory.getTerritoryOwner().getPlayerName() + "perd son territoire qui était en fait... sa fourmilière ! Bye Bye " + territory.getTerritoryOwner().getPlayerName() + " !"  );
 
 		} 
 	}
@@ -420,7 +420,7 @@ public class BugsButcheryService {
 	public boolean moveAvailable(Player player, Territory territoryStart, Territory territoryArrival, int antNbr ) {	
 
 		if (antNbr>=territoryStart.getTerritoryAntsNb()) {
-			myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " ne peut pas déplacer " + antNbr + " depuis "+ territoryStart + " sur " + territoryArrival + " : il n'a pas assez de fourmis ! " );
+			myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " ne peut pas déplacer " + antNbr + " depuis "+ territoryStart.getTerritoryName() + " sur " + territoryArrival.getTerritoryName() + " : il n'a pas assez de fourmis ! " );
 			return false;
 		}
 
@@ -433,7 +433,7 @@ public class BugsButcheryService {
 		boolean thereIsAPath=false;
 
 		if(!potentialsTerritories.contains(territoryArrival)){
-			myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " ne peut pas déplacer " + antNbr + " depuis "+ territoryStart + " sur " + territoryArrival + " : il n'existe aucun chemin d'accès! " );
+			myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " ne peut pas déplacer " + antNbr + " depuis "+ territoryStart.getTerritoryName() + " sur " + territoryArrival.getTerritoryName() + " : il n'existe aucun chemin d'accès! " );
 			return false;
 		}
 
@@ -449,7 +449,7 @@ public class BugsButcheryService {
 			territoryArrival.setTerritoryAntsNb(territoryArrival.getTerritoryAntsNb()+antNbr);
 			thereIsAPath=true;
 		}
-		myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " a déplacé " + antNbr + " depuis "+ territoryStart + " sur " + territoryArrival );
+		myGame.getMessage().add(territoryStart.getTerritoryOwner().getPlayerName() + " a déplacé " + antNbr + " depuis "+ territoryStart.getTerritoryName() + " sur " + territoryArrival.getTerritoryName() );
 		upDatePlayerTerritoryFamilyList(player);
 		changePlayer();
 		myGame.divOn.replace("moveOn", false);
@@ -565,7 +565,7 @@ public class BugsButcheryService {
 			territory.setTerritoryAntsNb(territory.getTerritoryAntsNb() + ants);
 			//le territoire possédé ...
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - ants);
-			myGame.getMessage().add(player.getPlayerName() + " a placé " + ants + " fourmis sur " + territory + ". ");
+			myGame.getMessage().add(player.getPlayerName() + " a placé " + ants + " fourmis sur " + territory.getTerritoryName() + ". ");
 			check=true;
 
 		}
@@ -635,7 +635,7 @@ public class BugsButcheryService {
 			} 
 		}
 
-		if(plein = true) {
+		if(plein == true) {
 			myGame.divOn.replace("placeFirstAntsOn", false);
 			myGame.divOn.replace("placeAntsOn", true);
 //			changePlayer(); 
@@ -650,17 +650,17 @@ public class BugsButcheryService {
 	public void addAntsHill(Player player, Territory territory) {
 		myGame.setNbAnthill(myGame.getNbAnthill()+1);
 		if (player.getPlayerTerritoryList().contains(territory)) {
-			territory.isAnthill();
+			territory.setAnthill(true);
 			//myGame.setMessage("---TOP SECRET---- vous avez désigné " + territory + "comme votre fourmilière. ");
 		}
 
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
 			myGame.divOn.replace("gameSetOn", false );
 			myGame.divOn.replace("gameOn", true );
-			changePlayer();
-		} else {
-			changePlayer();
-		}
+		} 
+		changePlayer();
+
+		
 	}
 
 
