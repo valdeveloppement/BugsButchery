@@ -1,33 +1,41 @@
-import React from 'react';
-import InfosMessage from './organisms/molecules/atoms/InfosMessage';
+import React from 'react'
+import InfosMessage from './organisms/molecules/atoms/InfosMessage'
 
 class Sas extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={}
+        this.state = {}
     }
 
     render() {
-        if(!this.props.currentPlayer) {
+        if (!this.props.currentPlayer) {
             return <p>Loading...</p>
-        }
-        else if(this.props.currentPlayer.playerName === this.props.playerName) {
+        } else if (
+            this.props.currentPlayer.playerName === this.props.playerName
+        ) {
             return (
                 <div className="contenant">
-                    <button onClick={this.props.newGame}>New Game</button>
                     <div className="infos">
                         {this.props.playerList.map((i, index) => {
                             return <p key={index}>{i.playerName}</p>
                         })}
                     </div>
-    
+
                     <div>
-                        <InfosMessage className="infos" message={this.props.message} />
+                        <InfosMessage
+                            className="infos"
+                            message={this.props.message}
+                        />
+                    </div>
+                    <div className="button" onClick={this.props.newGame}>
+                        New Game
                     </div>
                 </div>
-            );
-        }
-        else if (this.props.gameStatus.gameOn || this.props.gameStatus.gameSetOn) {
+            )
+        } else if (
+            this.props.gameStatus.gameOn ||
+            this.props.gameStatus.gameSetOn
+        ) {
             return (
                 <div className="contenant">
                     <button onClick={this.props.joinGame}>Join Game</button>
@@ -36,14 +44,16 @@ class Sas extends React.Component {
                             return <p key={index}>{i.playerName}</p>
                         })}
                     </div>
-    
+
                     <div>
-                        <InfosMessage className="infos" message={this.props.message} />
+                        <InfosMessage
+                            className="infos"
+                            message={this.props.message}
+                        />
                     </div>
                 </div>
-            );
-        }
-        else {
+            )
+        } else {
             return (
                 <div className="contenant">
                     <div className="infos">
@@ -51,14 +61,17 @@ class Sas extends React.Component {
                             return <p key={index}>{i.playerName}</p>
                         })}
                     </div>
-    
+
                     <div>
-                        <InfosMessage className="infos" message={this.props.message} />
+                        <InfosMessage
+                            className="infos"
+                            message={this.props.message}
+                        />
                     </div>
                 </div>
-            );
+            )
         }
     }
 }
 
-export default Sas;
+export default Sas
