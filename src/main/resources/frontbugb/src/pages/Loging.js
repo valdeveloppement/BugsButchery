@@ -16,11 +16,11 @@ class Loging extends React.Component {
                         onChange={this.props.changeName}
                         value={this.state.playerName}
                     ></input>
-                    <input
+                    {/* <input
                         type="text"
                         onChange={this.props.changeBreed}
                         value={this.state.playerAntsBreed}
-                    ></input>
+                    ></input> */}
                     <div className="button" onClick={this.props.newPlayer}>
                         newPlayer
                     </div>
