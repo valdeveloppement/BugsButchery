@@ -625,18 +625,13 @@ public class BugsButcheryService {
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
 			//enlever une fourmi au compte total de fourmi du player
 			myGame.getMessage().add(player.getPlayerName() + " a pris possession de " + territory.getTerritoryName() + ". ");
-
+			territory.setTerritoryAntsNb(territory.getTerritoryAntsNb()+1);
 			upDatePlayerTerritoryFamilyList(player);
 			changePlayer();
 		} 
-		
-		} 
-
-			
-		} else {
+		else {
 			myGame.getMessage().add(player.getPlayerName() + " ne peux pas prendre possession de " + territory.getTerritoryName() + " : ce territoire est déjà occupé ! ");
 		}
-
 
 		//retourn la liste des territoires qui on changé dans la methode
 
