@@ -46,8 +46,8 @@ public class Game {
 	
   	protected Territory territoryAttacker;
   	protected Territory territoryTarget;
-  	protected int nbrDiceAttack = 2;
-  	protected int nbrDiceDefense = 2;
+  	protected int nbrDiceAttack;
+  	protected int nbrDiceDefense;
 
 
   	
