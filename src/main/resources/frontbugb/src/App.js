@@ -11,265 +11,227 @@ let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.waitClick = this.waitClick.bind(this);
-        this.playClick = this.playClick.bind(this);
-        this.state = {
-            login: true,
-            sas: false,
-            map: false,
-            full: false,
-            allTerritories: [],
-            allFamilies: [],
-            playerList: [],
-            playerName: '',
-            playerAntsBreed: '',
-            playerTurn: {},
-            gameStatus: {},
-            territoryTarget: {},
-            playersAlive: [],
-            message: [],
-            connected: false,
-            // MessageReceived Attributes
-            territory1: '',
-            territory2: '',
-            player1: '',
-            player2: '',
-            nbAnts: 0,
-            nbrDiceAttack: 0,
-            nbrDiceDefense: 0,
-        };
-    }
+	constructor(props) {
+		super(props);
+		this.waitClick = this.waitClick.bind(this);
+		this.playClick = this.playClick.bind(this);
+		this.state = {
+			login: true,
+			sas: false,
+			map: false,
+			full: false,
+			allTerritories: [],
+			allFamilies: [],
+			playerList: [],
+			playerName: '',
+			playerAntsBreed: '',
+			playerTurn: {},
+			gameStatus: {},
+			territoryTarget: {},
+			playersAlive: [],
+			message: [],
+			connected: false,
+			// MessageReceived Attributes 
+			territory1: "",
+			territory2: "",
+			player1: "",
+			player2: "",
+			nbAnts: 0,
+			nbrDiceAttack: 0,
+			nbrDiceDefense: 0,
+		};
+	}
 
-    waitClick() {
-        this.setState({ sas: true, login: false });
-    }
+	waitClick() {
+		this.setState({ sas: true, login: false });
+	}
 
-    playClick() {
-        this.setState({ sas: false, map: true });
-    }
+	playClick() {
+		this.setState({ sas: false, map: true });
+	}
 
-    handleChangePlayer = event => {
-        this.setState({ playerName: event.target.value });
-    }
+	handleChangePlayer = (event) => {
+		this.setState({ playerName: event.target.value })
+	}
 
-    handleChangeBreed = event => {
-        this.setState({ playerAntsBreed: event.target.value });
-    }
+	handleChangeBreed = (event) => {
+		this.setState({ playerAntsBreed: event.target.value })
+	}
 
-    handleChangeTerritory1 = event => {
-        this.setState({ territory1: event.target.value });
-    }
+	handleChangeTerritory1 = (event) => {
+		this.setState({ territory1: event.target.value })
+	}
 
-    handleChangeTerritory2 = event => {
-        this.setState({ territory2: event.target.value });
-    }
+	handleChangeTerritory2 = (event) => {
+		this.setState({ territory2: event.target.value })
+	}
 
-    handleChangeNbrDiceAttack = event => {
-        this.setState({ nbrDiceAttack: event.target.value });
-    }
+	handleChangeNbrDiceAttack = (event) => {
+		this.setState({ nbrDiceAttack: event.target.value })
+	}
 
-    handleChangeNbrDicesDefense = event => {
-        this.setState({ nbrDiceDefense: event.target.value });
-    }
+	handleChangeNbrDicesDefense = (event) => {
+		this.setState({ nbrDiceDefense: event.target.value })
+	}
 
-    handleChangeNbAnts = event => {
-        this.setState({ nbAnts: event.target.value });
-    }
+	handleChangeNbAnts = (event) => {
+		this.setState({ nbAnts: event.target.value })
+	}
 
-    newPlayer = () => {
-        if (stompClient) {
-            let player = {
-                playerName: this.state.playerName,
-                playerAntsBreed: this.state.playerAntsBreed,
-            };
-            stompClient.send('/app/newPlayer', {}, JSON.stringify(player));
-            this.waitClick();
-        }
-    }
+	newPlayer = () => {
+		if (stompClient) {
+			let player = {
+				playerName: this.state.playerName,
+				playerAntsBreed: this.state.playerAntsBreed
+			}
+			stompClient.send("/app/newPlayer", {}, JSON.stringify(player))
+			this.waitClick()
+		}
+	}
 
-    fullgame = () => {
-        if (this.state.gameStatus.gameSetOn || this.state.gameStatus.gameOn) {
-            this.setState({ full: true });
-        }
-    }
+	fullgame = () => {
+		if (this.state.gameStatus.gameSetOn || this.state.gameStatus.gameOn) {
+			this.setState({ full: true })
+		}
+	}
 
-    newGame = () => {
-        if (stompClient) {
-            stompClient.send('/app/newGame');
-        }
-        this.playClick();
-    }
+	newGame = () => {
+		if (stompClient) {
+			stompClient.send("/app/newGame")
+		}
+		this.playClick()
+	}
 
-    echo = () => {
-        if (stompClient) {
-            stompClient.send('/app/echo');
-        }
-    }
+	echo = () => {
+		if (stompClient) {
+			stompClient.send("/app/echo")
+		}
+	}
 
-    placeFirstAnts = () => {
-        if (stompClient) {
-            let message = {
-                territory1: this.state.territory1,
-            };
-            stompClient.send('/app/pickTerritory', {}, JSON.stringify(message));
-        }
-        console.log('placeFirstAnts');
-    }
 
-    placeAnts = () => {
-        if (stompClient) {
-            let message = {
-                territory1: this.state.territory1,
-                nbAnts: this.state.nbAnts,
-            };
-            stompClient.send('/app/addAnt', {}, JSON.stringify(message));
-        }
-        console.log('placeAnts');
-    }
+	placeFirstAnts = () => {
+		if (stompClient) {
+			let message = {
+				territory1: this.state.territory1,
+			}
+			stompClient.send("/app/pickTerritory", {}, JSON.stringify(message))
+		}
+		console.log("placeFirstAnts");
+	}
 
-    addAntsHill = () => {
-        if (stompClient) {
-            let message = {
-                territory1: this.state.territory1,
-            };
-            stompClient.send('/app/addAnthill', {}, JSON.stringify(message));
-        }
-        console.log('addAntsHill');
-    }
+	placeAnts = () => {
+		if (stompClient) {
+			let message = {
+				territory1: this.state.territory1,
+				nbAnts: this.state.nbAnts,
+			}
+			stompClient.send("/app/addAnt", {}, JSON.stringify(message))
+		}
+		console.log("placeAnts");
+	}
 
-    requestAttack = () => {
-        if (stompClient) {
-            let message = {
-                territory1: this.state.territory1,
-                territory2: this.state.territory2,
-                nbrDiceAttack: this.state.nbrDiceAttack,
-            };
-            stompClient.send('/app/requestAttack', {}, JSON.stringify(message));
-        }
-        console.log('attack');
-    }
+	addAntHill = () => {
+		if (stompClient) {
+			let message = {
+				territory1: this.state.territory1,
+			}
+			stompClient.send("/app/addAnthill", {}, JSON.stringify(message))
+		}
+		console.log("addAntHill");
+	}
 
-    requestDefense = () => {
-        if (stompClient) {
-            let message = {
-                nbrDiceDefense: this.state.nbrDiceDefense,
-            };
-            stompClient.send('/app/requestDefense', {}, JSON.stringify(message));
-        }
-        console.log('requestDefense');
-    }
+	requestAttack = () => {
+		if (stompClient) {
+			let message = {
+				territory1: this.state.territory1,
+				territory2: this.state.territory2,
+				nbrDiceAttack: this.state.nbrDiceAttack,
+			}
+			stompClient.send("/app/requestAttack", {}, JSON.stringify(message))
 
-    skip = () => {
-        if (stompClient) {
-            // let message = {
-            // }
-            stompClient.send('/app/skip');
-        }
-        console.log('skip');
-    }
+		}
+		console.log("attack");
+	}
 
-    moveAvailable = () => {
-        if (stompClient) {
-            let message = {
-                territory1: this.state.territory1,
-                territory2: this.state.territory2,
-                nbAnts: this.state.nbAnts,
-            };
-            stompClient.send('/app/move', {}, JSON.stringify(message));
-        }
-        console.log('moveAvailable');
-    }
+	requestDefense = () => {
+		if (stompClient) {
+			let message = {
+				nbrDiceDefense: this.state.nbrDiceDefense,
+			}
+			stompClient.send("/app/requestDefense", {}, JSON.stringify(message))
+		}
+		console.log("requestDefense");
+	}
 
-    onMessageReceived = payload => {
-        let game = JSON.parse(payload.body);
-        this.setState({
-            allTerritories: game.allTerritories,
-            playerList: game.playersAlive,
-            playerTurn: game.playerTurn,
-            allFamilies: game.allFamilies,
-            message: game.message,
-            gameStatus: game.divOn,
-            territoryTarget: game.territoryTarget,
-            playersAlive: game.playersAlive,
-        });
-    }
+	skip = () => {
+		if (stompClient) {
+			// let message = {
+			// }
+			stompClient.send("/app/skip")
+		}
+		console.log("skip");
+	}
 
-    onConnected = () => {
-        // Subscribe to the Public Topic
-        stompClient.subscribe('/bugsbutchery', this.onMessageReceived);
-    }
+	moveAvailable = () => {
+		if (stompClient) {
+			let message = {
+				territory1: this.state.territory1,
+				territory2: this.state.territory2,
+				nbAnts: this.state.nbAnts,
+			}
+			stompClient.send("/app/move", {}, JSON.stringify(message))
+		}
+		console.log("moveAvailable")
+	}
 
-    onError = error => {
-        'Could not connect to WebSocket server. Please refresh this page to try again!';
-    }
+	onMessageReceived = (payload) => {
+		let game = JSON.parse(payload.body)
+		this.setState({
+			allTerritories: game.allTerritories,
+			playerList: game.playersAlive,
+			playerTurn: game.playerTurn,
+			allFamilies: game.allFamilies,
+			message: game.message,
+			gameStatus: game.divOn,
+			territoryTarget: game.territoryTarget,
+			playersAlive: game.playersAlive,
+		})
+	}
 
-    componentDidMount() {
-        const connect = () => {
-            stompClient.connect({}, this.onConnected, this.onError);
-        };
-        connect();
-        this.setState({ connected: true });
-        setTimeout(this.echo, 500);
-        setTimeout(this.fullgame, 600);
-        setTimeout(this.activeGame, 700);
-    }
+	onConnected = () => {
+		// Subscribe to the Public Topic
+		stompClient.subscribe('/bugsbutchery', this.onMessageReceived);
+	}
 
-    render() {
-        const login = this.state.login;
-        const sas = this.state.sas;
-        const full = this.state.full;
+	onError = (error) => {
+		'Could not connect to WebSocket server. Please refresh this page to try again!';
+	}
 
-        if (full) {
-            return <Fu />;
-        } else if (login) {
-            return (
-                <Loging
-                    newPlayer={this.newPlayer}
-                    changeName={this.handleChangePlayer}
-                    changeBreed={this.handleChangeBreed}
-                />
-            );
-        } else if (sas) {
-            return (
-                <Sas
-                    newGame={this.newGame}
-                    playerList={this.state.playerList}
-                    message={this.state.message}
-                    currentPlayer={this.state.playerTurn}
-                    playerName={this.state.playerName}
-                    gameStatus={this.state.gameStatus}
-                    joinGame={this.playClick}
-                />
-            );
-        } else {
-            return (
-                <MapGame
-                    playerName={this.state.playerName}
-                    playerList={this.state.playerList}
-                    currentPlayer={this.state.playerTurn}
-                    gameStatus={this.state.gameStatus}
-                    message={this.state.message}
-                    allTerritories={this.state.allTerritories}
-                    allFamilies={this.state.allFamilies}
-                    requestAttack={this.requestAttack}
-                    requestDefense={this.requestDefense}
-                    moveAvailable={this.moveAvailable}
-                    placeAnts={this.placeAnts}
-                    placeFirstAnts={this.placeFirstAnts}
-                    skip={this.skip}
-                    addAntsHill={this.addAntsHill}
-                    changeTerritory1={this.handleChangeTerritory1}
-                    changeTerritory2={this.handleChangeTerritory2}
-                    changeNbAnts={this.handleChangeNbAnts}
-                    changeNbrDiceAttack={this.handleChangeNbrDiceAttack}
-                    changeNbrDicesDefense={this.handleChangeNbrDicesDefense}
-                    territoryTarget={this.state.territoryTarget}
-                />
-            );
-        }
-    }
-}
+	componentDidMount() {
+		const connect = () => {
+			stompClient.connect({}, this.onConnected, this.onError);
+		}
+		connect();
+		this.setState({ connected: true })
+		setTimeout(this.echo, 500)
+		setTimeout(this.fullgame, 600)
+		setTimeout(this.activeGame, 700)
+	}
 
+	render() {
+		const login = this.state.login;
+		const sas = this.state.sas;
+		const full = this.state.full;
+
+		if (full) {
+			return <Fu />
+		} else if (login) {
+			return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed} />;
+		} else if (sas) {
+			return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} currentPlayer={this.state.playerTurn} playerName={this.state.playerName} gameStatus={this.state.gameStatus} joinGame={this.playClick} />;
+		} else {
+			return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntHill={this.addAntHill} changeTerritory1={this.handleChangeTerritory1} changeTerritory2={this.handleChangeTerritory2} changeNbAnts={this.handleChangeNbAnts} changeNbrDiceAttack={this.handleChangeNbrDiceAttack} changeNbrDiceDefense={this.handleChangeNbrDicesDefense} territoryTarget={this.state.territoryTarget} />;
+		}
+	}
+}    
 export default App;
