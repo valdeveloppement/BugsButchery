@@ -5,8 +5,7 @@ import './App.css';
 import MapGame from './pages/MapGame';
 import Loging from './pages/Loging';
 import Sas from './pages/Sas';
-import Fu from './pages/Fu'
-
+import Fu from './pages/Fu';
 
 let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
@@ -234,6 +233,5 @@ class App extends React.Component {
 			return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntHill={this.addAntHill} changeTerritory1={this.handleChangeTerritory1} changeTerritory2={this.handleChangeTerritory2} changeNbAnts={this.handleChangeNbAnts} changeNbrDiceAttack={this.handleChangeNbrDiceAttack} changeNbrDiceDefense={this.handleChangeNbrDicesDefense} territoryTarget={this.state.territoryTarget} />;
 		}
 	}
-}
-
+}    
 export default App;

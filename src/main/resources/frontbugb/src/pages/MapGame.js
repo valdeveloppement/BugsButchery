@@ -14,7 +14,7 @@ class MapGame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            territory1:"",
         };
     }
 
