@@ -72,8 +72,8 @@ public class WebSocketController {
 		}
 		
 	}
-		
-		return bugService.myGame;
+	System.out.println("toto");
+	return bugService.myGame;
 		
 	}
 	

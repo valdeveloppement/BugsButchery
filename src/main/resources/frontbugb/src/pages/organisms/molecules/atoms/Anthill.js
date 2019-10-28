@@ -6,10 +6,8 @@ class Anthill extends React.Component{
     super(props) 
         this.state = {
 
-        }
-    
-}
-
+        }    
+  }
   render() {
     if(this.props.rendering && this.props.identity === this.props.playerTurn) {
       return (

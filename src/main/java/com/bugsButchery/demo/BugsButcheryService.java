@@ -123,7 +123,8 @@ public class BugsButcheryService {
 		player.setPlayerAvailableAnts(refillAvailableAnts);
 
 		myGame.getMessage().add(player.getPlayerName() +" a reçu " + refillAvailableAnts + " nouvelles fourmis ! Clique sur un de tes territoires pour les placer !");
-
+		
+		myGame.divOn.replace("placeAntsOn", true);
 		myGame.divOn.replace("availableAntsRefill", true);
 
 	}
@@ -373,14 +374,13 @@ public class BugsButcheryService {
 			defender.getPlayerTerritoryList().remove(target);
 			target.setTerritoryOwner(current);
 			current.getPlayerTerritoryList().add(target);
-			myGame.divOn.replace("moveOn", true);
+			
 			moveAvailable(current, attacker, target, 1);
 
 			myGame.getMessage().add(current + " a lancé ses dés ! Il a fait :" + resultCurrent + ". "+ defender.getPlayerName() + "a lancé ses dés et il a fait : " + resultTarget+ " ." + defender.getPlayerName() + " a perdu un des deux tours ! Il perd" + nbrDiceDefender + "de ses fourmis...  et perd donc son territoire..."  )
 			;
 		}
-
-
+		myGame.divOn.replace("moveOn", true);
 	}
 
 
@@ -608,7 +608,7 @@ public class BugsButcheryService {
 	 * @param territory
 	 * @return
 	 */
-	public ArrayList<Territory> placeFirstAnts(Player player, Territory territory) {
+	public void placeFirstAnts(Player player, Territory territory) {
 		System.out.println("PlacefirstAnt s'execute");
 		if (territory.getTerritoryOwner() == null) {
 			System.out.println("Entre dans le if");
@@ -619,9 +619,10 @@ public class BugsButcheryService {
 			player.setPlayerAvailableAnts(player.getPlayerAvailableAnts() - 1);
 			//enlever une fourmi au compte total de fourmi du player
 			myGame.getMessage().add(player.getPlayerName() + " a pris possession de " + territory.getTerritoryName() + ". ");
+			upDatePlayerTerritoryFamilyList(player);
+			changePlayer();
 		} 
-		upDatePlayerTerritoryFamilyList(player);
-		changePlayer();
+		
 		//retourn la liste des territoires qui on changé dans la methode
 
 		boolean plein = true;
@@ -638,7 +639,6 @@ public class BugsButcheryService {
 			myGame.divOn.replace("placeAntsOn", true);
 			changePlayer(); 
 		}
-		return player.getPlayerTerritoryList();
 	}
 
 	/**
@@ -654,6 +654,7 @@ public class BugsButcheryService {
 
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
 			myGame.divOn.replace("gameSetOn", false );
+			myGame.divOn.replace("placeAnthillOn", false);
 			myGame.divOn.replace("gameOn", true );
 		} 
 		changePlayer();
