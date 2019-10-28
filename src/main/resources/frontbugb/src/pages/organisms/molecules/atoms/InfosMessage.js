@@ -11,7 +11,7 @@ class InfosMessage extends React.Component{
 
   render() {
     return (
-      <ul className={this.props.className}>
+      <ul className={this.props.className} id="message">
         {this.props.message.map((message, index) => {
           return <li key={index}>{message}</li>                     
         })}
