@@ -84,37 +84,30 @@ public class BugsButcheryService {
 	 * @return void
 	 */
 	public void upDatePlayerTerritoryFamilyList(Player player) {
-		System.out.println("upDatePlayerTerritoryFamilyList  s'execute");
 
 		for (Territory t : player.getPlayerTerritoryList()) {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
-			System.out.println(allTerritoryInAFamily.get(0).getTerritoryName());
-			System.out.println(allTerritoryInAFamily.get(1).getTerritoryName());
-			System.out.println(allTerritoryInAFamily.get(2).getTerritoryName());
+
 			for (Territory p : player.getPlayerTerritoryList()) {
 				System.out.println(p.getTerritoryName());
 			}
 			
-			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)) {System.out.println("true, une famille");} else {System.out.println("false, une famille");}
-			System.out.println(t.getTerritoryName());
-			
+	
 			
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
-				System.out.println("bloublou");
+			
 				String newFamily = null;
 		
 				player.getPlayerTerritoryFamilyList().add(t.getTerritoryFamily());
 				
 				
 				for(Family f : myGame.getAllFamilies()) {
-					System.out.println(f.getFamilyId()+ "  est comparé à  "+t.getTerritoryFamily());
 					if(f.getFamilyId() == t.getTerritoryFamily()) { 
 						newFamily = f.getFamilyName();
-						System.out.println(newFamily);
 					} 
 				}
 
-				myGame.getMessage().add(player + " a acquis tous les territoires de la famille : "+ newFamily + " !");
+				myGame.getMessage().add(player.getPlayerName() + " a acquis tous les territoires de la famille "+ newFamily + " !");
 			}
 		}
 	}
@@ -663,7 +656,6 @@ public class BugsButcheryService {
 		if(plein == true) {
 			myGame.divOn.replace("placeFirstAntsOn", false);
 			myGame.divOn.replace("placeAntsOn", true);
-			changePlayer(); 
 		}
 	}
 
@@ -687,8 +679,7 @@ public class BugsButcheryService {
 			myGame.divOn.replace("gameOn", true );
 		} 
 		changePlayer();
-
-		
+	
 	}
 
 
