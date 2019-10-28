@@ -179,9 +179,9 @@ button{
   margin-top: 2rem;
 }
 
-.infosPlayer{
+.contenant .infosPlayer{
   width: 17rem;
-  height: 15rem;
+  height: 12rem;
   margin: auto;
 }
 
