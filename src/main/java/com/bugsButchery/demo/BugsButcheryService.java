@@ -2,6 +2,7 @@ package com.bugsButchery.demo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,6 @@ public class BugsButcheryService {
 
 	protected ArrayList<Territory> unownedTerritories = new ArrayList<Territory>();
 	protected ArrayList<Territory> potentialsTerritories= new ArrayList<Territory>();
-
 
 	// login
 
@@ -83,8 +83,7 @@ public class BugsButcheryService {
 	 * @param player
 	 * @return void
 	 */
-	public void upDatePlayerTerritoryFamilyList(Player player) {
-
+	public void upDatePlayerTerritoryFamilyList(Player player) {	
 		for (Territory t : player.getPlayerTerritoryList()) {
 			ArrayList<Territory> allTerritoryInAFamily = myTerritoryRepository.findAllByTerritoryFamily(t.getTerritoryFamily());
 			if(player.getPlayerTerritoryList().containsAll(allTerritoryInAFamily)){
