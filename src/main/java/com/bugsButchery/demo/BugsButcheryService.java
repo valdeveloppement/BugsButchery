@@ -635,7 +635,7 @@ public class BugsButcheryService {
 			} 
 		}
 
-		if(plein = true) {
+		if(plein == true) {
 			myGame.divOn.replace("placeFirstAntsOn", false);
 			myGame.divOn.replace("placeAntsOn", true);
 //			changePlayer(); 
@@ -650,17 +650,17 @@ public class BugsButcheryService {
 	public void addAntsHill(Player player, Territory territory) {
 		myGame.setNbAnthill(myGame.getNbAnthill()+1);
 		if (player.getPlayerTerritoryList().contains(territory)) {
-			territory.isAnthill();
+			territory.setAnthill(true);
 			//myGame.setMessage("---TOP SECRET---- vous avez désigné " + territory + "comme votre fourmilière. ");
 		}
 
 		if(myGame.getNbAnthill()== myGame.getPlayersAlive().size()) {
 			myGame.divOn.replace("gameSetOn", false );
 			myGame.divOn.replace("gameOn", true );
-			changePlayer();
-		} else {
-			changePlayer();
-		}
+		} 
+		changePlayer();
+
+		
 	}
 
 
