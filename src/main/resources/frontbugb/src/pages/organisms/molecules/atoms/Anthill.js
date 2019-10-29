@@ -32,6 +32,7 @@ class Anthill extends React.Component {
       );
     } else {
       return <div></div>;
+
     }
   }
 }
