@@ -9,7 +9,7 @@ class Defense extends React.Component {
     render() {
         if (
             this.props.rendering &&
-            this.props.identity === this.props.defender
+            this.props.identity === this.props.defender.playerName
         ) {
             return (
                 <div className="action">
