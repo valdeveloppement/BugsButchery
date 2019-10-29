@@ -120,7 +120,7 @@ public class BugsButcheryService {
 	public void refillAvailableAnts(Player player) {
 
 		int refillByTerritory; 
-		if((player.getPlayerTerritoryList().size()/3) <= 1) {
+		if((player.getPlayerTerritoryList().size()/2) <= 1) {
 
 			refillByTerritory = 1;
 		} else {
