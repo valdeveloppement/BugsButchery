@@ -7,7 +7,7 @@ import Loging from './pages/Loging';
 import Sas from './pages/Sas';
 import Fu from './pages/Fu';
 
-let socket = new SockJS('http://192.168.8.100:8095/game');
+let socket = new SockJS('http://localhost:8095/game');
 let stompClient = Stomp.over(socket);
 
 class App extends React.Component {
