@@ -1,5 +1,3 @@
-CREATE SCHEMA BUGSBUTCHERY
-
 CREATE TABLE family(
 family_id SERIAL,
 family_name VARCHAR(100),
