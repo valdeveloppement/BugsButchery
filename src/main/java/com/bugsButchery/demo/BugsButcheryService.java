@@ -407,8 +407,11 @@ public class BugsButcheryService {
 				unownedTerritories.add(entry);
 
 			}
-			myGame.getMessage().add("FOURMILIERE TOUCHEE !! " + player.getPlayerName() + " a gagné le tour et "+ territory.getTerritoryOwner().getPlayerName() + "perd son territoire qui était en fait... sa fourmilière ! Bye Bye " + territory.getTerritoryOwner().getPlayerName() + " !"  );
-
+			if(territory.getTerritoryOwner() != null) {
+				myGame.getMessage().add("FOURMILIERE TOUCHEE !! " + player.getPlayerName() + " a gagné le tour et "+ territory.getTerritoryOwner().getPlayerName() + "perd son territoire qui était en fait... sa fourmilière ! Bye Bye " + territory.getTerritoryOwner().getPlayerName() + " !"  );
+			} else {
+				
+			}
 		} 
 	}
 
