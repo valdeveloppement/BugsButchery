@@ -85,7 +85,6 @@ input{
 .infosPlayer {
   background-color: azure;
   border-radius: 1.5rem;
-  padding: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   text-align: center;
@@ -96,9 +95,14 @@ input{
   border-radius: 1.5rem;
   overflow: auto;
   position: relative; bottom:0;
+  color: #204b5a;
   -webkit-box-shadow: inset 2px 0px 16px 15px #99d3c8;
   -moz-box-shadow: inset 2px 0px 16px 15px #99d3c8;
   box-shadow: inset 2px 0px 16px 15px #99d3c8;
+}
+
+ul{
+  margin: 0;
 }
 
 h6 {
@@ -190,8 +194,7 @@ button{
   width: 20rem;
   height: 9rem;
   margin: auto;
-  margin-top: 10%;
-  padding-top: 5%;
+  margin-top: 5%;
 }
 
 
@@ -317,8 +320,8 @@ button{
   width: 26rem;
   height: 6rem;
   margin: auto;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 7%;
+  margin-bottom: 7%;
   /*padding-top: 5%;*/
 }
 
