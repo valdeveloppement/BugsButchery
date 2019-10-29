@@ -25,13 +25,14 @@ class Anthill extends React.Component {
             onChange={this.props.changeTerritory1}
             value={this.state.territory1}
           ></input>
-          <div className="button" onClick={this.props.addAntsHill}>
+          <div className="button" onClick={this.props.addAntHill}>
             Envoyer
           </div>
         </div>
       );
     } else {
       return <div></div>;
+
     }
   }
 }
