@@ -213,8 +213,8 @@ class App extends React.Component {
 		}
 		connect();
 		this.setState({ connected: true })
-		setTimeout(this.echo, 500)
-		setTimeout(this.fullgame, 700)
+		setTimeout(this.echo, 600)
+		setTimeout(this.fullgame, 800)
 		setTimeout(this.fullgame, 1700)
 	}
 
