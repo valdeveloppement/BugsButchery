@@ -234,15 +234,11 @@ public class WebSocketController {
 			
 			
 			for(Territory territoryStart:bugService.myGame.getAllTerritories()) {
-				System.out.println("entry=  "+ territoryStart.getTerritoryName());
 				if(territoryStart.getTerritoryName().equals(territoryNameStart) ){
-					System.out.println("il y a un match");
 					
 					for(Territory territoryArrival:bugService.myGame.getAllTerritories()) {
-						System.out.println("entry=  "+ territoryArrival.getTerritoryName());
 						if(territoryArrival.getTerritoryName().equals(territoryNameArrival) ){
-							System.out.println("il y a un double match");
-							
+												
 	
 							bugService.moveAvailable(territoryStart.getTerritoryOwner(), territoryStart, territoryArrival, antNbr);
 							

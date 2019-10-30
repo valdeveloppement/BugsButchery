@@ -213,9 +213,9 @@ class App extends React.Component {
 		}
 		connect();
 		this.setState({ connected: true })
-		setTimeout(this.echo, 500)
-		setTimeout(this.fullgame, 600)
-		setTimeout(this.activeGame, 700)
+		setTimeout(this.echo, 600)
+		setTimeout(this.fullgame, 800)
+		setTimeout(this.fullgame, 1700)
 	}
 
 	render() {
@@ -227,11 +227,11 @@ class App extends React.Component {
 			return <Fu />
 		} else if (login) {
 			return <Loging newPlayer={this.newPlayer} changeName={this.handleChangePlayer} changeBreed={this.handleChangeBreed} />;
-		} else if (sas) {
-			return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} currentPlayer={this.state.playerTurn} playerName={this.state.playerName} gameStatus={this.state.gameStatus} joinGame={this.playClick} />;
-		} else {
+		} else if ( this.state.gameStatus.gameOn || this.state.gameStatus.gameSetOn) {
 			return <MapGame playerName={this.state.playerName} playerList={this.state.playerList} currentPlayer={this.state.playerTurn} gameStatus={this.state.gameStatus} message={this.state.message} allTerritories={this.state.allTerritories} allFamilies={this.state.allFamilies} requestAttack={this.requestAttack} requestDefense={this.requestDefense} moveAvailable={this.moveAvailable} placeAnts={this.placeAnts} placeFirstAnts={this.placeFirstAnts} skip={this.skip} addAntHill={this.addAntHill} changeTerritory1={this.handleChangeTerritory1} changeTerritory2={this.handleChangeTerritory2} changeNbAnts={this.handleChangeNbAnts} changeNbrDiceAttack={this.handleChangeNbrDiceAttack} changeNbrDiceDefense={this.handleChangeNbrDicesDefense} territoryTarget={this.state.territoryTarget} />;
-		}
+		} else {
+			return <Sas newGame={this.newGame} playerList={this.state.playerList} message={this.state.message} currentPlayer={this.state.playerTurn} playerName={this.state.playerName} gameStatus={this.state.gameStatus} joinGame={this.playClick} />;
+		} 
 	}
 }    
 export default App;

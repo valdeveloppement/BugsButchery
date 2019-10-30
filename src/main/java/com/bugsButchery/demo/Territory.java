@@ -76,7 +76,6 @@ public class Territory {
 	}
 	public void setTerritoryOwner(Player territoryOwner) {
 		System.out.println("Le set terrirtory owner se fait");
-		System.out.println(territoryOwner.getPlayerName());
 		this.territoryOwner = territoryOwner;
 	}
 	public boolean isAnthill() {

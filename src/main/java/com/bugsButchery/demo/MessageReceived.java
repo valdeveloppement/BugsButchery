@@ -10,6 +10,7 @@ public class MessageReceived {
 	private int nbAnts;
 	private int nbrDiceAttack;
 	private int nbrDiceDefense;
+	
 	public String getTerritory1() {
 		return territory1;
 	}
