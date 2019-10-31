@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 public class Player {
 
 	//---- value objet ----//
 	private String playerName;
 	private String playerAntsBreed;
 	
-    @JsonIgnoreProperties("territoryOwner")
+    @JsonIgnoreProperties("playerTerritoryList")
 	private ArrayList<Territory> playerTerritoryList= new ArrayList<Territory>();
 
 	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();

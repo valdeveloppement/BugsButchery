@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
+
 public class Territory {
 
 	@Id
@@ -30,8 +31,7 @@ public class Territory {
 			  name = "frontier", 
 			  joinColumns = @JoinColumn(name = "territory_id"),
 			  inverseJoinColumns = @JoinColumn(name = "frontier_id"))
-	
-    @JsonIgnoreProperties("territoryFrontiers")
+	@JsonIgnoreProperties({"territoryFrontiers", "playerTerritoryList"})
 	private List<Territory> territoryFrontiers;
 	private int territoryFamily;
 	@Transient
@@ -39,8 +39,9 @@ public class Territory {
 	@Transient
 	private int territoryAntsNb=0;
 	
-    @JsonIgnoreProperties("playerTerritoryList")
+
 	@Transient
+    @JsonIgnoreProperties("playerTerritoryList")
 	private Player territoryOwner = null;
 	
 	public Territory() {
