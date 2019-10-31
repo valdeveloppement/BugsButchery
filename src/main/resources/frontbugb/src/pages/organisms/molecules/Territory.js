@@ -1,9 +1,6 @@
-import React from 'react';
-
+import React from "react";
 
 class Territory extends React.Component {
-
-
 
     render() {
 
@@ -19,6 +16,7 @@ class Territory extends React.Component {
             </div>
         )
     }
+
 }
 
 export default Territory;
