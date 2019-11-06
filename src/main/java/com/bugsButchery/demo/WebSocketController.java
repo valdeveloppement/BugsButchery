@@ -33,7 +33,7 @@ public class WebSocketController {
 		bugService.createAllFamilies();
 		bugService.createAllTerritories();
 		bugService.setOn();
-		System.out.println("it's working");
+		System.out.println("NewGame Se lance");
 		return bugService.myGame;
 	}
 
@@ -42,7 +42,7 @@ public class WebSocketController {
     @SendTo("/bugsbutchery")
     public Game newPlayer(Player player) {
         bugService.createNewPlayer(player);
-        System.out.println(player.getPlayerName());
+        System.out.println("Creation d'un joueur :" + player.getPlayerName());
         playerIncr=playerIncr+1;
     	if(playerIncr ==1) {
     		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));	

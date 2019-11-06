@@ -1,8 +1,20 @@
 package com.bugsButchery.demo;
 
+
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 
 @Entity
 public class Family {
@@ -12,7 +24,9 @@ public class Family {
 	private int familyId;
 	private String familyName;
 	private int familyValue;
-	
+	@OneToMany(mappedBy = "territoryFamily", fetch=FetchType.EAGER)
+	@JsonIgnoreProperties("territoryFamily")
+	private List<Territory> allTerritories;
 	
 	
 	public Family() {
@@ -36,6 +50,14 @@ public class Family {
 	}
 	public void setFamilyValue(int familyValue) {
 		this.familyValue = familyValue;
+	}
+
+	public List<Territory> getAllTerritories() {
+		return allTerritories;
+	}
+
+	public void setAllTerritories(List<Territory> allTerritories) {
+		this.allTerritories = allTerritories;
 	}
 
 }

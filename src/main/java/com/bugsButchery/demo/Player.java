@@ -14,7 +14,7 @@ public class Player {
     @JsonIgnoreProperties("playerTerritoryList")
 	private ArrayList<Territory> playerTerritoryList= new ArrayList<Territory>();
 
-	private ArrayList<Integer> playerTerritoryFamilyList = new ArrayList<Integer>();
+	private ArrayList<Family> playerTerritoryFamilyList = new ArrayList<Family>();
 	private int playerAvailableAnts;
 	
 	//---- constructor ----//
@@ -58,16 +58,28 @@ public class Player {
 	public void setPlayerAvailableAnts(int playerAvailableAnts) {
 		this.playerAvailableAnts = playerAvailableAnts;
 	}
-	public ArrayList<Integer> getPlayerTerritoryFamilyList() {
+
+
+	public ArrayList<Family> getPlayerTerritoryFamilyList() {
 		return playerTerritoryFamilyList;
 	}
+
+
+	public void setPlayerTerritoryFamilyList(ArrayList<Family> playerTerritoryFamilyList) {
+		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
+	}
+
+
+	public void setPlayerTerritoryList(ArrayList<Territory> playerTerritoryList) {
+		this.playerTerritoryList = playerTerritoryList;
+	}
+
+
 	public int getPlayerAvailableAnts() {
 		return playerAvailableAnts;
 	}
-	public void setPlayerTerritoryFamilyList(ArrayList<Integer> playerTerritoryFamilyList) {
-		this.playerTerritoryFamilyList = playerTerritoryFamilyList;
-	}
-		
+
+
 	/**
 	 * roll a Dice
 	 * @return
