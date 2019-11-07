@@ -1,5 +1,4 @@
 # BugsButchery
-Risk 
-https://drive.google.com/file/d/1Hvy_onUVuEKezaWQNobRfr3skudtcIfz/view?usp=sharing
-https://trello.com/b/p3h0WHsy
+
+jeu Risk theme perso, Java SpringBoot, React multi client via WebSocket
 
