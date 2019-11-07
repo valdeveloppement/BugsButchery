@@ -3,17 +3,26 @@ package com.bugsButchery.demo;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Service
 public class Game {
 
 
-
+	@JsonIgnoreProperties("playerTerritoryList")
 	protected ArrayList<Player> playersAlive = new ArrayList<Player>();
+	@JsonIgnoreProperties("playerTerritoryList")
 	protected Player playerTurn; // = playersAlive.get(0);
 	protected int pathExist;
+	@JsonIgnoreProperties({"playerTerritoryList"})
 	protected ArrayList<Territory> allTerritories = new ArrayList<Territory>();
+	@JsonIgnoreProperties("allTerritories")
     protected ArrayList<Family> allFamilies = new ArrayList<Family>();
 //    protected String message;
     protected ArrayList<String> message = new ArrayList<String>();
