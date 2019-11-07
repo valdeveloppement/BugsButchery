@@ -143,8 +143,8 @@ public class BugsButcheryService {
 	 * @param id
 	 * @return
 	 */
-	public boolean antNumber(Territory territory) {
-		if (territory.getTerritoryAntsNb() > 1) {
+	public boolean antNumber(Territory territory, int nbrDiceAttack) {
+		if (territory.getTerritoryAntsNb() > 1 && nbrDiceAttack <= 3 && nbrDiceAttack > 0) {
 			return true;
 		}
 		else {
@@ -190,7 +190,7 @@ public class BugsButcheryService {
 	 * @return
 	 */
 	public boolean requestAttack(Territory attacker, Territory target, int nbrDiceAttack) {
-		if (antNumber(attacker) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
+		if (antNumber(attacker, nbrDiceAttack) && pathExist(attacker, target) && oneAntBehind(attacker, nbrDiceAttack)) {
 			if(nbrDiceAttack > 1) {
 				myGame.getMessage().add(attacker.getTerritoryOwner().getPlayerName() + " attaque " + target.getTerritoryOwner().getPlayerName() + " sur "+ target.getTerritoryName() + " depuis " + attacker.getTerritoryName() +" avec " + nbrDiceAttack + " fourmis !");	
 			} else {

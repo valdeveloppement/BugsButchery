@@ -1,7 +1,5 @@
 # BugsButchery
 
-Risk 
-
 Bugs Butchery est un jeu multijoueurs en ligne, inspiré des règles du Risk (https://fr.wikipedia.org/wiki/Risk), réalisé en groupe.
 
 
