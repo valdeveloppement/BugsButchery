@@ -21,7 +21,6 @@ public class WebSocketController {
 	@MessageMapping("/echo")
 	@SendTo("/bugsbutchery")
 	public Game echo() {
-		
 		return bugService.myGame;
 	}
 	
@@ -34,7 +33,7 @@ public class WebSocketController {
 		bugService.createAllFamilies();
 		bugService.createAllTerritories();
 		bugService.setOn();
-		System.out.println("it's working");
+		System.out.println("NewGame Se lance");
 		return bugService.myGame;
 	}
 
@@ -43,7 +42,7 @@ public class WebSocketController {
     @SendTo("/bugsbutchery")
     public Game newPlayer(Player player) {
         bugService.createNewPlayer(player);
-        System.out.println(player.getPlayerName());
+        System.out.println("Creation d'un joueur :" + player.getPlayerName());
         playerIncr=playerIncr+1;
     	if(playerIncr ==1) {
     		bugService.myGame.setPlayerTurn(bugService.myGame.getPlayersAlive().get(0));	
@@ -73,8 +72,8 @@ public class WebSocketController {
 		}
 		
 	}
-		
-		return bugService.myGame;
+	System.out.println("toto");
+	return bugService.myGame;
 		
 	}
 	
@@ -235,15 +234,11 @@ public class WebSocketController {
 			
 			
 			for(Territory territoryStart:bugService.myGame.getAllTerritories()) {
-				System.out.println("entry=  "+ territoryStart.getTerritoryName());
 				if(territoryStart.getTerritoryName().equals(territoryNameStart) ){
-					System.out.println("il y a un match");
 					
 					for(Territory territoryArrival:bugService.myGame.getAllTerritories()) {
-						System.out.println("entry=  "+ territoryArrival.getTerritoryName());
 						if(territoryArrival.getTerritoryName().equals(territoryNameArrival) ){
-							System.out.println("il y a un double match");
-							
+												
 	
 							bugService.moveAvailable(territoryStart.getTerritoryOwner(), territoryStart, territoryArrival, antNbr);
 							

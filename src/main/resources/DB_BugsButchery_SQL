@@ -1,11 +1,10 @@
-CREATE SCHEMA BUGSBUTCHERY
-
 CREATE TABLE family(
 family_id SERIAL,
 family_name VARCHAR(100),
 family_value INTEGER,
 PRIMARY KEY (family_id)
 );
+
 
 CREATE TABLE territory(
 territory_id SERIAL,
