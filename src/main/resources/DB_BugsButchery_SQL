@@ -5,6 +5,7 @@ family_value INTEGER,
 PRIMARY KEY (family_id)
 );
 
+
 CREATE TABLE territory(
 territory_id SERIAL,
 territory_name VARCHAR(100),

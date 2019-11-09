@@ -38,9 +38,7 @@ class MapGame extends React.Component {
                   player={
                     i.territoryOwner ? i.territoryOwner.playerName : "libre"
                   }
-                  family={this.props.allFamilies.find(
-                    elem => elem.familyId === i.territoryFamily
-                  )}
+                  family={i.territoryFamily}
                 />
               );
             })}
