@@ -29,6 +29,7 @@ class InfosMessage extends React.Component{
 
 export default InfosMessage;
 
-
-
+// .infos{
+//   overflow: scroll;
+// }
 
